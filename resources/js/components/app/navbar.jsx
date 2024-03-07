@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 export default function Navbar() {
   return (
-    <nav className="py-4 bg-white text-black border-b">
+    <nav className="py-2 text-black bg-white border-b">
       <div className="container flex items-center justify-between mx-auto gap-x-6">
         <Link className="flex items-center gap-x-0" href="/">
           <img
@@ -12,7 +12,7 @@ export default function Navbar() {
             src="http://localhost:8000/images/logo.png"
             alt="logo"
           />
-          <span className="font-mono text-md lg:text-lg font-bold">
+          <span className="font-mono font-bold text-md lg:text-lg">
             RankRover.ai
           </span>
         </Link>
