@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppContentController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -15,8 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// website
 Route::get('/', [HomeController::class, 'render']);
 
+// app
 Route::get('/app', [AppController::class, 'render']);
 Route::post('/app', [AppController::class, 'submit']);
+
+Route::get('/app/{app:slug}', [AppContentController::class, 'render']);
+Route::post('/app/{app:slug}/content', [AppContentController::class, 'submit']);
 

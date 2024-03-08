@@ -12,13 +12,5 @@
   </head>
   <body class="font-sans antialiased">
     @inertia
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YK9B544JLX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YK9B544JLX');
-    </script>
   </body>
 </html>
