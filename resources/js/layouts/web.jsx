@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 
-import Navbar from "@/components/app/navbar"
-import Footer from "@/components/app/footer"
+import Navbar from "@/components/web/navbar"
+import Footer from "@/components/web/footer"
 
 export default function Layout({
   className,

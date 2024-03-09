@@ -1,7 +1,7 @@
 import { Head, Link } from "@inertiajs/react"
 import { ChatBubbleLeftIcon, BanknotesIcon, BellAlertIcon } from '@heroicons/react/24/outline'
 
-import Layout from "@/layouts/layout"
+import Layout from "@/layouts/web"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
@@ -77,7 +77,7 @@ export default function HomePage() {
             <span className="text-primary">Elevate</span> Your Digital Presence with AI-Powered Content
           </h1>
           <p className="mb-8 text-lg lg:text-xl leading-relaxed text-muted-foreground">
-            Generate engaging, optimized content tailored your business that drives traffic and boosts your ranking 
+            Generate engaging, optimized content tailored your business that drives traffic and boosts your ranking
             with ease. It's really that simple!
           </p>
           <div className="flex items-center gap-x-2">

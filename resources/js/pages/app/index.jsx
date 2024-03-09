@@ -1,33 +1,28 @@
 import { marked } from "marked"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
 
-import Layout from "@/layouts/layout"
+import Layout from "@/layouts/app"
+
+import PageHeader from "@/components/app/page/PageHeader"
+import Section from "@/components/app/section/Section"
+import AppCard from "@/components/app/app/AppCard"
 
 export default function AppIndexPage({ article }) {
-  /*
-  const form = useForm({
-    defaultValues: {
-      app: '',
-      language: '',
-      style: '',
-      keywords: '',
-    },
-    resolver: zodResolver(z.object({
-      app: z.string().required(),
-      language: z.string().required(),
-      style: z.string().required(),
-      keywords: z.string().required(),
-    })),
-  })
-  */
-
   return (
-    <Layout className="py-24">
-      <div className="container mx-auto">
-        <article className="prose prose-lg" dangerouslySetInnerHTML={{ __html: marked.parse(article) }} />
-      </div>
+    <Layout>
+      <PageHeader
+        title="App"
+        description="Your app here."
+      />
+      <main>
+        <Section>
+          <AppCard />
+        </Section>
+        <Section>
+          {article && (
+            <article className="py-16 prose prose-lg" dangerouslySetInnerHTML={{ __html: marked.parse(article.content) }} />
+          )}
+        </Section>
+      </main>
     </Layout>
   )
 }

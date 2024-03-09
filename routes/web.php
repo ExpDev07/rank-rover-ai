@@ -3,6 +3,8 @@
 use App\Http\Controllers\AppContentController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +20,14 @@ use Illuminate\Support\Facades\Route;
 
 // website
 Route::get('/', [HomeController::class, 'render']);
+
+// login
+Route::get('/login', [LoginController::class, 'render']);
+Route::post('/login', [LoginController::class, 'submit']);
+
+// registration
+Route::get('/register', [RegisterController::class, 'render']);
+Route::post('/register', [RegisterController::class, 'render']);
 
 // app
 Route::get('/app', [AppController::class, 'render']);
