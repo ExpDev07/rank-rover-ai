@@ -1,4 +1,6 @@
 import { Link } from "@inertiajs/react"
+import { ArrowPathIcon } from '@heroicons/react/24/solid'
+import { cn } from "@/lib/utils"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -19,8 +21,12 @@ export default function ContentCard({
   content,
 }) {
   return (
-    <Link href="/content">
-      <Card className="relative w-full px-4 py-2 hover:ring-primary hover:ring-2">
+    <Link href="/app/content/1">
+      <Card className={cn(
+        'relative w-full px-4 py-2 hover:ring-primary hover:ring-2',
+        content.status === 'generating' && 'opacity-50 pointer-events-none',
+        content.status === 'error' && 'opacity-50 pointer-events-none',
+      )}>
         <CardHeader className="flex flex-row items-center gap-x-6">
           <Avatar className="w-12 h-12">
             <AvatarImage
@@ -31,7 +37,7 @@ export default function ContentCard({
               {content.title}
             </AvatarFallback>
           </Avatar>
-          <div>
+          <div className="flex-1">
             <CardTitle className="text-lg">
               {content.title}
             </CardTitle>
@@ -39,6 +45,9 @@ export default function ContentCard({
               {content.description}
             </CardDescription>
           </div>
+          {content.status === 'generating' && (
+            <ArrowPathIcon className="w-7 h-7 animate-spin text-muted-foreground" />
+          )}
         </CardHeader>
       </Card>
     </Link>

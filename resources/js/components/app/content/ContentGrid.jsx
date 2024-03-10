@@ -3,8 +3,9 @@ import ContentCard from "@/components/app/content/ContentCard"
 export default function ContentGrid() {
   const content = [
     {
-      title: 'My content',
-      description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe aspernatur aliquam sequi'
+      title: 'How SEO can drive organic traffic to your app',
+      description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe aspernatur aliquam sequi',
+      status: 'generating',
     },
     {
       title: 'Other content',

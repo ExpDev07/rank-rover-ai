@@ -6,14 +6,8 @@ export default function PageHeader({
 }) {
   return (
     <header className="flex items-start justify-between">
-      <div className="flex items-center gap-x-4">
-        {icon && (
-          <img
-            className="w-16 h-16"
-            src={icon}
-            alt={title}
-          />
-        )}
+      <div className="flex items-center gap-x-6">
+        {icon}
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">
             {title}
@@ -25,7 +19,11 @@ export default function PageHeader({
           )}
         </div>
       </div>
-      {actions}
+      {actions && (
+        <div className="flex items-center gap-x-2">
+          {actions}
+        </div>
+      )}
     </header>
   )
 }

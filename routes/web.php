@@ -34,6 +34,9 @@ Route::get('/app', [AppController::class, 'render']);
 Route::post('/app', [AppController::class, 'submit']);
 
 // content
-Route::get('/app/content', [ContentController::class, 'render']);
+Route::get('/app/content', [ContentController::class, 'renderIndex']);
 Route::post('/app/content', [ContentController::class, 'submit']);
+
+Route::get('/app/content/{id}', [ContentController::class, 'renderContent']);
+Route::post('/app/content/{id}/change', [ContentController::class, 'submit']);
 

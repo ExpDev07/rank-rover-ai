@@ -1,21 +1,23 @@
-import Layout from "@/layouts/app"
-
 import { Button } from "@/components/ui/button"
 
+import Layout from "@/layouts/app"
 import PageHeader from "@/components/app/page/PageHeader"
 import Section from "@/components/app/section/Section"
 import ContentGrid from "@/components/app/content/ContentGrid"
+import CreateContentDialog from "@/components/app/content/CreateContentDialog"
 
-export default function ContentPage() {
+export default function ContentIndexPage() {
   return (
     <Layout>
       <PageHeader
         title="Your content"
         description="Manage all your content."
         actions={(
-          <Button>
-            Create content 🚀
-          </Button>
+          <CreateContentDialog>
+            <Button>
+              Create content 🚀
+            </Button>
+          </CreateContentDialog>
         )}
       />
       <main>
