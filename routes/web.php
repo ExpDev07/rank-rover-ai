@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AppContentController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -33,6 +33,7 @@ Route::post('/register', [RegisterController::class, 'render']);
 Route::get('/app', [AppController::class, 'render']);
 Route::post('/app', [AppController::class, 'submit']);
 
-Route::get('/app/{app:slug}', [AppContentController::class, 'render']);
-Route::post('/app/{app:slug}/content', [AppContentController::class, 'submit']);
+// content
+Route::get('/content', [ContentController::class, 'render']);
+Route::post('/content', [ContentController::class, 'submit']);
 
