@@ -34,6 +34,6 @@ Route::get('/app', [AppController::class, 'render']);
 Route::post('/app', [AppController::class, 'submit']);
 
 // content
-Route::get('/content', [ContentController::class, 'render']);
-Route::post('/content', [ContentController::class, 'submit']);
+Route::get('/app/content', [ContentController::class, 'render']);
+Route::post('/app/content', [ContentController::class, 'submit']);
 

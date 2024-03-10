@@ -10,9 +10,17 @@ class ContentController extends Controller
 {
 
     /**
-     * Renders the app page.
+     * Renders the content page.
      */
     public function render()
+    {
+        return Inertia::render('app/content');
+    }
+
+    /**
+     * Handles submission.
+     */
+    public function submit()
     {
         $content = $this->generateContent(
             language: 'norwegian',
@@ -24,14 +32,6 @@ class ContentController extends Controller
         return Inertia::render('app/index', [
             'article' => $content,
         ]);
-    }
-
-    /**
-     * Handles submission.
-     */
-    public function submit()
-    {
-        //
     }
 
     /**

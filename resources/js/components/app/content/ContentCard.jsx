@@ -21,10 +21,10 @@ export default function ContentCard({
   return (
     <Link href="/content">
       <Card className="relative w-full px-4 py-2 hover:ring-primary hover:ring-2">
-        <CardHeader className="flex flex-row items-center gap-x-4">
+        <CardHeader className="flex flex-row items-center gap-x-6">
           <Avatar className="w-12 h-12">
             <AvatarImage
-              src={`https://api.dicebear.com/7.x/personas/svg?seed=${content.title}`}
+              src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${content.title}`}
               alt={content.title}
             />
             <AvatarFallback>
