@@ -12,13 +12,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('subscription_plans', function (Blueprint $table) {
             $table->id();
+            $table->string('stripe_id')->unique();
+            $table->string('key')->unique();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('price');
+            $table->boolean('popular')->default(false);
+            $table->string('description');
+            $table->json('features');
             $table->timestamps();
         });
     }
@@ -28,7 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('subscription_plans');
     }
 
 };

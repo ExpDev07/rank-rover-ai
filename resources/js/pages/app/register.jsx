@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link } from "@inertiajs/react"
+import { router, Link } from "@inertiajs/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -25,7 +25,9 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 
-export default function LoginPage() {
+export default function RegisterPage({
+  subscription_plan,
+}) {
   const form = useForm({
     defaultValues: {
       name: '',
@@ -41,8 +43,12 @@ export default function LoginPage() {
     }),
   })
 
+  const handleSubmit = (data) => {
+    router.post('/register', data)
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen p-3">
+    <div className="flex items-center justify-center h-screen gap-12 p-3">
       <svg
         className="fixed inset-0 brightness-75"
         viewBox="0 0 1920 1080"
@@ -140,7 +146,7 @@ export default function LoginPage() {
             type="submit"
             size="lg"
             loading={form.processing}
-            onClick={() => form.post('/register')}
+            onClick={() => handleSubmit(form.getValues())}
           >
             Create account <span className="ml-2 text-lg -translate-y-1">👉</span>
           </Button>

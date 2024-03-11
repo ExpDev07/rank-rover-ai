@@ -7,7 +7,9 @@ import { Badge } from "@/components/ui/badge"
 
 import PricingGrid from "@/components/common/pricing/PricingGrid"
 
-export default function HomePage() {
+export default function HomePage({
+  subscription_plans,
+}) {
   const features = [
     {
       name: 'Dynamic Content Generation',
@@ -43,6 +45,7 @@ export default function HomePage() {
 
   const prices = [
     {
+      id: 1,
       popular: false,
       title: 'Basic',
       monthlyPrice: 15,
@@ -57,6 +60,7 @@ export default function HomePage() {
       ],
     },
     {
+      id: 2,
       popular: true,
       title: 'Pro',
       monthlyPrice: 40,
@@ -71,6 +75,7 @@ export default function HomePage() {
       ],
     },
     {
+      id: 3,
       popular: false,
       title: 'Enterprise',
       monthlyPrice: 99,
@@ -179,7 +184,7 @@ export default function HomePage() {
             </h2>
           </header>
           <PricingGrid
-            prices={prices}
+            prices={subscription_plans}
           />
         </div>
       </section>

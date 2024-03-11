@@ -2,11 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
 {
+
     /**
      * The root template that's loaded on the first page visit.
      *
@@ -37,7 +40,9 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            //
+            'current_user' => fn () => Auth::user(),
+            'current_user_subscribed' => fn () => Auth::user()?->subscriptions()->exists(),
         ]);
     }
+
 }

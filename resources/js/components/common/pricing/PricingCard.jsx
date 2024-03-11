@@ -1,3 +1,4 @@
+import { Link }from "@inertiajs/react"
 import { CheckCircle2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -12,36 +13,38 @@ import {
 } from "@/components/ui/card"
 
 export default function PricingCard({
+  className,
   price,
+  checkout,
 }) {
   return (
-    <Card className={cn('relative w-full h-full flex flex-col justify-between', price.popular ? 'border-rose-400 py-4 border-4' : 'border-zinc-700 py-4 border-2')}>
+    <Card className={cn('relative flex flex-col justify-between', price.popular ? 'border-rose-400 py-4 border-4 scale-110' : 'py-4 border-2', className)}>
       <CardHeader>
         {price.popular && (
           <span className="absolute text-4xl top-5 right-5">
             🔥
           </span>
         )}
-        {price.isYearly && price.yearlyPrice && price.monthlyPrice ? (
+        {price.isYearly && price.yearlyPrice && price.price ? (
           <div className="flex justify-between">
-            <CardTitle className="text-lg text-zinc-700 dark:text-zinc-300">
-              {price.title}
+            <CardTitle className="text-lg text-zinc-700">
+              {price.name}
             </CardTitle>
-            <div className={cn("px-2.5 rounded-xl h-fit text-sm py-1 bg-zinc-200 text-black dark:bg-zinc-800 dark:text-white", price.popular && 'bg-gradient-to-r from-orange-400 to-rose-400 dark:text-black')}>
-              Save ${price.monthlyPrice * 12 - price.yearlyPrice}
+            <div className={cn("px-2.5 rounded-xl h-fit text-sm py-1 bg-zinc-200 text-black", price.popular && 'bg-gradient-to-r from-orange-400 to-rose-400')}>
+              Save ${price.price * 12 - price.yearlyPrice}
             </div>
           </div>
         ) : (
-          <CardTitle className="text-lg text-zinc-700 dark:text-zinc-300">
-            {price.title}
+          <CardTitle className="text-lg text-zinc-700">
+            {price.name}
           </CardTitle>
         )}
         <div className="flex gap-1">
           <h3 className="text-3xl font-bold">
-            {price.yearlyPrice && price.isYearly ? "$" + price.yearlyPrice : price.monthlyPrice ? "$" + price.monthlyPrice : "Custom"}
+            {price.yearlyPrice && price.isYearly ? "$" + price.yearlyPrice : price.price ? "$" + price.price : "Custom"}
           </h3>
           <span className="flex flex-col justify-end mb-1 text-sm">
-            {price.yearlyPrice && price.isYearly ? "/year" : price.monthlyPrice ? "/month" : ''}
+            {price.yearlyPrice && price.isYearly ? "/year" : price.price ? "/month" : ''}
           </span>
         </div>
         <CardDescription className="pt-2">
@@ -57,8 +60,21 @@ export default function PricingCard({
         ))}
       </CardContent>
       <CardFooter className="pt-6 mt-auto">
-        <Button className="w-full" size="lg">
-          Get started <span className="ml-2 text-lg -translate-y-1">👉</span>
+        <Button
+          className="w-full"
+          size="lg"
+          variant={price.popular ? 'default' : 'outline'}
+          asChild
+        >
+          {checkout ? (
+            <Link href={`/select-plan/${price.id}/checkout`} method="post">
+              Select plan <span className="ml-2 text-lg -translate-y-1">👉</span>
+            </Link>
+          ) : (
+            <Link href={`/register?plan=${price.key}`} method="get">
+              Get started <span className="ml-2 text-lg -translate-y-1">👉</span>
+            </Link>
+          )}
         </Button>
       </CardFooter>
     </Card>
@@ -74,7 +90,7 @@ function CheckItem({
         className="my-auto text-green-400"
         size={18}
       />
-      <p className="pt-0.5 text-zinc-700 dark:text-zinc-300 text-sm">
+      <p className="pt-0.5 text-zinc-700 text-sm">
         {text}
       </p>
     </div>

@@ -23,7 +23,7 @@ class LoginController extends Controller
     /**
      * Handles logging in.
      */
-    public function submit(LoginRequest $request)
+    public function handleLogin(LoginRequest $request)
     {
         $data = $request->validated();
 
