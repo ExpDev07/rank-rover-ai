@@ -21,7 +21,7 @@ class ContentController extends Controller
     /**
      * Renders the content page.
      */
-    public function renderContent()
+    public function renderShow()
     {
         $content = $this->generateContent(
             language: 'english',

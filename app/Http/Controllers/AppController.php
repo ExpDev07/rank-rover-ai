@@ -11,11 +11,21 @@ class AppController extends Controller
 {
 
     /**
+     * Renders the app index page.
+     */
+    public function renderIndex()
+    {
+        return Inertia::render('app/apps/index', [
+            'apps' => App::query()->get(),
+        ]);
+    }
+
+    /**
      * Renders the app page.
      */
-    public function render(App $app)
+    public function renderShow(App $app)
     {
-        return Inertia::render('app/index', [
+        return Inertia::render('app/apps/show', [
             'app' => $app,
             'content' => $app->content,
         ]);

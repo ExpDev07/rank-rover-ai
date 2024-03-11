@@ -5,6 +5,8 @@ import Layout from "@/layouts/web"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
+import PricingGrid from "@/components/common/pricing/PricingGrid"
+
 export default function HomePage() {
   const features = [
     {
@@ -39,6 +41,52 @@ export default function HomePage() {
     },
   ]
 
+  const prices = [
+    {
+      popular: false,
+      title: 'Basic',
+      monthlyPrice: 15,
+      yearlyPrice: 100,
+      description: 'Essential features you need to get started.',
+      features: [
+        'Create one app',
+        'Generate 5x content daily',
+        'AI recommended keywords',
+        'Tweak your content with AI',
+        '24/7 support',
+      ],
+    },
+    {
+      popular: true,
+      title: 'Pro',
+      monthlyPrice: 40,
+      yearlyPrice: 150,
+      description: 'Perfect for owners of small & medium businessess.',
+      features: [
+        'Create 10x apps',
+        'Generate 50x content daily',
+        'AI recommended keywords',
+        'Tweak your content with AI',
+        '24/7 support',
+      ],
+    },
+    {
+      popular: false,
+      title: 'Enterprise',
+      monthlyPrice: 99,
+      yearlyPrice: 200,
+      description: 'Dedicated support and infrastructure to fit your needs.',
+      features: [
+        'Create 50x apps',
+        'Generate 100x content daily',
+        'AI recommended keywords',
+        'Tweak your content with AI',
+        '24/7 support',
+        'Priority feature requests',
+      ],
+    }
+  ]
+
   const articles = [
     {
       title: 'Å Navigere Samtalen: Å Fortelle Din Partner Om en Kjønnssykdom',
@@ -68,15 +116,15 @@ export default function HomePage() {
         <meta name="keywords" content="seo" />
         <meta name="robots" content="index, follow" />
       </Head>
-      <header className="bg-white text-black container grid items-center overflow-x-hidden grid-cols-1 lg:grid-cols-12 py-12 lg:py-32 mx-auto gap-x-28 gap-y-12">
+      <header className="container grid items-center grid-cols-1 py-12 mx-auto overflow-x-hidden text-black bg-white lg:grid-cols-12 lg:py-32 gap-x-28 gap-y-12">
         <div className="col-span-1 lg:col-span-7">
           <Badge className="mb-4">
             1000x traffic!
           </Badge>
-          <h1 className="mb-4 text-4xl lg:text-6xl font-bold leading-tight">
+          <h1 className="mb-4 text-4xl font-bold leading-tight lg:text-6xl">
             <span className="text-primary">Elevate</span> Your Digital Presence with AI-Powered Content
           </h1>
-          <p className="mb-8 text-lg lg:text-xl leading-relaxed text-muted-foreground">
+          <p className="mb-8 text-lg leading-relaxed lg:text-xl text-muted-foreground">
             Generate engaging, optimized content tailored your business that drives traffic and boosts your ranking
             with ease. It's really that simple!
           </p>
@@ -87,7 +135,7 @@ export default function HomePage() {
               </Link>
             </Button>
             <Button size="lg" variant="outline">
-              Learn more
+              Learn more 🤔
             </Button>
           </div>
         </div>
@@ -102,17 +150,17 @@ export default function HomePage() {
       <section className="py-12 lg:py-24 bg-primary text-primary-foreground">
         <div className="container mx-auto">
           <header>
-            <h2 className="text-3xl font-bold mb-8">
+            <h2 className="mb-8 text-3xl font-bold">
               What we offer ❤️
             </h2>
           </header>
-          <ul className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <ul className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {features.map((feature) => (
-              <li className="rounded-md border shadow-sm bg-white border-gray-200 p-8" key={feature.name}>
+              <li className="p-8 text-black bg-white border border-gray-200 rounded-md shadow-sm" key={feature.name}>
                 <feature.icon
-                  className="h-12 w-12 text-rose-600 mb-4"
+                  className="w-12 h-12 mb-6 text-rose-400"
                 />
-                <h3 className="font-medium text-lg mb-2">
+                <h3 className="mb-2 text-lg font-medium">
                   {feature.name}
                 </h3>
                 <p className="text-muted-foreground">
@@ -123,33 +171,45 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
-      <section className="py-12 lg:py-24 bg-white text-black">
+      <section className="py-12 text-black bg-white lg:py-24">
         <div className="container mx-auto">
           <header>
-            <h2 className="text-3xl font-bold mb-8">
+            <h2 className="mb-8 text-3xl font-bold">
+              Get started today 🚀
+            </h2>
+          </header>
+          <PricingGrid
+            prices={prices}
+          />
+        </div>
+      </section>
+      <section className="py-12 text-black bg-rose-100 lg:py-24">
+        <div className="container mx-auto">
+          <header>
+            <h2 className="mb-8 text-3xl font-bold">
               Latest from us 🌍
             </h2>
           </header>
-          <ul className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <ul className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {articles.map((article) => (
-              <li className="flex flex-col rounded-md border shadow-sm bg-white border-gray-200" key={article.title}>
+              <li className="flex flex-col bg-white border border-gray-200 rounded-md shadow-sm" key={article.title}>
                 <img
                   className="object-cover w-full h-56"
                   src={`https://meldsmitte.no/images/blog/${article.poster}`}
                   alt={article.slug}
                 />
-                <main className="px-4 py-6 lg:p-6 flex-1">
-                  <h3 className="font-medium text-md mb-2">
+                <main className="flex-1 px-4 py-6 lg:p-6">
+                  <h3 className="mb-2 font-medium text-md">
                     {article.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
                     {article.ingress}
                   </p>
                 </main>
                 <footer className="px-4 pb-4 lg:p-6">
                   <Button className="w-full" size="lg" asChild>
                     <Link href={`/blogg/${article.slug}`}>
-                      Les mer
+                      Read more
                     </Link>
                   </Button>
                 </footer>

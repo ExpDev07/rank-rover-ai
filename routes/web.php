@@ -30,13 +30,13 @@ Route::get('/register', [RegisterController::class, 'render']);
 Route::post('/register', [RegisterController::class, 'render']);
 
 // app
-Route::get('/app', [AppController::class, 'render']);
-Route::post('/app', [AppController::class, 'submit']);
+Route::post('/apps', [AppController::class, 'handleCreate']);
+Route::get('/apps', [AppController::class, 'renderIndex']);
+Route::get('/app', [AppController::class, 'renderShow']);
 
 // content
+Route::post('/app/content', [ContentController::class, 'handleCreate']);
 Route::get('/app/content', [ContentController::class, 'renderIndex']);
-Route::post('/app/content', [ContentController::class, 'submit']);
-
-Route::get('/app/content/{id}', [ContentController::class, 'renderContent']);
-Route::post('/app/content/{id}/change', [ContentController::class, 'submit']);
+Route::get('/app/content/{id}', [ContentController::class, 'renderShow']);
+Route::post('/app/content/{id}/change', [ContentController::class, '¨handleChange']);
 

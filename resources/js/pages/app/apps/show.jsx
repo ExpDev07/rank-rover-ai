@@ -5,11 +5,11 @@ import Layout from "@/layouts/app"
 import PageHeader from "@/components/app/page/PageHeader"
 import Section from "@/components/app/section/Section"
 import SectionHeader from "@/components/app/section/SectionHeader"
-import AppCard from "@/components/app/app/AppCard"
+import MyAppCard from "@/components/app/app/MyAppCard"
 import StatisticsGrid from "@/components/app/statistic/StatisticsGrid"
 import ContentGrid from "@/components/app/content/ContentGrid"
 
-export default function AppIndexPage({ article }) {
+export default function AppsShowPage({ article }) {
   return (
     <Layout>
       <PageHeader
@@ -21,7 +21,7 @@ export default function AppIndexPage({ article }) {
           <StatisticsGrid />
         </Section>
         <Section>
-          <AppCard />
+          <MyAppCard />
         </Section>
         <Section>
           <SectionHeader

@@ -23,7 +23,7 @@ export default function ContentCard({
   return (
     <Link href="/app/content/1">
       <Card className={cn(
-        'relative w-full px-4 py-2 hover:ring-primary hover:ring-2',
+        'relative w-full px-4 py-2 hover:ring hover:ring-primary',
         content.status === 'generating' && 'opacity-50 pointer-events-none',
         content.status === 'error' && 'opacity-50 pointer-events-none',
       )}>
