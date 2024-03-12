@@ -32,7 +32,7 @@ export default function LoginPage() {
     defaultValues: {
       email: '',
       password: '',
-      remember_me: false,
+      remember_me: true,
     },
     resolver: zodResolver({
       email: z.string().email(),

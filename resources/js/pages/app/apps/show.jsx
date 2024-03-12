@@ -36,11 +36,6 @@ export default function AppsShowPage({
             content={content}
           />
         </Section>
-        <Section>
-          <SectionHeader
-            title="Article"
-          />
-        </Section>
       </main>
     </Layout>
   )

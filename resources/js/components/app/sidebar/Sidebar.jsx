@@ -74,9 +74,7 @@ export default function DashboardSidebar() {
         ))}
       </nav>
       <footer className="px-4 py-6 mt-auto">
-        <Button className="w-full" variant="secondary">
-          Contact support 🛎️
-        </Button>
+
       </footer>
     </aside>
   )

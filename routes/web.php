@@ -5,6 +5,7 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PricingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubscriptionPlanController;
 use App\Http\Controllers\ThankYouController;
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 // website
 Route::get('/', [HomeController::class, 'render']);
+Route::get('/pricing', [PricingController::class, 'render']);
 
 Route::middleware('guest')->group(function () {
     // login

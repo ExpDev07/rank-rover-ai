@@ -31,6 +31,17 @@ class AppController extends Controller
         return Inertia::render('app/apps/show', [
             'app' => $app,
             'content' => $app->contents,
+            'statistics' => [
+                'content_generated' => [
+                    'amount' => $app->contents()->count(),
+                ],
+                'dollars_saved' => [
+                    'amount' => $app->contents()->count() * 720,
+                ],
+                'hours_saved' => [
+                    'amount' => $app->contents()->count() * 4,
+                ],
+            ],
         ]);
     }
 

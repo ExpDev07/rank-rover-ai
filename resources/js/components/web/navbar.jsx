@@ -20,6 +20,14 @@ export default function Navbar() {
           </span>
         </Link>
         <div className="flex items-center gap-x-2">
+          <div className="flex items-center mr-6 gap-x-4">
+            <Link className="text-sm hover:underline hover:text-primary" href="/">
+              Home
+            </Link>
+            <Link className="text-sm hover:underline hover:text-primary" href="/pricing">
+              Pricing
+            </Link>
+          </div>
           {current_user ? (
           <Button asChild>
             <Link href="/apps">
@@ -30,7 +38,7 @@ export default function Navbar() {
             <>
               <Button variant="outline" asChild>
                 <Link href="/login">
-                  Log in
+                  Log in 😎
                 </Link>
               </Button>
               <Button asChild>

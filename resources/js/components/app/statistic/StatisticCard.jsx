@@ -26,9 +26,11 @@ export default function StatisticCard({
         <div className="text-2xl font-bold">
           {amount}
         </div>
+        {/*
         <p className="text-xs text-muted-foreground">
           {amountDescription}
         </p>
+        */}
       </CardContent>
     </Card>
   )

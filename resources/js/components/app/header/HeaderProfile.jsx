@@ -23,6 +23,10 @@ export default function HeaderProfile() {
     router.post('/logout')
   }
 
+  const handleClickBilling = async () => {
+
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -58,6 +62,10 @@ export default function HeaderProfile() {
           <DropdownMenuItem>
             Settings
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Billing
+            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
