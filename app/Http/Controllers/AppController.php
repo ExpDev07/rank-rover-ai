@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateAppRequest;
 use App\Models\App;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use OpenAI\Laravel\Facades\OpenAI;
 
@@ -16,7 +18,7 @@ class AppController extends Controller
     public function renderIndex()
     {
         return Inertia::render('app/apps/index', [
-            'apps' => App::query()->get(),
+            'apps' => Auth::user()->apps()->get(),
         ]);
     }
 
@@ -27,16 +29,20 @@ class AppController extends Controller
     {
         return Inertia::render('app/apps/show', [
             'app' => $app,
-            'content' => $app->content,
+            'content' => $app->contents,
         ]);
     }
 
     /**
      * Creates a new app.
      */
-    public function submit()
+    public function handleCreate(CreateAppRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $app = Auth::user()->apps()->create($data);
+
+        return redirect()->to("/app/{$app->slug}");
     }
 
 }

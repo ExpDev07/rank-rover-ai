@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react"
+import { usePage, Link } from "@inertiajs/react"
 import { ArrowPathIcon } from '@heroicons/react/24/solid'
 import { cn } from "@/lib/utils"
 
@@ -20,12 +20,16 @@ import {
 export default function ContentCard({
   content,
 }) {
+  const page = usePage()
+  const { app } = page.props
+
   return (
-    <Link href="/app/content/1">
+    <Link href={`/app/${app.slug}/content/${content.slug}`}>
       <Card className={cn(
         'relative w-full px-4 py-2 hover:ring hover:ring-primary',
+        content.status === 'idle' && 'opacity-50 pointer-events-none',
         content.status === 'generating' && 'opacity-50 pointer-events-none',
-        content.status === 'error' && 'opacity-50 pointer-events-none',
+        content.status === 'errored' && 'opacity-50 pointer-events-none',
       )}>
         <CardHeader className="flex flex-row items-center gap-x-6">
           <Avatar className="w-12 h-12">

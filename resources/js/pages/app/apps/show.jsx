@@ -9,7 +9,10 @@ import MyAppCard from "@/components/app/app/MyAppCard"
 import StatisticsGrid from "@/components/app/statistic/StatisticsGrid"
 import ContentGrid from "@/components/app/content/ContentGrid"
 
-export default function AppsShowPage({ article }) {
+export default function AppsShowPage({
+  app,
+  content,
+}) {
   return (
     <Layout>
       <PageHeader
@@ -21,21 +24,22 @@ export default function AppsShowPage({ article }) {
           <StatisticsGrid />
         </Section>
         <Section>
-          <MyAppCard />
+          <MyAppCard
+            app={app}
+          />
         </Section>
         <Section>
           <SectionHeader
-            title="Content"
+            title="Your content"
           />
-          <ContentGrid />
+          <ContentGrid
+            content={content}
+          />
         </Section>
         <Section>
           <SectionHeader
             title="Article"
           />
-          {article && (
-            <article className="py-16 prose prose-lg" dangerouslySetInnerHTML={{ __html: marked.parse(article.content) }} />
-          )}
         </Section>
       </main>
     </Layout>

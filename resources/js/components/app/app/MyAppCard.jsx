@@ -26,15 +26,17 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-export default function MyAppCard() {
+export default function MyAppCard({
+  app,
+}) {
   const [isEditing, setIsEditing] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
 
   const form = useForm({
     defaultValues: {
-      name: '',
-      description: '',
-      target_audience: '',
+      name: app.name || '',
+      description: app.description || '',
+      target_audience: app.target_audience || '',
     },
     resolver: zodResolver(z.object({
       name: z.string().min(3),

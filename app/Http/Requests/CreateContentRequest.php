@@ -15,7 +15,6 @@ class CreateContentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'app_id' => ['required'],
             'language' => ['required'],
             'title' => ['required'],
             'keywords' => ['required', 'array'],

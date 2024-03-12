@@ -1,3 +1,4 @@
+import { router, usePage } from "@inertiajs/react"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -37,25 +38,28 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-const languages = [
-  { label: "English", value: "en" },
-  { label: "Norwegian", value: "nb" },
-  { label: "French", value: "fr" },
-  { label: "German", value: "de" },
-  { label: "Spanish", value: "es" },
-  { label: "Portuguese", value: "pt" },
-  { label: "Russian", value: "ru" },
-  { label: "Japanese", value: "ja" },
-  { label: "Korean", value: "ko" },
-  { label: "Chinese", value: "zh" },
-]
-
 export default function CreateContentDialog({
   children,
 }) {
+  const languages = [
+    { label: "English", value: "English" },
+    { label: "Norwegian", value: "Norwegian" },
+    { label: "French", value: "French" },
+    { label: "German", value: "German" },
+    { label: "Spanish", value: "Spanish" },
+    { label: "Portuguese", value: "Portuguese" },
+    { label: "Russian", value: "Russian" },
+    { label: "Japanese", value: "Japanese" },
+    { label: "Korean", value: "Korean" },
+    { label: "Chinese", value: "Chinese" },
+  ]
+
+  const page = usePage()
+  const { app } = page.props
+
   const form = useForm({
     defaultValues: {
-      language: '',
+      language: 'English',
       title: '',
       keywords: '',
     },
@@ -65,6 +69,15 @@ export default function CreateContentDialog({
       keywords: z.string().min(3),
     }))
   })
+
+  const handleSubmit = (data) => {
+    router.post(`/app/${app.slug}/content`, {
+      ...data,
+      keywords: data.keywords.split(', '),
+    }, {
+      preserveState: false,
+    })
+  }
 
   return (
     <Dialog>
@@ -86,62 +99,15 @@ export default function CreateContentDialog({
               control={form.control}
               name="language"
               render={({ field }) => (
-                <FormItem className="flex flex-col">
+                <FormItem>
                   <FormLabel>
                     Language
                   </FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          role="combobox"
-                          className={cn("w-full justify-between", !field.value && "text-muted-foreground")}
-                        >
-                          {field.value
-                            ? languages.find(
-                                (language) => language.value === field.value
-                              )?.label
-                            : "Select language"}
-                          <CaretSortIcon className="w-4 h-4 ml-2 opacity-50 shrink-0" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-[200px] p-0">
-                      <Command>
-                        <CommandInput
-                          placeholder="Search language..."
-                          className="h-9"
-                        />
-                        <CommandEmpty>
-                          No language found.
-                        </CommandEmpty>
-                        <CommandGroup>
-                          {languages.map((language) => (
-                            <CommandItem
-                              value={language.label}
-                              key={language.value}
-                              onSelect={() => {
-                                form.setValue("language", language.value)
-                              }}
-                            >
-                              {language.label}
-                              <CheckIcon
-                                className={cn(
-                                  "ml-auto h-4 w-4",
-                                  language.value === field.value
-                                    ? "opacity-100"
-                                    : "opacity-0"
-                                )}
-                              />
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
+                  <FormControl>
+                    <Input type="text" placeholder="English" {...field} />
+                  </FormControl>
                   <FormDescription>
-                    This is the language the content will be created in.
+                    This is the language that will be used in the dashboard.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -192,7 +158,12 @@ export default function CreateContentDialog({
           </form>
         </Form>
         <DialogFooter>
-          <Button className="w-full py-4" type="submit" size="lg">
+          <Button
+            className="w-full py-4"
+            type="submit"
+            size="lg"
+            onClick={() => handleSubmit(form.getValues())}
+          >
             Create the content 🚀
           </Button>
         </DialogFooter>

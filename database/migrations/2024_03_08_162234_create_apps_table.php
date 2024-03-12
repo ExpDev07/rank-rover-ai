@@ -14,6 +14,11 @@ return new class extends Migration
     {
         Schema::create('apps', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('name');
+            $table->string('slug');
+            $table->string('description');
+            $table->string('target_audience');
             $table->timestamps();
         });
     }

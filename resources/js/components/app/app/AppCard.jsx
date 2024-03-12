@@ -1,3 +1,5 @@
+import { Link } from "@inertiajs/react"
+
 import {
   Card,
   CardContent,
@@ -12,20 +14,22 @@ export default function AppCard({
   ...props
 }) {
   return (
-    <Card className={"p-4 relative hover:ring hover:ring-primary hover:cursor-pointer"} {...props}>
-      <CardHeader>
-        <img
-          className="w-16 h-16 mb-6"
-          src={`https://api.dicebear.com/7.x/shapes/svg?seed=${app.name}`}
-          alt={app.name}
-        />
-        <CardTitle>
-          {app.name}
-        </CardTitle>
-        <CardDescription>
-          {app.description}
-        </CardDescription>
-      </CardHeader>
-    </Card>
+    <Link href={`/app/${app.slug}`}>
+      <Card className={"p-4 relative hover:ring hover:ring-primary hover:cursor-pointer"} {...props}>
+        <CardHeader>
+          <img
+            className="w-16 h-16 mb-6"
+            src={`https://api.dicebear.com/7.x/shapes/svg?seed=${app.name}`}
+            alt={app.name}
+          />
+          <CardTitle>
+            {app.name}
+          </CardTitle>
+          <CardDescription>
+            {app.description}
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </Link>
   )
 }

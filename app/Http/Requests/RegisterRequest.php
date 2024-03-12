@@ -18,6 +18,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'confirmed', 'min:6'],
+            'subscription_plan' => [],
         ];
     }
 

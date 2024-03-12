@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -19,6 +20,7 @@ class App extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'name',
         'slug',
         'description',
@@ -34,9 +36,17 @@ class App extends Model
     }
 
     /**
+     * The user.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * The app's content.
      */
-    public function content(): HasMany
+    public function contents(): HasMany
     {
         return $this->hasMany(Content::class);
     }

@@ -4,6 +4,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubscriptionPlanController;
 use App\Http\Controllers\ThankYouController;
@@ -34,9 +35,13 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    // logout
+    Route::post('/logout', [LogoutController::class, 'handleLogout']);
+
     // subscription
     Route::get('/select-plan', [SubscriptionPlanController::class, 'render']);
-    Route::post('/select-plan/{plan}/checkout', [SubscriptionPlanController::class, 'handleCheckout']);
+    Route::get('/select-plan/{plan:key}/checkout', [SubscriptionPlanController::class, 'handleCheckout']);
+    Route::post('/select-plan/{plan:key}/checkout', [SubscriptionPlanController::class, 'handleCheckout']);
 
     // thank you
     Route::get('/thank-you', [ThankYouController::class, 'render']);
@@ -44,12 +49,12 @@ Route::middleware('auth')->group(function () {
     // app
     Route::post('/apps', [AppController::class, 'handleCreate']);
     Route::get('/apps', [AppController::class, 'renderIndex']);
-    Route::get('/app', [AppController::class, 'renderShow']);
+    Route::get('/app/{app:slug}', [AppController::class, 'renderShow']);
 
     // content
-    Route::post('/app/content', [ContentController::class, 'handleCreate']);
-    Route::get('/app/content', [ContentController::class, 'renderIndex']);
-    Route::get('/app/content/{id}', [ContentController::class, 'renderShow']);
-    Route::post('/app/content/{id}/change', [ContentController::class, '¨handleChange']);
+    Route::post('/app/{app:slug}/content', [ContentController::class, 'handleCreate']);
+    Route::get('/app/{app:slug}/content', [ContentController::class, 'renderIndex']);
+    Route::get('/app/{app:slug}/content/{content:slug}', [ContentController::class, 'renderShow']);
+    Route::post('/app/{app:slug}/content/{content:slug}/change', [ContentController::class, '¨handleChange']);
 });
 

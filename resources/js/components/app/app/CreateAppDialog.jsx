@@ -1,3 +1,4 @@
+import { router } from "@inertiajs/react"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -41,6 +42,10 @@ export default function CreateAppDialog({
       target_audience: z.string().min(3),
     }))
   })
+
+  const handleSubmit = (data) => {
+    router.post('/apps', data)
+  }
 
   return (
     <Dialog>
@@ -106,7 +111,12 @@ export default function CreateAppDialog({
           </form>
         </Form>
         <DialogFooter>
-          <Button className="w-full py-4" type="submit" size="lg">
+          <Button
+          className="w-full py-4"
+          type="submit"
+          size="lg"
+          onClick={() => handleSubmit(form.getValues())}
+        >
             Create app 📱
           </Button>
         </DialogFooter>

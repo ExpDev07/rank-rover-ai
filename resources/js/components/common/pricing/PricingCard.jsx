@@ -31,7 +31,7 @@ export default function PricingCard({
               {price.name}
             </CardTitle>
             <div className={cn("px-2.5 rounded-xl h-fit text-sm py-1 bg-zinc-200 text-black", price.popular && 'bg-gradient-to-r from-orange-400 to-rose-400')}>
-              Save ${price.price * 12 - price.yearlyPrice}
+              Save ${(price.price / 100) * 12 - price.yearlyPrice}
             </div>
           </div>
         ) : (
@@ -41,10 +41,10 @@ export default function PricingCard({
         )}
         <div className="flex gap-1">
           <h3 className="text-3xl font-bold">
-            {price.yearlyPrice && price.isYearly ? "$" + price.yearlyPrice : price.price ? "$" + price.price : "Custom"}
+            {price.yearlyPrice && price.isYearly ? "$" + price.yearlyPrice : (price.price / 100) ? "$" + (price.price / 100) : "Custom"}
           </h3>
           <span className="flex flex-col justify-end mb-1 text-sm">
-            {price.yearlyPrice && price.isYearly ? "/year" : price.price ? "/month" : ''}
+            {price.yearlyPrice && price.isYearly ? "/year" : (price.price / 100) ? "/month" : ''}
           </span>
         </div>
         <CardDescription className="pt-2">
@@ -67,7 +67,7 @@ export default function PricingCard({
           asChild
         >
           {checkout ? (
-            <Link href={`/select-plan/${price.id}/checkout`} method="post">
+            <Link href={`/select-plan/${price.key}/checkout`} method="post">
               Select plan <span className="ml-2 text-lg -translate-y-1">👉</span>
             </Link>
           ) : (

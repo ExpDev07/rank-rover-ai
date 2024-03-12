@@ -43,55 +43,6 @@ export default function HomePage({
     },
   ]
 
-  const prices = [
-    {
-      id: 1,
-      popular: false,
-      title: 'Basic',
-      monthlyPrice: 15,
-      yearlyPrice: 100,
-      description: 'Essential features you need to get started.',
-      features: [
-        'Create one app',
-        'Generate 5x content daily',
-        'AI recommended keywords',
-        'Tweak your content with AI',
-        '24/7 support',
-      ],
-    },
-    {
-      id: 2,
-      popular: true,
-      title: 'Pro',
-      monthlyPrice: 40,
-      yearlyPrice: 150,
-      description: 'Perfect for owners of small & medium businessess.',
-      features: [
-        'Create 10x apps',
-        'Generate 50x content daily',
-        'AI recommended keywords',
-        'Tweak your content with AI',
-        '24/7 support',
-      ],
-    },
-    {
-      id: 3,
-      popular: false,
-      title: 'Enterprise',
-      monthlyPrice: 99,
-      yearlyPrice: 200,
-      description: 'Dedicated support and infrastructure to fit your needs.',
-      features: [
-        'Create 50x apps',
-        'Generate 100x content daily',
-        'AI recommended keywords',
-        'Tweak your content with AI',
-        '24/7 support',
-        'Priority feature requests',
-      ],
-    }
-  ]
-
   const articles = [
     {
       title: 'Å Navigere Samtalen: Å Fortelle Din Partner Om en Kjønnssykdom',
@@ -135,12 +86,14 @@ export default function HomePage({
           </p>
           <div className="flex items-center gap-x-2">
             <Button size="lg" asChild>
-              <Link href="/varsel">
+              <Link href="/register">
                 Get started 🌟
               </Link>
             </Button>
             <Button size="lg" variant="outline">
-              Learn more 🤔
+              <Link href="/">
+                Learn more 🤔
+              </Link>
             </Button>
           </div>
         </div>

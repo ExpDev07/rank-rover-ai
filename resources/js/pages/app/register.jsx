@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Input } from "@/components/ui/input"
-import { Switch } from "@/components/ui/switch"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -44,11 +43,19 @@ export default function RegisterPage({
   })
 
   const handleSubmit = (data) => {
-    router.post('/register', data)
+    router.post('/register', {
+      ...data,
+      subscription_plan: subscription_plan ? subscription_plan.key : null,
+    })
   }
 
   return (
     <div className="flex items-center justify-center h-screen gap-12 p-3">
+      <Button className="absolute z-50 top-5 left-5" variant="outline" asChild>
+        <Link href="/">
+          Back to home 🛑
+        </Link>
+      </Button>
       <svg
         className="fixed inset-0 brightness-75"
         viewBox="0 0 1920 1080"
@@ -137,6 +144,21 @@ export default function RegisterPage({
                   </FormItem>
                 )}
               />
+              {subscription_plan && (
+                <div className="flex items-center justify-between gap-6 px-4 py-2 border-2 rounded-md shadow border-rose-400 bg-card text-card-foreground">
+                  <div>
+                    <h4 className="font-bold text-md">
+                      {subscription_plan.name}
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      {subscription_plan.description}
+                    </p>
+                  </div>
+                  <div className="text-sm">
+                    ${subscription_plan.price / 100}/m
+                  </div>
+                </div>
+              )}
             </form>
           </Form>
         </CardContent>
@@ -148,7 +170,7 @@ export default function RegisterPage({
             loading={form.processing}
             onClick={() => handleSubmit(form.getValues())}
           >
-            Create account <span className="ml-2 text-lg -translate-y-1">👉</span>
+            Create account{subscription_plan && ' and checkout'} <span className="ml-2 text-lg -translate-y-1">👉</span>
           </Button>
           <p className="text-sm text-muted-foreground">
             Already have an account? <Link className="text-primary hover:underline" href="/login">Log in now</Link>.

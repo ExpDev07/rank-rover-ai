@@ -17,7 +17,9 @@ class RegisterController extends Controller
      */
     public function render(Request $request)
     {
-        return Inertia::render('app/register');
+        return Inertia::render('app/register', [
+            'subscription_plan' => $request->has('plan') ? SubscriptionPlan::query()->where('key', $request->get('plan'))->first() : null,
+        ]);
     }
 
     /**
@@ -29,6 +31,10 @@ class RegisterController extends Controller
 
         $user = User::query()->create($data);
         Auth::login($user, true);
+
+        if ($subscriptionPlan = $request->post('subscription_plan')) {
+            return redirect()->to("/select-plan/$subscriptionPlan/checkout");
+        }
 
         return redirect()->to('/select-plan');
     }

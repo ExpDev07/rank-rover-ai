@@ -1,8 +1,11 @@
-import { Link } from "@inertiajs/react"
+import { usePage, Link } from "@inertiajs/react"
 
 import { Button } from "@/components/ui/button"
 
 export default function Navbar() {
+  const page = usePage()
+  const { current_user } = page.props
+
   return (
     <nav className="py-2 text-black bg-white border-b">
       <div className="container flex items-center justify-between mx-auto gap-x-6">
@@ -17,16 +20,26 @@ export default function Navbar() {
           </span>
         </Link>
         <div className="flex items-center gap-x-2">
-          <Button variant="outline" asChild>
-            <Link href="/">
-              Log in
-            </Link>
-          </Button>
+          {current_user ? (
           <Button asChild>
-            <Link href="/">
-              Get started 🌟
+            <Link href="/apps">
+              Go to dashboard
             </Link>
           </Button>
+          ) : (
+            <>
+              <Button variant="outline" asChild>
+                <Link href="/login">
+                  Log in
+                </Link>
+              </Button>
+              <Button asChild>
+                <Link href="/register">
+                  Get started 🌟
+                </Link>
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </nav>

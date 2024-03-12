@@ -29,44 +29,18 @@ import Section from "@/components/app/section/Section"
 export default function ContentShowPage({
   content,
 }) {
+  const handleCopyToMarkdown = () => {
+    navigator.clipboard.writeText(content.content_md);
+  }
+
   return (
     <Layout>
-      <PageHeader
-        title="How SEO can drive organic traffic to your app"
-        description="Manage the content."
-        icon={(
-          <img
-            className="w-12 h-12"
-            src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${'How SEO can drive organic traffic to your app'}`}
-            alt=""
-          />
-        )}
-        actions={(
-          <>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button>
-                  Export now 😎
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>Save as</DropdownMenuLabel>
-                <DropdownMenuItem>markdown (md)</DropdownMenuItem>
-                <DropdownMenuItem>json</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuLabel>Endpoints</DropdownMenuLabel>
-                <DropdownMenuItem>https://example.com/webhook</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </>
-        )}
-      />
       <main>
         <Section className="grid grid-cols-12 gap-24">
           <div className="col-span-7">
             <article
               className="prose prose-md"
-              dangerouslySetInnerHTML={{ __html: marked.parse(content.content.replace('# How SEO can drive organic traffic to your app', '')) }}
+              dangerouslySetInnerHTML={{ __html: marked.parse(content.content_md.replace('# How SEO can drive organic traffic to your app', '')) }}
             />
           </div>
           <div className="col-span-5 space-y-4">
@@ -78,15 +52,14 @@ export default function ContentShowPage({
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-x-1">
-                  <Badge variant="outline">
-                    seo
-                  </Badge>
-                  <Badge variant="outline">
-                    backlinking
-                  </Badge>
-                  <Badge variant="outline">
-                    organic traffic
-                  </Badge>
+                  {content.keywords.map((keyword, i) => (
+                    <Badge
+                      key={i}
+                      variant="outline"
+                    >
+                      {keyword}
+                    </Badge>
+                  ))}
                 </div>
               </CardContent>
             </Card>
@@ -106,10 +79,28 @@ export default function ContentShowPage({
                 />
               </CardContent>
               <CardFooter>
-                <Button disabled={true}>
+                <Button className="w-full" disabled={true}>
                   Send tweak 🛠️
                 </Button>
               </CardFooter>
+            </Card>
+            <Card className="p-3">
+              <CardHeader>
+                <CardTitle>
+                  Save to somewhere 📠
+                </CardTitle>
+                <CardDescription>
+                  Take your content with you to where you like.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button
+                  className="w-full"
+                  onClick={() => handleCopyToMarkdown()}
+                >
+                  Copy as markdown (MD) 🧲
+                </Button>
+              </CardContent>
             </Card>
           </div>
         </Section>

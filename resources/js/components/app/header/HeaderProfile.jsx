@@ -1,4 +1,5 @@
 import * as React from "react"
+import { router } from "@inertiajs/react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -19,7 +20,7 @@ import {
 
 export default function HeaderProfile() {
   const handleLogout = async () => {
-    console.log('logout')
+    router.post('/logout')
   }
 
   return (

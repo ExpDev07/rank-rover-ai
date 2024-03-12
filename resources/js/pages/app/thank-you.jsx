@@ -7,10 +7,10 @@ export default function ThankYouPage({
   current_user_subscribed,
 }) {
   if (current_user_subscribed) {
-    router.get('/app')
+    router.get('/apps')
   } else {
     setTimeout(() => {
-      router.get('/thank-you', {}, { preserveState: false, preserveScroll: true, replace: true })
+      router.get('/thank-you', {}, { only: ['current_user_subscribed'] })
     }, 5000)
   }
 

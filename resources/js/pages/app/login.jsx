@@ -50,6 +50,11 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen p-3">
+      <Button className="absolute z-50 top-5 left-5" variant="outline" asChild>
+        <Link href="/">
+          Back to home 🛑
+        </Link>
+      </Button>
       <svg
         className="fixed inset-0 brightness-75"
         viewBox="0 0 1920 1080"
