@@ -42,6 +42,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'current_user' => fn () => Auth::user(),
             'current_user_subscribed' => fn () => Auth::user()?->subscriptions()->exists(),
+            'current_user_apps' => fn () => Auth()->user()?->apps()->get(),
         ]);
     }
 

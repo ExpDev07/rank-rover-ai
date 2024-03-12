@@ -4,37 +4,36 @@ import { usePage, Link } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
 import {
   HomeIcon,
-  UserIcon,
-  UserGroupIcon,
   RectangleGroupIcon,
-  KeyIcon,
   DocumentCheckIcon,
-  BoltIcon
 } from "@heroicons/react/16/solid"
 
 export default function DashboardSidebar() {
   const page = usePage()
-  const [collapsed, setCollapsed] = React.useState(false)
-  const [selectedApp, setSelectedApp] = React.useState({ name: 'Test App' })
+  const { app } = page.props
+
+  if (! app) {
+    return
+  }
 
   const getSections = () => {
     // the navigation sections
     const sections = []
 
     // add admin navigation items
-    sections.push({
-      title: "Admin",
-      items: [
-        { title: "Manage apps", to: "/apps", icon: <RectangleGroupIcon className="w-4 h-4" /> },
-      ]
-    })
+    // sections.push({
+    //   title: "RankRover.ai",
+    //   items: [
+    //     { title: "Apps", to: "/apps", icon: <RectangleGroupIcon className="w-4 h-4" /> },
+    //   ]
+    // })
 
     // add app navigation items
-    selectedApp && sections.unshift({
-      title: selectedApp.name,
+    app && sections.unshift({
+      title: app.name,
       items: [
-        { title: "App", to: "/app", icon: <HomeIcon className="w-4 h-4" />, exact: true },
-        { title: "Content", to: "/app/content", icon: <DocumentCheckIcon className="w-4 h-4" /> },
+        { title: "App", to: `/app/${app.slug}`, icon: <HomeIcon className="w-4 h-4" />, exact: true },
+        { title: "Content", to: `/app/${app.slug}/content`, icon: <DocumentCheckIcon className="w-4 h-4" /> },
       ]
     })
 

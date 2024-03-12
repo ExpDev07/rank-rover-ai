@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     // app
     Route::post('/apps', [AppController::class, 'handleCreate']);
     Route::get('/apps', [AppController::class, 'renderIndex']);
+    Route::put('/app/{app:slug}', [AppController::class, 'handleUpdate']);
     Route::get('/app/{app:slug}', [AppController::class, 'renderShow']);
 
     // content

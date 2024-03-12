@@ -1,4 +1,5 @@
 import * as React from "react"
+import { router } from "@inertiajs/react"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -44,6 +45,15 @@ export default function MyAppCard({
       target_audience: z.string().min(50),
     }))
   })
+
+  const handleSubmit = (data) => {
+    router.put(`/app/${app.slug}`, data, {
+      onBefore: () => form.clearErrors(),
+      onStart: () => setLoading(true),
+      onFinish: () => setLoading(false),
+      onError: (errors) => Object.keys(errors).forEach((field) => form.setError(field, { message: errors[field] })),
+    })
+  }
 
   return (
     <Card className="relative w-full p-6">
@@ -140,8 +150,8 @@ export default function MyAppCard({
           <Button
             className="w-full"
             size="lg"
-            disabled={!form.formState.isValid}
-            onClick={() => console.log('update app')}
+            loading={loading}
+            onClick={() => handleSubmit(form.getValues())}
           >
             Update app 🚀
           </Button>

@@ -46,9 +46,11 @@ export default function RegisterPage({
   })
 
   const handleSubmit = (data) => {
-    router.post('/register', {
-      ...data,
-      subscription_plan: selectedSubscriptionPlan?.key || null,
+    router.post('/register', { ...data, subscription_plan: selectedSubscriptionPlan?.key || null }, {
+      onBefore: () => form.clearErrors(),
+      onStart: () => setLoading(true),
+      onFinish: () => setLoading(false),
+      onError: (errors) => Object.keys(errors).forEach((field) => form.setError(field, { message: errors[field] })),
     })
   }
 

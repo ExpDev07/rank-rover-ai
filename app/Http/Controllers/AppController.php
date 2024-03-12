@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAppRequest;
+use App\Http\Requests\UpdateAppRequest;
 use App\Models\App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,18 @@ class AppController extends Controller
         $app = Auth::user()->apps()->create($data);
 
         return redirect()->to("/app/{$app->slug}");
+    }
+
+    /**
+     * Handles updating the app.
+     */
+    public function handleUpdate(App $app, UpdateAppRequest $request)
+    {
+        $data = $request->validated();
+
+        $app->update($data);
+
+        return redirect()->back();
     }
 
 }

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link } from "@inertiajs/react"
+import { router, usePage, Link } from "@inertiajs/react"
 import { cn } from "@/lib/utils"
 
 import {
@@ -32,13 +32,10 @@ import {
 export default function HeaderAppSwitcher({
   className
 }) {
-  const [open, setOpen] = React.useState(false)
-  const [apps, setApps] = React.useState([{ name: 'Test App' }, { name: 'Another App' }])
-  const [selectedApp, setSelectedApp] = React.useState({ name: 'Test App' })
+  const page = usePage()
+  const { current_user_apps: apps, app: selectedApp } = page.props
 
-  if (! selectedApp) {
-    return
-  }
+  const [open, setOpen] = React.useState(false)
 
   const groups = [
     {
@@ -57,14 +54,22 @@ export default function HeaderAppSwitcher({
           aria-label="Select an app"
           className={cn("w-[200px] justify-between", className)}
         >
-          <Avatar className="w-5 h-5 mr-2">
-            <AvatarImage
-              src={`https://api.dicebear.com/7.x/bottts-neutral/svg?seed=/${selectedApp.name}`}
-              alt={selectedApp.name}
-            />
-            <AvatarFallback>SC</AvatarFallback>
-          </Avatar>
-          {selectedApp.name}
+          {selectedApp ? (
+            <>
+              <Avatar className="w-5 h-5 mr-2">
+                <AvatarImage
+                  src={`https://api.dicebear.com/7.x/bottts-neutral/svg?seed=/${selectedApp.name}`}
+                  alt={selectedApp.name}
+                />
+                <AvatarFallback>SC</AvatarFallback>
+              </Avatar>
+              {selectedApp.name}
+            </>
+          ) : (
+            <>
+              Select an app
+            </>
+          )}
           <CaretSortIcon className="w-4 h-4 ml-auto opacity-50 shrink-0" />
         </Button>
       </PopoverTrigger>
@@ -81,12 +86,12 @@ export default function HeaderAppSwitcher({
               <CommandGroup key={group.label} heading={group.label}>
                 {group.apps.map((app, i) => (
                   <CommandItem
+                    className="text-sm"
                     key={i}
                     onSelect={() => {
-                      setSelectedApp(app)
                       setOpen(false)
+                      router.get(`/app/${app.slug}`)
                     }}
-                    className="text-sm"
                   >
                     <Avatar className="w-5 h-5 mr-2">
                       <AvatarImage
@@ -99,7 +104,7 @@ export default function HeaderAppSwitcher({
                     <CheckIcon
                       className={cn(
                         "ml-auto h-4 w-4",
-                        selectedApp.name === app.name ? "opacity-100" : "opacity-0"
+                        selectedApp?.name === app.name ? "opacity-100" : "opacity-0"
                       )}
                     />
                   </CommandItem>
@@ -110,7 +115,7 @@ export default function HeaderAppSwitcher({
           <CommandSeparator />
           <CommandList>
             <CommandGroup>
-              <Link to="/apps">
+              <Link href="/apps">
                 <CommandItem>
                   <HamburgerMenuIcon className="w-5 h-5 mr-2" />
                   Manage apps

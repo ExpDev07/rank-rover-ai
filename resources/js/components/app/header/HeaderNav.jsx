@@ -12,12 +12,12 @@ export default function HeaderNav({
       {...props}
     >
       <Link
-        to="/dashboard"
+        href="/apps"
         className="text-sm font-medium transition-colors hover:text-primary"
         inactiveProps={{ className: 'text-muted-foreground' }}
         activeOptions={{ exact: true }}
       >
-        Overview
+        Apps
       </Link>
     </nav>
   )

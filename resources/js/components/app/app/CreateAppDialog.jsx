@@ -1,9 +1,8 @@
+import * as React from "react"
 import { router } from "@inertiajs/react"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { CaretSortIcon, CheckIcon, Component1Icon } from "@radix-ui/react-icons"
-import { cn } from "@/lib/utils"
 
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -30,6 +29,8 @@ import {
 export default function CreateAppDialog({
   children,
 }) {
+  const [loading, setLoading] = React.useState(false)
+
   const form = useForm({
     defaultValues: {
       name: '',
@@ -44,7 +45,12 @@ export default function CreateAppDialog({
   })
 
   const handleSubmit = (data) => {
-    router.post('/apps', data)
+    router.post('/apps', data, {
+      onBefore: () => form.clearErrors(),
+      onStart: () => setLoading(true),
+      onFinish: () => setLoading(false),
+      onError: (errors) => Object.keys(errors).forEach((field) => form.setError(field, { message: errors[field] })),
+    })
   }
 
   return (
@@ -115,6 +121,7 @@ export default function CreateAppDialog({
           className="w-full py-4"
           type="submit"
           size="lg"
+          loading={loading}
           onClick={() => handleSubmit(form.getValues())}
         >
             Create app 📱

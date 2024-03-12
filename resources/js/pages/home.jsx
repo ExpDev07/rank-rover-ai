@@ -37,7 +37,7 @@ export default function HomePage({
       icon: BellAlertIcon,
     },
     {
-      name: 'Keyword Optimization',
+      name: 'It\'s your content',
       description: 'Export your content in multiple formats including markdown, semantic HTML, and JSON for seamless integration.',
       icon: BellAlertIcon,
     },
@@ -116,7 +116,7 @@ export default function HomePage({
             {features.map((feature) => (
               <li className="p-8 text-black bg-white border border-gray-200 rounded-md shadow-sm" key={feature.name}>
                 <feature.icon
-                  className="w-12 h-12 mb-6 text-rose-400"
+                  className="mb-6 w-14 h-14 text-rose-400"
                 />
                 <h3 className="mb-2 text-lg font-medium">
                   {feature.name}

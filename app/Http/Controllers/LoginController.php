@@ -33,7 +33,7 @@ class LoginController extends Controller
             abort(503, 'Invalid credentials');
         }
 
-        return redirect()->to('/app');
+        return redirect()->to('/apps');
     }
 
 }

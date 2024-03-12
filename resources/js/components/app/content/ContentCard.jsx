@@ -3,6 +3,7 @@ import { ArrowPathIcon } from '@heroicons/react/24/solid'
 import { cn } from "@/lib/utils"
 
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import {
   Avatar,
   AvatarFallback,
@@ -32,7 +33,7 @@ export default function ContentCard({
         content.status === 'errored' && 'opacity-50 pointer-events-none',
       )}>
         <CardHeader className="flex flex-row items-center gap-x-6">
-          <Avatar className="w-12 h-12">
+          <Avatar className="w-14 h-14">
             <AvatarImage
               src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${content.title}`}
               alt={content.title}
@@ -42,12 +43,16 @@ export default function ContentCard({
             </AvatarFallback>
           </Avatar>
           <div className="flex-1">
-            <CardTitle className="text-lg">
+            <CardTitle className="mb-2 text-lg">
               {content.title}
             </CardTitle>
-            <CardDescription className="text-md">
-              {content.description}
-            </CardDescription>
+            <div className="flex items-center gap-2">
+              {content.keywords.map((keyword) => (
+                <Badge variant="outline">
+                  {keyword}
+                </Badge>
+              ))}
+            </div>
           </div>
           {content.status === 'generating' && (
             <ArrowPathIcon className="w-7 h-7 animate-spin text-muted-foreground" />

@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CreateAppRequest extends FormRequest
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -19,4 +20,5 @@ class CreateAppRequest extends FormRequest
             'target_audience' => ['required'],
         ];
     }
+
 }

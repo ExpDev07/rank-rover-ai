@@ -43,8 +43,10 @@ export default function LoginPage() {
 
   const handleSubmit = (data) => {
     router.post('/login', data, {
+      onBefore: () => form.clearErrors(),
       onStart: () => setLoading(true),
       onFinish: () => setLoading(false),
+      onError: (errors) => Object.keys(errors).forEach((field) => form.setError(field, { message: errors[field] })),
     })
   }
 
