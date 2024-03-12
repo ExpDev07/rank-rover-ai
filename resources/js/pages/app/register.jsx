@@ -27,6 +27,9 @@ import {
 export default function RegisterPage({
   subscription_plan,
 }) {
+  const [loading, setLoading] = React.useState(false)
+  const [selectedSubscriptionPlan, setSelectedSubscriptionPlan] = React.useState(subscription_plan || null)
+
   const form = useForm({
     defaultValues: {
       name: '',
@@ -45,7 +48,7 @@ export default function RegisterPage({
   const handleSubmit = (data) => {
     router.post('/register', {
       ...data,
-      subscription_plan: subscription_plan ? subscription_plan.key : null,
+      subscription_plan: selectedSubscriptionPlan?.key || null,
     })
   }
 
@@ -144,19 +147,24 @@ export default function RegisterPage({
                   </FormItem>
                 )}
               />
-              {subscription_plan && (
-                <div className="flex items-center justify-between gap-6 px-4 py-2 border-2 rounded-md shadow border-rose-400 bg-card text-card-foreground">
-                  <div>
-                    <h4 className="font-bold text-md">
-                      {subscription_plan.name}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {subscription_plan.description}
-                    </p>
+              {selectedSubscriptionPlan && (
+                <div>
+                  <div className="flex items-center justify-between gap-6 px-4 py-3 mt-2 rounded-md shadow ring-2 ring-rose-400 bg-card text-card-foreground">
+                    <div>
+                      <h4 className="text-sm font-bold">
+                        {selectedSubscriptionPlan.name}
+                      </h4>
+                      <p className="text-sm text-muted-foreground">
+                        {selectedSubscriptionPlan.description}
+                      </p>
+                    </div>
+                    <div className="text-sm">
+                      ${selectedSubscriptionPlan.price / 100}/m
+                    </div>
                   </div>
-                  <div className="text-sm">
-                    ${subscription_plan.price / 100}/m
-                  </div>
+                  <Button className="mt-1" variant="link" size="sm" onClick={() => setSelectedSubscriptionPlan(null)}>
+                    Select a different plan later
+                  </Button>
                 </div>
               )}
             </form>
@@ -167,10 +175,10 @@ export default function RegisterPage({
             className="w-full py-6 mb-6 text-md"
             type="submit"
             size="lg"
-            loading={form.processing}
+            loading={loading}
             onClick={() => handleSubmit(form.getValues())}
           >
-            Create account{subscription_plan && ' and checkout'} <span className="ml-2 text-lg -translate-y-1">👉</span>
+            Create account{selectedSubscriptionPlan && ' and checkout'} <span className="ml-2 text-lg -translate-y-1">👉</span>
           </Button>
           <p className="text-sm text-muted-foreground">
             Already have an account? <Link className="text-primary hover:underline" href="/login">Log in now</Link>.
