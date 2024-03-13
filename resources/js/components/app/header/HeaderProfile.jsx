@@ -24,7 +24,7 @@ export default function HeaderProfile() {
   }
 
   const handleClickBilling = async () => {
-
+    router.get('/billing');
   }
 
   return (
@@ -55,6 +55,7 @@ export default function HeaderProfile() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+          {/*
           <DropdownMenuItem>
             Profile
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
@@ -63,7 +64,8 @@ export default function HeaderProfile() {
             Settings
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          */}
+          <DropdownMenuItem  onClick={() => handleClickBilling()}>
             Billing
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>

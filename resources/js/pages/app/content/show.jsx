@@ -38,8 +38,17 @@ export default function ContentShowPage({
     }, 10000)
   }
 
+  const [loadingRetry, setLoadingRetry] = React.useState(false)
+
+  const [loadingTweak, setLoadingTweak] = React.useState(false)
+  const [tweak, setTweak] = React.useState('')
+
   const handleRetry = () => {
     router.post(`/app/${app.slug}/content/${content.slug}/retry`, {}, { only: ['content'] })
+  }
+
+  const handleTweak = () => {
+    router.post(`/app/${app.slug}/content/${content.slug}/tweak`, { tweak }, { only: ['content'] })
   }
 
   const handleCopyToMarkdown = () => {
@@ -125,10 +134,15 @@ export default function ContentShowPage({
                 <Textarea
                   placeholder="Write more about the impact backlinking has on SEO"
                   rows="6"
+                  onChange={(e) => setTweak(e.target.value)}
                 />
               </CardContent>
               <CardFooter>
-                <Button className="w-full" disabled={true}>
+                <Button
+                  className="w-full"
+                  disabled={tweak.length < 30}
+                  onClick={() => handleTweak()}
+                >
                   Send tweak 🛠️
                 </Button>
               </CardFooter>

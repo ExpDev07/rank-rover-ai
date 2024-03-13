@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -47,6 +48,9 @@ Route::middleware('auth')->group(function () {
 
     // thank you
     Route::get('/thank-you', [ThankYouController::class, 'render']);
+
+    // billing
+    Route::get('/billing', [BillingController::class, 'handleRedirect']);
 
     // app
     Route::post('/apps', [AppController::class, 'handleCreate']);

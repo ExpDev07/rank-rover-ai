@@ -10,7 +10,7 @@ export default function DashboardHeader() {
       <HeaderAppSwitcher />
       <HeaderNav className="mx-6" />
       <div className="flex items-center ml-auto space-x-4">
-        <HeaderSearch />
+        {/*<HeaderSearch />*/}
         <HeaderProfile />
         <HeaderNotifications />
       </div>

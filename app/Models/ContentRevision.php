@@ -6,6 +6,7 @@ use App\Content\ContentGenerationStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ContentRevision extends Model
 {
@@ -18,9 +19,11 @@ class ContentRevision extends Model
      */
     protected $fillable = [
         'content_id',
+        'parent_id',
         'status',
         'status_text',
         'content_md',
+        'messages',
     ];
 
     /**
@@ -30,7 +33,16 @@ class ContentRevision extends Model
      */
     protected $casts = [
         'status' => ContentGenerationStatus::class,
+        'messages' => 'array',
     ];
+
+    /**
+     * The parent revision (if any).
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(ContentRevision::class, 'parent_id');
+    }
 
     /**
      * The content.
@@ -38,6 +50,14 @@ class ContentRevision extends Model
     public function content(): BelongsTo
     {
         return $this->belongsTo(Content::class);
+    }
+
+    /**
+     * The children.
+     */
+    public function children(): HasMany
+    {
+        return $this->hasMany(ContentRevision::class, 'parent_id');
     }
 
 }

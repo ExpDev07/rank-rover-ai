@@ -15,9 +15,11 @@ return new class extends Migration
         Schema::create('content_revisions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('content_id')->references('id')->on('contents');
+            $table->foreignId('parent_id')->nullable();
             $table->string('status')->default('idle');
             $table->string('status_text')->nullable();
             $table->longText('content_md')->nullable();
+            $table->json('messages');
             $table->timestamps();
         });
     }
