@@ -1,5 +1,6 @@
 import AppCard from "@/components/app/app/AppCard"
 import CreateAppCard from "@/components/app/app/CreateAppCard"
+import { cn } from "@/lib/utils"
 
 export default function AppsGrid({
   apps,
@@ -12,7 +13,9 @@ export default function AppsGrid({
           app={app}
         />
       ))}
-      <CreateAppCard />
+      <CreateAppCard
+        className={cn(apps.length === 0 && 'col-span-4 h-52')}
+      />
     </div>
   )
 }

@@ -83,20 +83,4 @@ class ContentController extends Controller
         return redirect()->to("/app/{$app->slug}/content/{$content->slug}");
     }
 
-    /**
-     * Recommends a title for the content.
-     */
-    private function recommendTitle(string $appDescription)
-    {
-        //
-    }
-
-    /**
-     * Recommends keywords to write about from the app description.
-     */
-    private function recommendKeywords(string $appDescription)
-    {
-        //
-    }
-
 }

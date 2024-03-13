@@ -12,15 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contents', function (Blueprint $table) {
+        Schema::create('content_clusters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('app_id')->references('id')->on('apps');
-            $table->foreignId('cluser_id')->nullable();
-            $table->foreignId('current_revision_id')->nullable();
-            $table->string('slug');
-            $table->string('language');
-            $table->string('title');
-            $table->json('keywords');
             $table->timestamps();
         });
     }
@@ -30,7 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contents');
+        Schema::dropIfExists('content_clusters');
     }
 
 };

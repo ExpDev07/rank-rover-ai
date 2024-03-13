@@ -1,4 +1,5 @@
 import { PlusIcon } from '@radix-ui/react-icons'
+import { cn } from "@/lib/utils"
 
 import {
   Card,
@@ -11,10 +12,12 @@ import {
 
 import CreateAppDialog from '@/components/app/app/CreateAppDialog'
 
-export default function CreateAppCard() {
+export default function CreateAppCard({
+  className,
+}) {
   return (
     <CreateAppDialog>
-      <Card className="relative p-4 hover:ring hover:ring-primary hover:cursor-pointer">
+      <Card className={cn('relative p-4 hover:ring hover:ring-primary hover:cursor-pointer', className)}>
         <CardContent className="flex flex-col items-center justify-center h-full gap-2 p-0">
           <PlusIcon
             className="w-16 h-16 text-gray-950"

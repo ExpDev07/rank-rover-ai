@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\ContentClusterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -64,5 +65,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/app/{app:slug}/content/{content:slug}', [ContentController::class, 'renderShow']);
     Route::post('/app/{app:slug}/content/{content:slug}/retry', [ContentController::class, 'handleRetry']);
     Route::post('/app/{app:slug}/content/{content:slug}/tweak', [ContentController::class, 'handleTweak']);
+
+    // content clusters
+    Route::post('/app/{app:slug}/content-cluster', [ContentClusterController::class, 'handleCreate']);
+    Route::post('/app/{app:slug}/content-cluster/{content_cluster:id}/recommend', [ContentClusterController::class, 'handleCreateRecommendations']);
 });
 

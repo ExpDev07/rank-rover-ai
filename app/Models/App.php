@@ -44,6 +44,14 @@ class App extends Model
     }
 
     /**
+     * The app's content clusters.
+     */
+    public function contentClusters(): HasMany
+    {
+        return $this->hasMany(ContentCluster::class);
+    }
+
+    /**
      * The app's content.
      */
     public function contents(): HasMany

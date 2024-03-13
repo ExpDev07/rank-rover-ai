@@ -1,21 +1,10 @@
+import * as React from "react"
 import { router, usePage } from "@inertiajs/react"
-import { z } from "zod"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { CaretSortIcon, CheckIcon, Component1Icon } from "@radix-ui/react-icons"
 import { cn } from "@/lib/utils"
 
+import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
 import {
   Dialog,
   DialogContent,
@@ -38,46 +27,30 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
+import CreateManualContentDialog from "@/components/app/content/CreateManualContentDialog"
+import CreateAutoPilotContentDialog from "@/components/app/content/CreateAutoPilotContentDialog"
+
+const languages = [
+  { label: "English", value: "English" },
+  { label: "Norwegian", value: "Norwegian" },
+  { label: "French", value: "French" },
+  { label: "German", value: "German" },
+  { label: "Spanish", value: "Spanish" },
+  { label: "Portuguese", value: "Portuguese" },
+  { label: "Russian", value: "Russian" },
+  { label: "Japanese", value: "Japanese" },
+  { label: "Korean", value: "Korean" },
+  { label: "Chinese", value: "Chinese" },
+]
+
 export default function CreateContentDialog({
   children,
 }) {
-  const languages = [
-    { label: "English", value: "English" },
-    { label: "Norwegian", value: "Norwegian" },
-    { label: "French", value: "French" },
-    { label: "German", value: "German" },
-    { label: "Spanish", value: "Spanish" },
-    { label: "Portuguese", value: "Portuguese" },
-    { label: "Russian", value: "Russian" },
-    { label: "Japanese", value: "Japanese" },
-    { label: "Korean", value: "Korean" },
-    { label: "Chinese", value: "Chinese" },
-  ]
-
   const page = usePage()
   const { app } = page.props
 
-  const form = useForm({
-    defaultValues: {
-      language: 'English',
-      title: '',
-      keywords: '',
-    },
-    resolver: zodResolver(z.object({
-      language: z.string(),
-      title: z.string().min(5),
-      keywords: z.string().min(3),
-    }))
-  })
-
-  const handleSubmit = (data) => {
-    router.post(`/app/${app.slug}/content`, {
-      ...data,
-      keywords: data.keywords.split(', '),
-    }, {
-      preserveState: false,
-    })
-  }
+  const [language, setLanguage] = React.useState('English');
+  const [selectedMethod, setSelectedMethod] = React.useState('')
 
   return (
     <Dialog>
@@ -90,82 +63,76 @@ export default function CreateContentDialog({
             Let's create some content 🚀
           </DialogTitle>
           <DialogDescription>
-            To create your content we'll need some short info about what content you're creating and the keywords you want to be focused on.
+            You can create content manually or on AutoPilot. Both leverages AI, but AutoPilot will recommend content for you.
           </DialogDescription>
         </DialogHeader>
-        <Form {...form}>
-          <form className="py-6 space-y-4">
-            <FormField
-              control={form.control}
-              name="language"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Language
-                  </FormLabel>
-                  <FormControl>
-                    <Input type="text" placeholder="English" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    This is the language that will be used in the dashboard.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
+        <div className="py-6 space-y-8">
+          <div className="flex flex-col gap-2">
+            <Label>
+              Language
+            </Label>
+            <Input
+              type="text"
+              placeholder="English"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value.toLowerCase())}
             />
-            <div className={cn('space-y-4', !form.getValues("language") && 'opacity-50 pointer-events-none')}>
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Title
-                    </FormLabel>
-                    <FormControl>
-                      <div className="flex items-center gap-x">
-                        <Input className="flex-1" type="text" placeholder="How SEO can drive organic traffic to your app" {...field} />
-                        <Button size="sm" variant="link">
-                          <Component1Icon className="w-5 h-5 text-primary" />
-                        </Button>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="keywords"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Keywords
-                    </FormLabel>
-                    <FormControl>
-                      <div className="flex items-center gap-x">
-                        <Input className="flex-1" type="text" placeholder="seo, ai, traffic" {...field} />
-                        <Button size="sm" variant="link">
-                          <Component1Icon className="w-5 h-5 text-primary" />
-                        </Button>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </form>
-        </Form>
+            <p className="text-xs text-muted-foreground">
+              The content will be created in this language.
+            </p>
+          </div>
+          <div className="flex gap-4">
+            <button
+              className={cn('flex flex-col items-center justify-center w-full h-32 gap-3 border-2 rounded-md', selectedMethod === 'autopilot' && 'border-primary')}
+              ariaSelected={selectedMethod === 'autopilot'}
+              onClick={() => setSelectedMethod('autopilot')}
+            >
+              <span className="text-2xl">🤖</span>
+              <span className="">AutoPilot</span>
+            </button>
+            <button
+              className={cn('flex flex-col items-center justify-center w-full h-32 gap-3 border-2 rounded-md', selectedMethod === 'manual' && 'border-primary')}
+              ariaSelected={selectedMethod === 'manual'}
+              onClick={() => setSelectedMethod('manual')}
+            >
+              <span className="text-2xl">🧑</span>
+              <span className="">Manual</span>
+            </button>
+          </div>
+        </div>
         <DialogFooter>
-          <Button
-            className="w-full py-4"
-            type="submit"
-            size="lg"
-            onClick={() => handleSubmit(form.getValues())}
-          >
-            Create the content 🚀
-          </Button>
+          {(!language || !selectedMethod) && (
+            <Button
+              className="w-full py-4"
+              type="button"
+              size="lg"
+              disabled={true}
+            >
+              Choose method
+            </Button>
+          )}
+          {language && selectedMethod === 'autopilot' && (
+            <CreateAutoPilotContentDialog language={language}>
+              <Button
+                className="w-full py-4"
+                type="submit"
+                size="lg"
+              >
+                Continue with AutoPilot 🤖
+              </Button>
+            </CreateAutoPilotContentDialog>
+          )}
+          {language && selectedMethod === 'manual' && (
+            <CreateManualContentDialog language={language} >
+              <Button
+                className="w-full py-4"
+                type="submit"
+                size="lg"
+              >
+                Continue with manual 🧑
+              </Button>
+            </CreateManualContentDialog>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -13,7 +13,7 @@ export default function AppsShowPage({
     <Layout>
       <PageHeader
         title="Your apps 📱"
-        description="Manage your apps."
+        description="We use your app as context whenever generating content for it."
       />
       <main>
         <Section>

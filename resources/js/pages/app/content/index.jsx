@@ -24,7 +24,7 @@ export default function ContentIndexPage({
     <Layout>
       <PageHeader
         title="Your content"
-        description="Manage all your content."
+        description="All your content here."
         actions={(
           <CreateContentDialog>
             <Button>

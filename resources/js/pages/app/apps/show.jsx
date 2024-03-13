@@ -28,14 +28,6 @@ export default function AppsShowPage({
             app={app}
           />
         </Section>
-        <Section>
-          <SectionHeader
-            title="Your content"
-          />
-          <ContentGrid
-            content={content}
-          />
-        </Section>
       </main>
     </Layout>
   )

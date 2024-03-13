@@ -31,6 +31,7 @@ class Content extends Model
      */
     protected $fillable = [
         'app_id',
+        'cluster_id',
         'current_revision_id',
         'slug',
         'language',
@@ -61,6 +62,14 @@ class Content extends Model
     public function app(): BelongsTo
     {
         return $this->belongsTo(App::class);
+    }
+
+    /**
+     * The cluster the content was created for.
+     */
+    public function cluster(): BelongsTo
+    {
+        return $this->belongsTo(ContentCluster::class, 'cluster_id');
     }
 
     /**
