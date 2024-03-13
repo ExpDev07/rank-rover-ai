@@ -44,15 +44,19 @@ export default function HeaderAppSwitcher({
     },
   ]
 
+  if (! selectedApp) {
+    return
+  }
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          className={cn("w-[200px] justify-between", 'pointer-events-none', className)}
           variant="outline"
           role="combobox"
           aria-expanded={open}
           aria-label="Select an app"
-          className={cn("w-[200px] justify-between", className)}
         >
           {selectedApp ? (
             <>
@@ -70,7 +74,8 @@ export default function HeaderAppSwitcher({
               Select an app
             </>
           )}
-          <CaretSortIcon className="w-4 h-4 ml-auto opacity-50 shrink-0" />
+          {/*<CaretSortIcon className="w-4 h-4 ml-auto opacity-50 shrink-0" />*/}
+          <div className="ml-auto"></div>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[250px] p-0">

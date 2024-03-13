@@ -2,7 +2,7 @@
 
 namespace App\Content;
 
-enum ContentStatus: string
+enum ContentGenerationStatus: string
 {
 
     case Idle = 'idle';

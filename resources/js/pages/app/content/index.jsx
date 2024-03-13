@@ -1,3 +1,4 @@
+import * as React from "react"
 import { router } from "@inertiajs/react"
 
 import { Button } from "@/components/ui/button"
@@ -12,7 +13,8 @@ export default function ContentIndexPage({
   app,
   content,
 }) {
-  if (content.find((c) => c.status === 'idle' || c.status === 'generating')) {
+  // poll for changes
+  if (content.map(c => c.current_revision).find((r) => !r || r.status === 'idle' || r.status === 'generating')) {
     setTimeout(() => {
       router.get(`/app/${app.slug}/content`, {}, { only: ['content'] })
     }, 10000)

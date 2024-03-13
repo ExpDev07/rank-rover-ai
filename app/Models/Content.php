@@ -16,18 +16,26 @@ class Content extends Model
     use HasSlug;
 
     /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'currentRevision',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
         'app_id',
+        'current_revision_id',
         'slug',
-        'status',
         'language',
         'title',
         'keywords',
-        'content_md',
     ];
 
     /**
@@ -36,7 +44,6 @@ class Content extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'status' => ContentStatus::class,
         'keywords' => 'array',
     ];
 
@@ -54,6 +61,14 @@ class Content extends Model
     public function app(): BelongsTo
     {
         return $this->belongsTo(App::class);
+    }
+
+    /**
+     * The current revision.
+     */
+    public function currentRevision(): BelongsTo
+    {
+        return $this->belongsTo(ContentRevision::class, 'current_revision_id');
     }
 
     /**

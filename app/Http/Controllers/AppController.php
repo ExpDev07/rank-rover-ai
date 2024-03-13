@@ -30,7 +30,7 @@ class AppController extends Controller
     {
         return Inertia::render('app/apps/show', [
             'app' => $app,
-            'content' => $app->contents,
+            'content' => $app->contents()->latest()->get(),
             'statistics' => [
                 'content_generated' => [
                     'amount' => $app->contents()->count(),

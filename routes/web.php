@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/app/{app:slug}/content', [ContentController::class, 'handleCreate']);
     Route::get('/app/{app:slug}/content', [ContentController::class, 'renderIndex']);
     Route::get('/app/{app:slug}/content/{content:slug}', [ContentController::class, 'renderShow']);
-    Route::post('/app/{app:slug}/content/{content:slug}/change', [ContentController::class, '¨handleChange']);
+    Route::post('/app/{app:slug}/content/{content:slug}/retry', [ContentController::class, 'handleRetry']);
+    Route::post('/app/{app:slug}/content/{content:slug}/tweak', [ContentController::class, 'handleTweak']);
 });
 

@@ -1,6 +1,7 @@
 import * as React from "react"
+import { router } from "@inertiajs/react"
 import { marked } from "marked"
-import { Share2Icon } from "@radix-ui/react-icons"
+import { ArrowPathIcon } from '@heroicons/react/24/solid'
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -27,23 +28,71 @@ import PageHeader from "@/components/app/page/PageHeader"
 import Section from "@/components/app/section/Section"
 
 export default function ContentShowPage({
+  app,
   content,
 }) {
+  // poll for changes
+  if (! content.current_revision || content.current_revision.status === 'idle' || content.current_revision.status === 'generating') {
+    setTimeout(() => {
+      router.get(`/app/${app.slug}/content/${content.slug}`, {}, { only: ['content'] })
+    }, 10000)
+  }
+
+  const handleRetry = () => {
+    router.post(`/app/${app.slug}/content/${content.slug}/retry`, {}, { only: ['content'] })
+  }
+
   const handleCopyToMarkdown = () => {
-    navigator.clipboard.writeText(content.content_md);
+    navigator.clipboard.writeText(content.current_revision?.content_md);
   }
 
   return (
     <Layout>
+      <PageHeader
+        title={content.title}
+        description="Manage this content"
+        icon={(
+          <img
+            className="w-12 h-12"
+            src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${content.title}`}
+            alt={content.title}
+          />
+        )}
+      />
       <main>
         <Section className="grid grid-cols-12 gap-24">
           <div className="col-span-7">
-            <article
-              className="prose prose-md"
-              dangerouslySetInnerHTML={{ __html: marked.parse(content.content_md.replace('# How SEO can drive organic traffic to your app', '')) }}
-            />
+            {!content.current_revision && (
+              <div className="flex flex-col items-center justify-center w-full h-full border-2 rounded-md">
+                <ArrowPathIcon className="w-12 h-12 animate-spin text-muted-foreground" />
+              </div>
+            )}
+            {content.current_revision?.status === 'generating' && (
+              <div className="flex flex-col items-center justify-center w-full h-full border-2 rounded-md">
+                <ArrowPathIcon className="w-12 h-12 animate-spin text-muted-foreground" />
+              </div>
+            )}
+            {content.current_revision?.status === 'errored' && (
+              <div className="flex flex-col items-center justify-center w-full h-full border-2 rounded-md">
+                <h4 className="mb-2 text-2xl text-destructive">
+                  Could not create content
+                </h4>
+                <p className="mb-6 text-muted-foreground text-md">
+                  Something wrong happened while creating your content.
+                </p>
+                <Button onClick={() => handleRetry()}>
+                  Retry now
+                </Button>
+              </div>
+            )}
+            {content.current_revision?.status === 'generated' && content.current_revision?.content_md && (
+              <article
+                className="prose prose-md"
+                dangerouslySetInnerHTML={{ __html: marked.parse(content.current_revision.content_md) }}
+              />
+            )}
           </div>
-          <div className="col-span-5 space-y-4">
+          <div className="col-span-5 -mt-24 space-y-4">
             <Card className="p-3">
               <CardHeader>
                 <CardTitle>

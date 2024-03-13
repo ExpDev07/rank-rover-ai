@@ -21,7 +21,7 @@ class ContentController extends Controller
     {
         return Inertia::render('app/content/index', [
             'app' => $app,
-            'content' => $app->contents,
+            'content' => $app->contents()->latest()->get(),
         ]);
     }
 
@@ -43,13 +43,32 @@ class ContentController extends Controller
     {
         $data = $request->validated();
 
-        $content = $app->contents()->create(array_merge($data, [
-            'status' => ContentStatus::Idle,
-        ]));
+        $content = $app->contents()->create(array_merge($data));
 
         dispatch(new GenerateContentJob($content));
 
-        return redirect()->to("/app/{$app->slug}/content");
+        return redirect()->to("/app/{$app->slug}/content/{$content->slug}");
+    }
+
+    /**
+     * Handles retrying generating the content.
+     */
+    public function handleRetry(App $app, Content $content)
+    {
+        $content->currentRevision()->dissociate();
+        $content->save();
+
+        dispatch(new GenerateContentJob($content));
+
+        return redirect()->to("/app/{$app->slug}/content/{$content->slug}");
+    }
+
+    /**
+     * Handles tweaking the content.
+     */
+    public function handleTweak(App $app, Content $content)
+    {
+        //
     }
 
     /**
@@ -57,7 +76,7 @@ class ContentController extends Controller
      */
     private function recommendTitle(string $appDescription)
     {
-
+        //
     }
 
     /**
@@ -65,7 +84,7 @@ class ContentController extends Controller
      */
     private function recommendKeywords(string $appDescription)
     {
-
+        //
     }
 
 }

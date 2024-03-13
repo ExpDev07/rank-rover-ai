@@ -15,12 +15,11 @@ return new class extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('app_id')->references('id')->on('apps');
+            $table->foreignId('current_revision_id')->nullable();
             $table->string('slug');
-            $table->string('status');
             $table->string('language');
             $table->string('title');
             $table->json('keywords');
-            $table->longText('content_md')->nullable();
             $table->timestamps();
         });
     }
