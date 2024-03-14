@@ -9,6 +9,7 @@ use App\Jobs\GenerateContentJob;
 use App\Jobs\TweakContentJob;
 use App\Models\App;
 use App\Models\Content;
+use App\Models\ContentRecommendation;
 use App\Models\ContentRevision;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -25,6 +26,7 @@ class ContentController extends Controller
         return Inertia::render('app/content/index', [
             'app' => $app,
             'content' => $app->contents()->latest()->get(),
+            'content_clusters' => $app->contentClusters()->latest()->whereHas('recommendations')->with('recommendations')->get(),
         ]);
     }
 
@@ -47,6 +49,10 @@ class ContentController extends Controller
         $data = $request->validated();
 
         $content = $app->contents()->create(array_merge($data));
+
+        if ($request->has('recommendation_id')) {
+            ContentRecommendation::query()->where('id', $request->integer('recommendation_id'))->delete();
+        }
 
         dispatch(new GenerateContentJob($content));
 

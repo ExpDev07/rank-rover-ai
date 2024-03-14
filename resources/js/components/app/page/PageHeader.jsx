@@ -9,7 +9,7 @@ export default function PageHeader({
       <div className="flex items-center gap-x-6">
         {icon}
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">
+          <h1 className="text-2xl font-semibold leading-tight tracking-tight mb-0.5">
             {title}
           </h1>
           {description && (

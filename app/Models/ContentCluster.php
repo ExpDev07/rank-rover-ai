@@ -18,6 +18,7 @@ class ContentCluster extends Model
      */
     protected $fillable = [
         'app_id',
+        'language',
     ];
 
     /**

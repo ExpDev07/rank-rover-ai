@@ -20,37 +20,18 @@ class ContentClusterController extends Controller
     {
         $data = $request->validated();
 
-        $cluster = $app->contentClusters()->create();
+        $cluster = $app->contentClusters()->create($data);
 
-        // create recommendations if wanted
-        if ($request->boolean('create_recommendations'))
-        {
-            return $this->handleCreateRecommendations($app, $cluster);
-        }
-
-        return back()->with([
-            'content_cluster' => $cluster,
-        ]);
-    }
-
-    /**
-     * Handles creating content recommendations for the cluster.
-     */
-    public function handleCreateRecommendations(App $app, ContentCluster $cluster) {
         $generatedRecommendations = $this->generateRecommendations(
             $app->name,
             $app->description,
             $app->target_audience,
-            'english'
+            $data['language'],
         )['recommendations'];
 
-        $clusterRecommendations = $cluster->recommendations()->createMany($generatedRecommendations);
+        $cluster->recommendations()->createMany($generatedRecommendations);
 
-        return back()->with([
-            'app' => $app,
-            'content_cluster' => $cluster,
-            'content_cluster_recommendations' => $clusterRecommendations,
-        ]);
+        return redirect()->to("/app/{$app->slug}/content");
     }
 
     /**

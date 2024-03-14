@@ -15,7 +15,7 @@ class CreateContentClusterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'create_recommendations' => ['boolean'],
+            'language' => ['required'],
         ];
     }
 

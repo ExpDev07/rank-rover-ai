@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('app_id')->references('id')->on('apps');
-            $table->foreignId('cluser_id')->nullable();
+            $table->foreignId('cluster_id')->nullable();
+            $table->foreignId('recommendation_id')->nullable();
             $table->foreignId('current_revision_id')->nullable();
             $table->string('slug');
             $table->string('language');

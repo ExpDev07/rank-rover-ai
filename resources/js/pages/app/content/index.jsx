@@ -8,15 +8,17 @@ import PageHeader from "@/components/app/page/PageHeader"
 import Section from "@/components/app/section/Section"
 import ContentGrid from "@/components/app/content/ContentGrid"
 import CreateContentDialog from "@/components/app/content/CreateContentDialog"
+import RecommendedContentGrid from "@/components/app/content/RecommendedContentGrid"
 
 export default function ContentIndexPage({
   app,
   content,
+  content_clusters,
 }) {
   // poll for changes
   if (content.map(c => c.current_revision).find((r) => !r || r.status === 'idle' || r.status === 'generating')) {
     setTimeout(() => {
-      router.get(`/app/${app.slug}/content`, {}, { only: ['content'] })
+      router.reload({ only: ['content'], preserveState: true })
     }, 10000)
   }
 
@@ -37,6 +39,11 @@ export default function ContentIndexPage({
         <Section>
           <ContentGrid
             content={content}
+          />
+        </Section>
+        <Section>
+          <RecommendedContentGrid
+            recommendedContent={content_clusters.flatMap(c => c.recommendations.map((r) => ({ ...r, language: c.language })))}
           />
         </Section>
       </main>

@@ -67,7 +67,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/app/{app:slug}/content/{content:slug}/tweak', [ContentController::class, 'handleTweak']);
 
     // content clusters
-    Route::post('/app/{app:slug}/content-cluster', [ContentClusterController::class, 'handleCreate']);
-    Route::post('/app/{app:slug}/content-cluster/{content_cluster:id}/recommend', [ContentClusterController::class, 'handleCreateRecommendations']);
-});
+    Route::post('/app/{app:slug}/content-cluster', [ContentClusterController::class, 'handleCreate']);});
 

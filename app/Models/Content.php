@@ -32,6 +32,7 @@ class Content extends Model
     protected $fillable = [
         'app_id',
         'cluster_id',
+        'recommendation_id',
         'current_revision_id',
         'slug',
         'language',
@@ -70,6 +71,14 @@ class Content extends Model
     public function cluster(): BelongsTo
     {
         return $this->belongsTo(ContentCluster::class, 'cluster_id');
+    }
+
+    /**
+     * The recommendation the content was created from.
+     */
+    public function recommendation(): BelongsTo
+    {
+        return $this->belongsTo(ContentRecommendation::class, 'recommendation_id');
     }
 
     /**

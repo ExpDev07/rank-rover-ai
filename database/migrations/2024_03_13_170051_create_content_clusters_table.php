@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('content_clusters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('app_id')->references('id')->on('apps');
+            $table->string('language');
             $table->timestamps();
         });
     }

@@ -30,7 +30,7 @@ export default function ContentCard({
         'relative w-full px-4 py-2 hover:ring hover:ring-primary',
         !content.current_revision && 'opacity-50 pointer-events-none'
     )}>
-        <CardHeader className="flex flex-row items-center gap-x-8">
+        <CardHeader className="flex flex-row items-center gap-x-24">
           <img
             className="w-16 h-16"
             src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${content.title}`}
@@ -45,7 +45,7 @@ export default function ContentCard({
                 {content.current_revision.content_md.slice(0, 250)}...
               </CardDescription>
             )}
-            <div className="flex items-center gap-2 mt-4">
+            <div className="flex flex-wrap items-center gap-2 mt-4">
               {content.keywords.map((keyword) => (
                 <Badge variant="outline">
                   {keyword}
@@ -55,6 +55,9 @@ export default function ContentCard({
           </div>
           {content.current_revision?.status === 'generating' && (
             <ArrowPathIcon className="w-7 h-7 animate-spin text-muted-foreground" />
+          )}
+          {content.current_revision?.status === 'generated' && (
+            <Badge variant="success">Ready</Badge>
           )}
         </CardHeader>
       </Card>
