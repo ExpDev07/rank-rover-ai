@@ -1,9 +1,8 @@
+import * as React from "react"
 import { router, usePage } from "@inertiajs/react"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Component1Icon } from "@radix-ui/react-icons"
-import { cn } from "@/lib/utils"
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -33,6 +32,8 @@ export default function CreateManualContentDialog({
   const page = usePage()
   const { app } = page.props
 
+  const [loading, setLoading] = React.useState(false)
+
   const form = useForm({
     defaultValues: {
       title: '',
@@ -49,6 +50,10 @@ export default function CreateManualContentDialog({
       ...data,
       language: language,
       keywords: data.keywords.split(', '),
+    }, {
+      onBefore: () => form.clearErrors(),
+      onStart: () => setLoading(true),
+      onFinish: () => setLoading(false),
     })
   }
 
@@ -105,6 +110,7 @@ export default function CreateManualContentDialog({
             className="w-full py-4"
             type="submit"
             size="lg"
+            loading={loading}
             onClick={() => handleSubmit(form.getValues())}
           >
             Create the content 🚀

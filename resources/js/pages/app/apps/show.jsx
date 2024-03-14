@@ -17,7 +17,7 @@ export default function AppsShowPage({
     <Layout>
       <PageHeader
         title="Hi, Marius!"
-        description="Keep up with the latest here."
+        description={`Keep up with the latest for ${app.name} here.`}
       />
       <main>
         <Section>

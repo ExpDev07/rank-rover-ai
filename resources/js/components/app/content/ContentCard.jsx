@@ -29,28 +29,30 @@ export default function ContentCard({
       <Card className={cn(
         'relative w-full px-4 py-2 hover:ring hover:ring-primary',
         !content.current_revision && 'opacity-50 pointer-events-none'
-    )}>
-        <CardHeader className="flex flex-row items-center gap-x-24">
-          <img
-            className="w-16 h-16"
-            src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${content.title}`}
-            alt={content.title}
-          />
-          <div className="flex-1">
-            <CardTitle className="mb-2 text-lg">
-              {content.title}
-            </CardTitle>
-            {content.current_revision?.content_md && (
-              <CardDescription>
-                {content.current_revision.content_md.slice(0, 250)}...
-              </CardDescription>
-            )}
-            <div className="flex flex-wrap items-center gap-2 mt-4">
-              {content.keywords.map((keyword) => (
-                <Badge variant="outline">
-                  {keyword}
-                </Badge>
-              ))}
+      )}>
+        <CardHeader className="flex flex-row items-center justify-between gap-x-24">
+          <div className="flex flex-row items-center gap-x-8">
+            <img
+              className="w-16 h-16"
+              src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${content.title}`}
+              alt={content.title}
+            />
+            <div className="flex-1">
+              <CardTitle className="mb-2 text-lg">
+                {content.title}
+              </CardTitle>
+              {content.current_revision?.content_md && (
+                <CardDescription>
+                  {content.current_revision.content_md.slice(0, 250)}...
+                </CardDescription>
+              )}
+              <div className="flex flex-wrap items-center gap-2 mt-4">
+                {content.keywords.map((keyword) => (
+                  <Badge variant="secondary">
+                    {keyword}
+                  </Badge>
+                ))}
+              </div>
             </div>
           </div>
           {content.current_revision?.status === 'generating' && (

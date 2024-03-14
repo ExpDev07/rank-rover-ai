@@ -48,7 +48,7 @@ export default function RecommendedContentCard({
           </CardTitle>
           <div className="flex flex-wrap items-center gap-2 mt-4">
             {recommendedContent.keywords.map((keyword) => (
-              <Badge variant="outline">
+              <Badge variant="secondary">
                 {keyword}
               </Badge>
             ))}
@@ -59,7 +59,7 @@ export default function RecommendedContentCard({
           size="sm"
           onClick={() => handleWrite()}
         >
-          Write
+          Start writing ✏️
         </Button>
       </CardHeader>
     </Card>

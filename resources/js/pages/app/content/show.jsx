@@ -78,42 +78,40 @@ export default function ContentShowPage({
               />
             )}
           />
-          <Section className="grid grid-cols-12 gap-24 mt-10">
-            <div className="col-span-7">
-              {!content.current_revision && (
-                <div className="flex flex-col items-center justify-center w-full border-2 rounded-md h-52">
-                  <ArrowPathIcon className="w-12 h-12 animate-spin text-muted-foreground" />
-                </div>
-              )}
-              {content.current_revision?.status === 'generating' && (
-                <div className="flex flex-col items-center justify-center w-full border-2 rounded-md h-52">
-                  <ArrowPathIcon className="w-12 h-12 animate-spin text-muted-foreground" />
-                </div>
-              )}
-              {content.current_revision?.status === 'errored' && (
-                <div className="flex flex-col items-center justify-center w-full border-2 rounded-md h-52">
-                  <h4 className="mb-2 text-2xl text-destructive">
-                    Could not create content
-                  </h4>
-                  <p className="mb-6 text-muted-foreground text-md">
-                    Something wrong happened while creating your content.
-                  </p>
-                  <Button
-                    disabled={loadingRetry}
-                    loading={loadingRetry}
-                    onClick={() => handleRetry()}
-                  >
-                    Retry now
-                  </Button>
-                </div>
-              )}
-              {content.current_revision?.status === 'generated' && content.current_revision?.content_md && (
-                <article
-                  className="prose prose-md"
-                  dangerouslySetInnerHTML={{ __html: marked.parse(content.current_revision.content_md) }}
-                />
-              )}
-            </div>
+          <Section className="mt-10">
+            {!content.current_revision && (
+              <div className="flex flex-col items-center justify-center w-full border-2 rounded-md h-52">
+                <ArrowPathIcon className="w-12 h-12 animate-spin text-muted-foreground" />
+              </div>
+            )}
+            {content.current_revision?.status === 'generating' && (
+              <div className="flex flex-col items-center justify-center w-full border-2 rounded-md h-52">
+                <ArrowPathIcon className="w-12 h-12 animate-spin text-muted-foreground" />
+              </div>
+            )}
+            {content.current_revision?.status === 'errored' && (
+              <div className="flex flex-col items-center justify-center w-full border-2 rounded-md h-52">
+                <h4 className="mb-2 text-2xl text-destructive">
+                  Could not create content
+                </h4>
+                <p className="mb-6 text-muted-foreground text-md">
+                  Something wrong happened while creating your content.
+                </p>
+                <Button
+                  disabled={loadingRetry}
+                  loading={loadingRetry}
+                  onClick={() => handleRetry()}
+                >
+                  Retry now
+                </Button>
+              </div>
+            )}
+            {content.current_revision?.status === 'generated' && content.current_revision?.content_md && (
+              <article
+                className="prose prose-md"
+                dangerouslySetInnerHTML={{ __html: marked.parse(content.current_revision.content_md) }}
+              />
+            )}
           </Section>
         </div>
         <div className="col-span-5 space-y-4 ">
@@ -124,11 +122,11 @@ export default function ContentShowPage({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex flex-wrap items-center gap-1">
+              <div className="flex flex-wrap items-center gap-2">
                 {content.keywords.map((keyword, i) => (
                   <Badge
                     key={i}
-                    variant="outline"
+                    variant="secondary"
                   >
                     {keyword}
                   </Badge>

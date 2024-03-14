@@ -1,10 +1,7 @@
 import * as React from "react"
 import { router, usePage } from "@inertiajs/react"
-import { Component1Icon } from "@radix-ui/react-icons"
 import { cn } from "@/lib/utils"
 
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -14,15 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
 
 export default function CreateAutoPilotContentDialog({
   language,

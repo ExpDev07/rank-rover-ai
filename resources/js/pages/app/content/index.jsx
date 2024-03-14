@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import Layout from "@/layouts/app"
 import PageHeader from "@/components/app/page/PageHeader"
 import Section from "@/components/app/section/Section"
+import SectionHeader from "@/components/app/section/SectionHeader"
 import ContentGrid from "@/components/app/content/ContentGrid"
 import CreateContentDialog from "@/components/app/content/CreateContentDialog"
 import RecommendedContentGrid from "@/components/app/content/RecommendedContentGrid"
@@ -42,6 +43,9 @@ export default function ContentIndexPage({
           />
         </Section>
         <Section>
+          <SectionHeader
+            title="Recommendations"
+          />
           <RecommendedContentGrid
             recommendedContent={content_clusters.flatMap(c => c.recommendations.map((r) => ({ ...r, language: c.language })))}
           />
