@@ -74,17 +74,15 @@ export default function PricingCard({
               Go to app <span className="ml-2 text-lg -translate-y-1">👉</span>
             </Link>
           ) : (
-            <>
-              {checkout ? (
-                <Link href={`/select-plan/${price.key}/checkout`} method="post">
-                  Select plan <span className="ml-2 text-lg -translate-y-1">👉</span>
-                </Link>
-              ) : (
-                <Link href={`/register?plan=${price.key}`} method="get">
-                  Get started <span className="ml-2 text-lg -translate-y-1">👉</span>
-                </Link>
-              )}
-            </>
+            checkout ? (
+              <Link href={`/select-plan/${price.key}/checkout`} method="post">
+                Select plan <span className="ml-2 text-lg -translate-y-1">👉</span>
+              </Link>
+            ) : (
+              <Link href={`/register?plan=${price.key}`} method="get">
+                Get started <span className="ml-2 text-lg -translate-y-1">👉</span>
+              </Link>
+            )
           )}
         </Button>
       </CardFooter>
