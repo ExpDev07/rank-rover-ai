@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import PricingGrid from "@/components/common/pricing/PricingGrid"
 
 export default function HomePage({
+  current_user,
   subscription_plans,
 }) {
   const features = [
@@ -86,9 +87,15 @@ export default function HomePage({
           </p>
           <div className="flex items-center gap-x-2">
             <Button size="lg" asChild>
-              <Link href="/register">
-                Get started 🌟
-              </Link>
+              {current_user ? (
+                <Link href="/apps">
+                  Go to app 🌟
+                </Link>
+              ) : (
+                <Link href="/register">
+                  Get started 🌟
+                </Link>
+              )}
             </Button>
             <Button size="lg" variant="outline">
               <Link href="/">

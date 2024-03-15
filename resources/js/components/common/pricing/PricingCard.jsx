@@ -1,4 +1,4 @@
-import { Link }from "@inertiajs/react"
+import { usePage, Link }from "@inertiajs/react"
 import { CheckCircle2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -17,6 +17,9 @@ export default function PricingCard({
   price,
   checkout,
 }) {
+  const page = usePage();
+  const { current_user } = page.props;
+
   return (
     <Card className={cn('relative flex flex-col justify-between', price.popular ? 'border-rose-400 py-4 border-4 scale-110' : 'py-4 border-2', className)}>
       <CardHeader>
@@ -66,14 +69,22 @@ export default function PricingCard({
           variant={price.popular ? 'default' : 'outline'}
           asChild
         >
-          {checkout ? (
-            <Link href={`/select-plan/${price.key}/checkout`} method="post">
-              Select plan <span className="ml-2 text-lg -translate-y-1">👉</span>
+          {current_user ? (
+            <Link href="/apps" method="get">
+              Go to app <span className="ml-2 text-lg -translate-y-1">👉</span>
             </Link>
           ) : (
-            <Link href={`/register?plan=${price.key}`} method="get">
-              Get started <span className="ml-2 text-lg -translate-y-1">👉</span>
-            </Link>
+            <>
+              {checkout ? (
+                <Link href={`/select-plan/${price.key}/checkout`} method="post">
+                  Select plan <span className="ml-2 text-lg -translate-y-1">👉</span>
+                </Link>
+              ) : (
+                <Link href={`/register?plan=${price.key}`} method="get">
+                  Get started <span className="ml-2 text-lg -translate-y-1">👉</span>
+                </Link>
+              )}
+            </>
           )}
         </Button>
       </CardFooter>

@@ -26,31 +26,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 
-const languages = [
-  { label: "English", value: "English" },
-  { label: "Norwegian", value: "Norwegian" },
-  { label: "French", value: "French" },
-  { label: "German", value: "German" },
-  { label: "Spanish", value: "Spanish" },
-  { label: "Portuguese", value: "Portuguese" },
-  { label: "Russian", value: "Russian" },
-  { label: "Japanese", value: "Japanese" },
-  { label: "Korean", value: "Korean" },
-  { label: "Chinese", value: "Chinese" },
-]
+import LanguagePicker from "@/components/app/language/LanguagePicker"
 
 export default function CreateContentDialog({
   children,
@@ -58,7 +35,7 @@ export default function CreateContentDialog({
   const page = usePage()
   const { app } = page.props
 
-  const [language, setLanguage] = React.useState('English');
+  const [language, setLanguage] = React.useState('english');
   const [selectedMethod, setSelectedMethod] = React.useState('')
 
   const [manualWorking, setManualWorking] = React.useState(false)
@@ -120,11 +97,9 @@ export default function CreateContentDialog({
             <Label>
               Language
             </Label>
-            <Input
-              type="text"
-              placeholder="English"
+            <LanguagePicker
               value={language}
-              onChange={(e) => setLanguage(e.target.value.toLowerCase())}
+              onChange={setLanguage}
             />
             <p className="text-xs text-muted-foreground">
               The content will be created in this language.

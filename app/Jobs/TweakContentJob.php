@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use Ahc\Json\Fixer;
 use App\Content\ContentGenerationStatus;
+use App\Events\ContentRevisionStatusChangedEvent;
 use App\Models\ContentRevision;
 use Exception;
 use Illuminate\Bus\Queueable;
@@ -56,6 +57,7 @@ class TweakContentJob implements ShouldQueue
         // set revision status to generating.
         $newRevision->status = ContentGenerationStatus::Generating;
         $newRevision->save();
+        event(new ContentRevisionStatusChangedEvent($newRevision));
 
         try {
             $generatedContent = $this->generateContent(
@@ -69,9 +71,10 @@ class TweakContentJob implements ShouldQueue
             $newRevision->status = ContentGenerationStatus::Errored;
             $newRevision->status_text = $error->getMessage();
         } finally {
-            $content->content_queued = true;
+            $content->content_queued = false;
             $content->save();
             $newRevision->save();
+            event(new ContentRevisionStatusChangedEvent($newRevision));
         }
     }
 

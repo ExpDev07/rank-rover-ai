@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { PopoverTrigger, PopoverContent, Popover } from "@/components/ui/popover"
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
 
+/*
 const notifications = [
   {
     id: "abc",
@@ -24,6 +25,9 @@ const notifications = [
     read: false,
   },
 ]
+*/
+
+const notifications = [];
 
 export default function HeaderNotifications() {
   return (
@@ -31,9 +35,11 @@ export default function HeaderNotifications() {
       <PopoverTrigger asChild>
         <Button className="relative rounded-full" size="icon" variant="secondary">
           <BellIcon className="w-6 h-6" />
+          {notifications.length > 0 && (
           <Badge className="absolute top-0 right-0 text-xs transform translate-x-1/2 -translate-y-1/2">
             3
           </Badge>
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0">
@@ -46,21 +52,23 @@ export default function HeaderNotifications() {
               You have {notifications.filter(n => !n.read).length} unread messages.
             </CardDescription>
           </CardHeader>
-          <CardContent className="p-6 space-y-4">
-            {notifications.map((notification) => (
-              <div key={notification.id} className="flex items-start gap-x-4">
-                <span className="block w-2 h-2 translate-y-2 rounded-full bg-primary" />
-                <div className="flex flex-col flex-1 gap-1">
-                  <p className="text-xs">
-                    {notification.title}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {notification.date}
-                  </p>
+          {notifications.length > 0 && (
+            <CardContent className="p-6 space-y-4">
+              {notifications.map((notification) => (
+                <div key={notification.id} className="flex items-start gap-x-4">
+                  <span className="block w-2 h-2 translate-y-2 rounded-full bg-primary" />
+                  <div className="flex flex-col flex-1 gap-1">
+                    <p className="text-xs">
+                      {notification.title}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {notification.date}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </CardContent>
+              ))}
+            </CardContent>
+          )}
         </Card>
       </PopoverContent>
     </Popover>

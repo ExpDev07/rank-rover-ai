@@ -53,7 +53,7 @@ export default function ContentCard({
             <Button size="sm" onClick={() => console.log('write now')}>Write now</Button>
           )}
           {(content.content_queued || content.current_revision?.status === 'generating') && (
-            <ArrowPathIcon className="w-6 h-6 animate-spin text-muted-foreground" />
+            <ArrowPathIcon className="w-7 h-7 animate-spin text-muted-foreground" />
           )}
           {(!content.content_queued && content.current_revision && content.current_revision.status === 'generated') && (
             <Badge variant="success">Ready</Badge>

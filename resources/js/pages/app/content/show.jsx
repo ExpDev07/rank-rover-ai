@@ -2,6 +2,7 @@ import * as React from "react"
 import { router } from "@inertiajs/react"
 import { marked } from "marked"
 import { ArrowPathIcon } from '@heroicons/react/24/solid'
+import { cn } from "@/lib/utils"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -57,6 +58,7 @@ export default function ContentShowPage({
       onStart: () => setLoadingTweak(true),
       onFinish: () => setLoadingTweak(false),
     })
+    setTweak('')
   }
 
   const handleCopyToMarkdown = () => {

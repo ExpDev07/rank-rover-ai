@@ -31,7 +31,7 @@ export default function Navbar() {
           {current_user ? (
           <Button asChild>
             <Link href="/apps">
-              Go to dashboard
+              Go to app 🌟
             </Link>
           </Button>
           ) : (

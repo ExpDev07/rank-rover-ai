@@ -5,6 +5,7 @@ namespace App\Jobs;
 use Ahc\Json\Fixer;
 use App\Content\ContentGenerationStatus;
 use App\Content\ContentStatus;
+use App\Events\ContentRevisionStatusChangedEvent;
 use App\Models\Content;
 use App\Models\ContentRevision;
 use Exception;
@@ -49,6 +50,7 @@ class GenerateContentJob implements ShouldQueue
         // set revision status to generating.
         $revision->status = ContentGenerationStatus::Generating;
         $revision->save();
+        broadcast(new ContentRevisionStatusChangedEvent($revision));
 
         try {
             $generatedContent = $this->generateContent(
@@ -70,6 +72,7 @@ class GenerateContentJob implements ShouldQueue
             $this->content->content_queued = false;
             $this->content->save();
             $revision->save();
+            broadcast(new ContentRevisionStatusChangedEvent($revision));
         }
     }
 

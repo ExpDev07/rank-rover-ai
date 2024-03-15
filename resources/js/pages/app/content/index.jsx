@@ -15,10 +15,12 @@ export default function ContentIndexPage({
   content,
   content_cluster,
 }) {
-  // poll for changes
-  setTimeout(() => {
-    // router.reload({ only: ['content', 'content_cluster'], preserveState: true })
-  }, 10000)
+  // listen to changes
+  content.map((c) => c.current_revision).filter((cRevision) => cRevision).forEach((cRevision) => {
+    Echo.private(`contentRevisions.${cRevision.id}`).listen('ContentRevisionStatusChangedEvent', (e) => {
+      router.reload({ only: ['content', 'content_cluster'], preserveState: true })
+    });
+  })
 
   return (
     <Layout>
