@@ -30,11 +30,11 @@ class ContentCluster extends Model
     }
 
     /**
-     * The content.
+     * The contents.
      */
-    public function content(): HasMany
+    public function contents(): HasMany
     {
-        return $this->hasMany(Content::class);
+        return $this->hasMany(Content::class, 'cluster_id');
     }
 
     /**

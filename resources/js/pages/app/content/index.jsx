@@ -6,22 +6,19 @@ import { Button } from "@/components/ui/button"
 import Layout from "@/layouts/app"
 import PageHeader from "@/components/app/page/PageHeader"
 import Section from "@/components/app/section/Section"
-import SectionHeader from "@/components/app/section/SectionHeader"
 import ContentGrid from "@/components/app/content/ContentGrid"
 import CreateContentDialog from "@/components/app/content/CreateContentDialog"
-import RecommendedContentGrid from "@/components/app/content/RecommendedContentGrid"
+import ContentClusterDialog from "@/components/app/content-cluster/ContentClusterDialog"
 
 export default function ContentIndexPage({
   app,
   content,
-  content_clusters,
+  content_cluster,
 }) {
   // poll for changes
-  if (content.map(c => c.current_revision).find((r) => !r || r.status === 'idle' || r.status === 'generating')) {
-    setTimeout(() => {
-      router.reload({ only: ['content'], preserveState: true })
-    }, 10000)
-  }
+  setTimeout(() => {
+    // router.reload({ only: ['content', 'content_cluster'], preserveState: true })
+  }, 10000)
 
   return (
     <Layout>
@@ -37,17 +34,16 @@ export default function ContentIndexPage({
         )}
       />
       <main>
+        {content_cluster && (
+          <ContentClusterDialog
+            contentCluster={content_cluster}
+            defaultOpen={true}
+            onOpenChange={() => router.get(`/app/${app.slug}/content`)}
+          />
+        )}
         <Section>
           <ContentGrid
             content={content}
-          />
-        </Section>
-        <Section>
-          <SectionHeader
-            title="Recommendations"
-          />
-          <RecommendedContentGrid
-            recommendedContent={content_clusters.flatMap(c => c.recommendations.map((r) => ({ ...r, language: c.language })))}
           />
         </Section>
       </main>

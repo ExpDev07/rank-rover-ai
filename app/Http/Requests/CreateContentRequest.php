@@ -16,7 +16,6 @@ class CreateContentRequest extends FormRequest
     {
         return [
             'cluster_id' => ['integer'],
-            'recommendation_id' => ['integer'],
             'language' => ['required'],
             'title' => ['required'],
             'keywords' => ['required', 'array'],

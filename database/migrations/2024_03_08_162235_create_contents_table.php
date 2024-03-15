@@ -16,12 +16,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('app_id')->references('id')->on('apps');
             $table->foreignId('cluster_id')->nullable();
-            $table->foreignId('recommendation_id')->nullable();
             $table->foreignId('current_revision_id')->nullable();
             $table->string('slug');
             $table->string('language');
             $table->string('title');
             $table->json('keywords');
+            $table->boolean('content_queued')->default(false);
             $table->timestamps();
         });
     }

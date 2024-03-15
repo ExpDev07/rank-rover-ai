@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Content\ContentStatus;
 use App\Http\Requests\CreateContentRequest;
 use App\Http\Requests\TweakContentRequest;
 use App\Jobs\GenerateContentJob;
 use App\Jobs\TweakContentJob;
 use App\Models\App;
 use App\Models\Content;
-use App\Models\ContentRecommendation;
-use App\Models\ContentRevision;
+use App\Models\ContentCluster;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use OpenAI\Laravel\Facades\OpenAI;
 
 class ContentController extends Controller
 {
@@ -21,12 +18,12 @@ class ContentController extends Controller
     /**
      * Renders the content index page.
      */
-    public function renderIndex(App $app)
+    public function renderIndex(App $app, Request $request)
     {
         return Inertia::render('app/content/index', [
             'app' => $app,
-            'content' => $app->contents()->latest()->get(),
-            'content_clusters' => $app->contentClusters()->latest()->whereHas('recommendations')->with('recommendations')->get(),
+            'content' => $app->contents()->latest()->where('content_queued', true)->orWhereHas('currentRevision')->get(),
+            'content_cluster' => $request->has('show_cluster') ? ContentCluster::query()->with('contents.currentRevision')->findOrFail($request->integer(('show_cluster'))) : null,
         ]);
     }
 
@@ -48,15 +45,29 @@ class ContentController extends Controller
     {
         $data = $request->validated();
 
-        $content = $app->contents()->create(array_merge($data));
-
-        if ($request->has('recommendation_id')) {
-            ContentRecommendation::query()->where('id', $request->integer('recommendation_id'))->delete();
-        }
+        $content = $app->contents()->create($data);
 
         dispatch(new GenerateContentJob($content));
+        $content->content_queued = true;
+        $content->save();
 
         return redirect()->to("/app/{$app->slug}/content/{$content->slug}");
+    }
+
+
+    /**
+     * Handles retrying generating the content.
+     */
+    public function handleWrite(App $app, Content $content)
+    {
+        $content->currentRevision()->dissociate();
+        $content->save();
+
+        dispatch(new GenerateContentJob($content));
+        $content->content_queued = true;
+        $content->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -68,8 +79,10 @@ class ContentController extends Controller
         $content->save();
 
         dispatch(new GenerateContentJob($content));
+        $content->content_queued = true;
+        $content->save();
 
-        return redirect()->to("/app/{$app->slug}/content/{$content->slug}");
+        return redirect()->back();
     }
 
     /**
@@ -85,8 +98,10 @@ class ContentController extends Controller
         $content->save();
 
         dispatch(new TweakContentJob($revisionToTweak, $data['tweak']));
+        $content->content_queued = true;
+        $content->save();
 
-        return redirect()->to("/app/{$app->slug}/content/{$content->slug}");
+        return redirect()->back();
     }
 
 }

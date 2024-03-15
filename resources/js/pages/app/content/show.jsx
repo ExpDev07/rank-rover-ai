@@ -153,7 +153,7 @@ export default function ContentShowPage({
             <CardFooter>
               <Button
                 className="w-full"
-                disabled={tweak.length < 30 || loadingTweak || content.current_revision?.status !== 'generated'}
+                disabled={tweak.length < 20 || loadingTweak || content.current_revision?.status !== 'generated'}
                 loading={loadingTweak}
                 onClick={() => handleTweak()}
               >

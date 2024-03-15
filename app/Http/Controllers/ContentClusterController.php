@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Ahc\Json\Fixer;
 use App\Http\Requests\CreateContentClusterRequest;
 use App\Models\App;
-use App\Models\ContentCluster;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use OpenAI\Laravel\Facades\OpenAI;
 
@@ -27,11 +25,16 @@ class ContentClusterController extends Controller
             $app->description,
             $app->target_audience,
             $data['language'],
-        )['recommendations'];
+        )['recommendations']['titles'];
 
-        $cluster->recommendations()->createMany($generatedRecommendations);
+        $cluster->contents()->createMany(collect($generatedRecommendations)->map(fn ($r) => [
+            ...$r,
+            'app_id' => $app->id,
+            'language' => $data['language'],
+            'content_queued' => false,
+        ]));
 
-        return redirect()->to("/app/{$app->slug}/content");
+        return redirect()->to("/app/{$app->slug}/content?show_cluster={$cluster->id}");
     }
 
     /**
@@ -42,12 +45,13 @@ class ContentClusterController extends Controller
         // the messages
         $messages = [];
         $messages[] = ['role' => 'system', 'content' => 'You are a highly skilled AI trained to assist with SEO content creation.'];
-        $messages[] = ['role' => 'user', 'content' => "Please generate $amount titles for SEO content with keywords also for the following app:\n\n- **App name:** $appName\n- **App description:** $appDesc\n- **Target Audience:** $targetAudience\n- **Language:** $language\n\nPlease return in the format of json where it looks like [{ title, keywords }, ...] where title is a string and keywords is an array. Do not wrap it in ```json, just return it as raw text. MAKE SURE that the returned json is correct format!\n\nThank you!"];
+        $messages[] = ['role' => 'user', 'content' => "Please generate $amount titles for SEO content with keywords also for the following app:\n\n- **App name:** $appName\n- **App description:** $appDesc\n- **Target Audience:** $targetAudience\n- **Language:** $language\n\nPlease return it as an json array of objects in the format of { title, keywords } where title is a string and keywords is an array. Make sure to include the keywords, and that the json keys are not padded with spacing!\n\nThank you!"];
 
 
         // send to openai
         $response = OpenAI::chat()->create([
             'model' => 'gpt-4-turbo-preview',
+            'response_format' => ['type' => 'json_object'],
             'messages' => $messages,
         ]);
 

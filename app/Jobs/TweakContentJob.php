@@ -69,6 +69,8 @@ class TweakContentJob implements ShouldQueue
             $newRevision->status = ContentGenerationStatus::Errored;
             $newRevision->status_text = $error->getMessage();
         } finally {
+            $content->content_queued = true;
+            $content->save();
             $newRevision->save();
         }
     }
