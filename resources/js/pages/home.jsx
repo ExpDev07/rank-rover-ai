@@ -47,21 +47,21 @@ export default function HomePage({
 
   const articles = [
     {
-      title: 'Å Navigere Samtalen: Å Fortelle Din Partner Om en Kjønnssykdom',
-      ingress: 'En guide til hvordan man på en respektfull og ansvarlig måte kan fortelle en partner om en kjønnssykdom.',
-      slug: 'aa-navigere-samtalen-aa-fortelle-din-partner-om-en-kjoonnssykdom',
+      title: 'How RankRover.ai is Revolutionizing SEO Content Creation',
+      ingress: 'In the dynamic world of digital marketing, staying ahead is not just about keeping pace but setting the pace.',
+      slug: 'how-rankroverai-is-revolutionizing-seo-content-creation',
       poster: 'yellow.jpg',
     },
     {
-      title: 'Forståelse av Kjønnssykdommer: Symptomer, Typer og Behandlinger',
-      ingress: 'En omfattende guide til symptomer, overføringsmetoder, og behandling av vanlige kjønnssykdommer.',
-      slug: 'forstaaelse-av-kjoonnssykdommer-symptomer-typer-og-behandlinger',
+      title: 'Achieving Higher Organic Traffic: Insights from RankRover.ai',
+      ingress: 'In today\'s digital marketplace, the quest for higher organic traffic is relentless. Businesses of all sizes vie for that coveted top spot on search engine results pages (SERPs).',
+      slug: 'achieving-higher-organic-traffic-insights-from-rankroverai',
       poster: 'window.png',
     },
     {
-      title: 'Myteknusing: Vanlige Misforståelser om Kjønnssykdommer',
-      ingress: 'En gjennomgang av vanlige myter om kjønnssykdommer (STIer), og fakta som motbeviser disse misforståelsene for å fremme bedre seksuell helseforståelse.',
-      slug: 'myteknusing-vanlige-misforstaaelser-om-kjoonnssykdommer',
+      title: 'From Keywords to Content: How RankRover.ai Powers Your SEO Strategy',
+      ingress: 'In the rapidly evolving digital landscape, businesses are in an endless competition to rank higher on search engine results pages (SERPs).',
+      slug: 'from-keywords-to-content-how-rankroverai-powers-your-seo-strategy',
       poster: 'clover.jpg',
     },
   ]
@@ -69,15 +69,15 @@ export default function HomePage({
   return (
     <Layout>
       <Head>
-        <title>Home</title>
+        <title>Hi</title>
         <meta name="description" content="In the digital age, standing out online is paramount. RankRover.ai harnesses the power of AI to craft SEO-optimized articles that resonate with your audience and search engines alike. Say goodbye to content creation hurdles and hello to effortless ranking success." />
-        <meta name="keywords" content="seo" />
+        <meta name="keywords" content="seo, ai, traffic, SaaS, chatgpt, tools, content, content generation" />
         <meta name="robots" content="index, follow" />
       </Head>
       <header className="container grid items-center grid-cols-1 py-12 mx-auto overflow-x-hidden text-black bg-white lg:grid-cols-12 lg:py-32 gap-x-28 gap-y-12">
         <div className="col-span-1 lg:col-span-7">
           <Badge className="mb-4">
-            1000x traffic!
+            Inrease organic traffic!
           </Badge>
           <h1 className="mb-4 text-4xl font-bold leading-tight lg:text-6xl">
             <span className="text-primary">Elevate</span> Your Digital Presence with AI-Powered Content
@@ -99,7 +99,7 @@ export default function HomePage({
               )}
             </Button>
             <Button size="lg" variant="outline">
-              <Link href="/">
+              <Link href="#features">
                 Learn more 🤔
               </Link>
             </Button>
@@ -119,7 +119,7 @@ export default function HomePage({
           </svg>
         </div>
       </header>
-      <section className="py-12 lg:py-24 bg-primary text-primary-foreground">
+      <section className="py-12 lg:py-24 bg-primary text-primary-foreground" id="features">
         <div className="container mx-auto">
           <header>
             <h2 className="mb-8 text-3xl font-bold">
@@ -152,6 +152,7 @@ export default function HomePage({
           'Choose your app\'s main language.',
           'Set your target audience.',
           'See our AI curate content for your app.',
+          'You can edit your app at any time later.'
         ]}
         image={(
           <img
@@ -184,12 +185,77 @@ export default function HomePage({
           'Decide your type of content, whether it be a blog post or listicle.',
           'Let our AI recommend titles and keywords, or choose yourself.',
           'Set the length you want for your content.',
+          'Toggle whether you want to only use your target audience as context (create more generic content).',
           'You can revise your content later.'
         ]}
         image={(
           <img
             className="object-cover w-full"
             src="http://localhost:8000/images/create_content.png"
+            alt=""
+          />
+        )}
+        ctas={(
+          <Button size="lg" asChild>
+            {current_user ? (
+              <Link href="/apps">
+                Go to app 🌟
+              </Link>
+            ) : (
+              <Link href="/register">
+                Get started 🌟
+              </Link>
+            )}
+          </Button>
+        )}
+      />
+      <ShowcaseSection
+        largeImage={true}
+        title="Choose from our AI's 🤖 recommendations"
+        description="With AutoPilot our AI will create a cluster of recommendations. Pick and choose."
+        features={[
+          'Let our AutoPilot recommend content.',
+          'Choose which ones you want our AI to write.',
+          'Our AI will write your content simultaneously.',
+          'We\'ll keep you updated on the status of your content.',
+          'You can always revise your content later after it\'s been written.'
+        ]}
+        image={(
+          <img
+            className="object-cover w-full"
+            src="http://localhost:8000/images/content_cluster.png"
+            alt=""
+          />
+        )}
+        ctas={(
+          <Button size="lg" asChild>
+            {current_user ? (
+              <Link href="/apps">
+                Go to app 🌟
+              </Link>
+            ) : (
+              <Link href="/register">
+                Get started 🌟
+              </Link>
+            )}
+          </Button>
+        )}
+      />
+      <ShowcaseSection
+        className="text-black bg-rose-50"
+        reverse={true}
+        title="Revise & tweak your content "
+        description="Talk to our AI to revise your content, improving on it and making it even more suitable to your exact needs."
+        features={[
+          'Write your tweaks to our AI.',
+          'Let our AI do the job of updating your content.',
+          'Continue tweaking & revising your content.',
+          'Jump between the different versions of content.',
+        ]}
+        image={(
+          <img
+            className="object-cover w-full"
+            src="http://localhost:8000/images/tweak_content.png"
             alt=""
           />
         )}
@@ -244,7 +310,7 @@ export default function HomePage({
                 </main>
                 <footer className="px-4 pb-4 lg:p-6">
                   <Button className="w-full" size="lg" asChild>
-                    <Link href={`/blogg/${article.slug}`}>
+                    <Link href={`/blog/${article.slug}`}>
                       Read more
                     </Link>
                   </Button>

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { router } from "@inertiajs/react"
+import { router, Head } from "@inertiajs/react"
 
 import { Button } from "@/components/ui/button"
 
@@ -24,6 +24,9 @@ export default function ContentIndexPage({
 
   return (
     <Layout>
+      <Head>
+        <title>Your content</title>
+      </Head>
       <PageHeader
         title="Your content"
         description="All your content here."

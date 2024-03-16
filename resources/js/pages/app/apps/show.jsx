@@ -1,13 +1,11 @@
-import { marked } from "marked"
+import { Head } from "@inertiajs/react"
 
 import Layout from "@/layouts/app"
 
 import PageHeader from "@/components/app/page/PageHeader"
 import Section from "@/components/app/section/Section"
-import SectionHeader from "@/components/app/section/SectionHeader"
 import MyAppCard from "@/components/app/app/MyAppCard"
 import StatisticsGrid from "@/components/app/statistic/StatisticsGrid"
-import ContentGrid from "@/components/app/content/ContentGrid"
 
 export default function AppsShowPage({
   app,
@@ -15,6 +13,9 @@ export default function AppsShowPage({
 }) {
   return (
     <Layout>
+      <Head>
+        <title>{app.name}</title>
+      </Head>
       <PageHeader
         title="Hi, Marius!"
         description={`Keep up with the latest for ${app.name} here.`}

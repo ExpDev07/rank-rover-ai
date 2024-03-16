@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContentClusterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -27,6 +28,10 @@ use Illuminate\Support\Facades\Route;
 // website
 Route::get('/', [HomeController::class, 'render']);
 Route::get('/pricing', [PricingController::class, 'render']);
+
+// blog
+Route::get('/blog', [BlogController::class, 'renderIndex']);
+Route::get('/blog/{slug}', [BlogController::class, 'renderShow']);
 
 Route::middleware('guest')->group(function () {
     // login

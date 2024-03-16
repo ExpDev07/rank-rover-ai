@@ -10,7 +10,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
     @inertiaHead
   </head>
-  <body class="font-sans antialiased">
+  <body class="font-sans antialiased scroll-smooth">
     @inertia
 
     <!-- Start of LiveChat (www.livechat.com) code -->

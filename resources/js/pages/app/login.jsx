@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { router, Link } from "@inertiajs/react"
+import { router, Head, Link } from "@inertiajs/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -52,6 +52,12 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen p-3">
+      <Head>
+        <title>Login</title>
+        <meta name="description" content="Log in to your account to access RankRover.ai." />
+        <meta name="keywords" content="seo, ai, traffic, SaaS, chatgpt, tools, content, content generation, login" />
+        <meta name="robots" content="index, follow" />
+      </Head>
       <Button className="absolute z-50 top-5 left-5" variant="outline" asChild>
         <Link href="/">
           Back to home 🛑

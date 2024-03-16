@@ -43,7 +43,7 @@ export default function DashboardSidebar() {
   return (
     <aside className="sticky flex flex-col w-64 border-r bg-gray-950">
       <div className="flex items-center justify-center px-4 py-8">
-        <Link href="/app">
+        <Link href={`/app/${app.slug}`}>
           <img
             className="w-24"
             src="http://localhost:8000/images/logo.png"

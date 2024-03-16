@@ -55,8 +55,8 @@ class GenerateContentJob implements ShouldQueue
         try {
             $generatedContent = $this->generateContent(
                 language: $this->content->language,
-                format: $this->content->format,
-                size: $this->content->size,
+                format: $this->content->format->value,
+                size: $this->content->size->value,
                 title: $this->content->title,
                 keywords: $this->content->keywords,
                 targetAudience: $this->content->app->target_audience,

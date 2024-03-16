@@ -1,5 +1,5 @@
 import * as React from "react"
-import { router } from "@inertiajs/react"
+import { router, Head } from "@inertiajs/react"
 import { marked } from "marked"
 import { ArrowPathIcon } from '@heroicons/react/24/solid'
 import { cn } from "@/lib/utils"
@@ -67,6 +67,9 @@ export default function ContentShowPage({
 
   return (
     <Layout>
+      <Head>
+        <title>{content.title}</title>
+      </Head>
       <div className="relative grid grid-cols-12 gap-24">
         <div className="col-span-7">
           <PageHeader

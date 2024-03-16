@@ -1,3 +1,5 @@
+import { Head } from "@inertiajs/react"
+
 export default function ErrorPage({ status }) {
   const title = {
     503: '503: Service Unavailable',
@@ -15,6 +17,10 @@ export default function ErrorPage({ status }) {
 
   return (
     <div>
+      <Head>
+        <title>Error</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
       <H1>{title}</H1>
       <div>{description}</div>
     </div>

@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react"
+import { Head, Link } from "@inertiajs/react"
 
 import { Button } from "@/components/ui/button"
 
@@ -10,6 +10,9 @@ export default function SelectPlanPage({
 }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-5">
+      <Head>
+        <title>Select plan</title>
+      </Head>
       <Button className="absolute top-5 left-5" variant="outline" asChild>
         <Link href="/">
           Back to home 🛑
