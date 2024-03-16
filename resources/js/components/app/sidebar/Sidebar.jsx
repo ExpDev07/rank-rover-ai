@@ -46,7 +46,7 @@ export default function DashboardSidebar() {
         <Link href={`/app/${app.slug}`}>
           <img
             className="w-24"
-            src="http://localhost:8000/images/logo.png"
+            src="https://rankrover.ai/images/logo.png"
             alt="logo"
           />
         </Link>

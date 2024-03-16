@@ -1,61 +1,61 @@
 @font-face {
   font-family: 'ui-sans-serif';
   font-weight: 300;
-  src: url('http://localhost:8000/fonts/Geist/Geist-Light.woff2') format('woff2');
+  src: url('https://rankrover.ai/fonts/Geist/Geist-Light.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ui-sans-serif';
   font-weight: 400;
-  src: url('http://localhost:8000/fonts/Geist/Geist-Regular.woff2') format('woff2');
+  src: url('https://rankrover.ai/fonts/Geist/Geist-Regular.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ui-sans-serif';
   font-weight: 500;
-  src: url('http://localhost:8000/fonts/Geist/Geist-Medium.woff2') format('woff2');
+  src: url('https://rankrover.ai/fonts/Geist/Geist-Medium.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ui-sans-serif';
   font-weight: 600;
-  src: url('http://localhost:8000/fonts/Geist/Geist-SemiBold.woff2') format('woff2');
+  src: url('https://rankrover.aifonts/Geist/Geist-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ui-sans-serif';
   font-weight: 700;
-  src: url('http://localhost:8000/fonts/Geist/Geist-Bold.woff2') format('woff2');
+  src: url('https://rankrover.ai/fonts/Geist/Geist-Bold.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ui-monospace';
   font-weight: 300;
-  src: url('http://localhost:8000/fonts/Geist.Mono/GeistMono-Light.woff2') format('woff2');
+  src: url('https://rankrover.ai/fonts/Geist.Mono/GeistMono-Light.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ui-monospace';
   font-weight: 400;
-  src: url('http://localhost:8000/fonts/Geist.Mono/GeistMono-Regular.woff2') format('woff2');
+  src: url('https://rankrover.ai/fonts/Geist.Mono/GeistMono-Regular.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ui-monospace';
   font-weight: 500;
-  src: url('http://localhost:8000/fonts/Geist.Mono/GeistMono-Medium.woff2') format('woff2');
+  src: url('https://rankrover.ai/fonts/Geist.Mono/GeistMono-Medium.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ui-monospace';
   font-weight: 600;
-  src: url('http://localhost:8000/fonts/Geist.Mono/GeistMono-SemiBold.woff2') format('woff2');
+  src: url('https://rankrover.ai/fonts/Geist.Mono/GeistMono-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ui-monospace';
   font-weight: 700;
-  src: url('http://localhost:8000/fonts/Geist.Mono/GeistMono-Bold.woff2') format('woff2');
+  src: url('https://rankrover.ai/fonts/Geist.Mono/GeistMono-Bold.woff2') format('woff2');
 }
 
 @tailwind base;

@@ -82,7 +82,7 @@ export default function RegisterPage({
         <CardHeader>
           <img
             className="w-32 pb-0 pr-4 mb-4 border-b"
-            src="http://localhost:8000/images/logo.png"
+            src="https://rankrover.ai/images/logo.png"
             alt="RankRover.ai"
           />
           <CardTitle className="text-2xl text-primary">
