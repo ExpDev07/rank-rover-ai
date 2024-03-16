@@ -69,6 +69,9 @@ export default function CreateContentDialog({
     router.post(`/app/${app.slug}/content`, {
       ...data,
       language: language,
+      size: size,
+      format: selectedFormat,
+      only_target_audience: onlyTargetAudience,
       keywords: data.keywords.split(', '),
     }, {
       preserveState: false,
@@ -83,6 +86,9 @@ export default function CreateContentDialog({
   const handleCreateContentCluster = () => {
     router.post(`/app/${app.slug}/content-cluster`, {
       language,
+      size: size,
+      format: selectedFormat,
+      only_target_audience: onlyTargetAudience,
     }, {
       preserveState: false,
       preserveScroll: false,
@@ -105,7 +111,7 @@ export default function CreateContentDialog({
             You can create content manually or on AutoPilot. Both leverages AI, but AutoPilot will recommend content for you.
           </DialogDescription>
         </DialogHeader>
-        <div className={cn('py-6 space-y-8', autopilotWorking || manualWorking && 'pointer-events-none opacity-50')}>
+        <div className={cn('py-6 space-y-8', (autopilotWorking || manualWorking) && 'pointer-events-none opacity-50')}>
           <div className="flex flex-col gap-2">
             <Label>
               Language
@@ -157,10 +163,10 @@ export default function CreateContentDialog({
             />
             <SelectableCard
               className="shrink-0 max-w-48 h-28"
-              isSelected={selectedFormat === 'lipsticles'}
-              onSelect={() => setSelectedFormat('lipsticles')}
+              isSelected={selectedFormat === 'listicle'}
+              onSelect={() => setSelectedFormat('listicle')}
               emoji="🔢"
-              text="Listicles"
+              text="Listicle"
             />
           </div>
           <ScrollBar orientation="horizontal" />

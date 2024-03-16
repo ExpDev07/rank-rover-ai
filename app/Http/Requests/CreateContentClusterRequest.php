@@ -18,7 +18,6 @@ class CreateContentClusterRequest extends FormRequest
             'language' => ['required'],
             'size' => ['required'],
             'format' => ['required'],
-            'title' => ['required'],
             'only_target_audience' => ['boolean'],
         ];
     }

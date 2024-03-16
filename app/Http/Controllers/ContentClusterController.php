@@ -21,10 +21,11 @@ class ContentClusterController extends Controller
         $cluster = $app->contentClusters()->create($data);
 
         $generatedRecommendations = $this->generateRecommendations(
-            $app->name,
-            $app->description,
-            $app->target_audience,
-            $data['language'],
+            targetAudience: $app->target_audience,
+            appName: $data['only_target_audience'] ? '' : $app->name,
+            appDesc: $data['only_target_audience'] ? '' : $app->description,
+            language: $data['language'],
+            format: $data['format'],
         )['recommendations']['titles'];
 
         $cluster->contents()->createMany(collect($generatedRecommendations)->map(fn ($r) => [
@@ -43,12 +44,12 @@ class ContentClusterController extends Controller
     /**
      * Generates the content.
      */
-    private function generateRecommendations(string $appName, string $appDesc, string $targetAudience, string $language, int $amount = 8)
+    private function generateRecommendations(string $appName, string $appDesc, string $targetAudience, string $language, string $format, int $amount = 8)
     {
         // the messages
         $messages = [];
         $messages[] = ['role' => 'system', 'content' => 'You are a highly skilled AI trained to assist with SEO content creation.'];
-        $messages[] = ['role' => 'user', 'content' => "Please generate $amount titles for SEO content with keywords also for the following app:\n\n- **App name:** $appName\n- **App description:** $appDesc\n- **Target Audience:** $targetAudience\n- **Language:** $language\n\nPlease return it as an json array of objects in the format of { title, keywords } where title is a string and keywords is an array. Make sure to include the keywords, and that the json keys are not padded with spacing!\n\nThank you!"];
+        $messages[] = ['role' => 'user', 'content' => "Please recommend $amount amount of SEO content titles, each with its own set of recommended keywords, and using the provided context. If the app name and app description are empty, omit them from the context when recommending. Ensure there is no excessive spacing in the response. Here is the context:\n\n- **App name:** $appName\n- **App description:** $appDesc\n- **Target Audience:** $targetAudience\n- **Language:** $language\n- **Type of content (essay, article, listicle, etc):** $format\n\nPlease return your recommendations as a JSON array of objects in the format of {\"title\":\"titleString\", \"keywords\":[\"keyword1\", \"keyword2\"]} (this is only the format I want you to return in). Ensure the JSON structure is compact without unnecessary whitespace or padding in keys and values. Thank you!"];
 
 
         // send to openai

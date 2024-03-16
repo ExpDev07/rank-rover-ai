@@ -18,7 +18,7 @@ export default function PricingCard({
   checkout,
 }) {
   const page = usePage();
-  const { current_user } = page.props;
+  const { current_user, current_user_subscribed } = page.props;
 
   return (
     <Card className={
@@ -35,7 +35,7 @@ export default function PricingCard({
         {price.isYearly && price.yearlyPrice && price.price ? (
           <div className="flex justify-between">
             <CardTitle className="text-lg text-zinc-700">
-              {price.name}
+              {price.name.split(' ')[0]}
             </CardTitle>
             <div className={cn("px-2.5 rounded-xl h-fit text-sm py-1 bg-zinc-200 text-black", price.popular && 'bg-gradient-to-r from-orange-400 to-rose-400')}>
               Save ${(price.price / 100) * 12 - price.yearlyPrice}
@@ -73,7 +73,7 @@ export default function PricingCard({
           variant={price.popular ? 'default' : 'outline'}
           asChild
         >
-          {current_user ? (
+          {current_user && current_user_subscribed ? (
             <Link href="/apps" method="get">
               Go to app <span className="ml-2 text-lg -translate-y-1">👉</span>
             </Link>

@@ -75,7 +75,7 @@ export default function CreateAppDialog({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Title
+                    Name
                   </FormLabel>
                   <FormControl>
                     <Input type="text" placeholder="Todoly.ai" {...field} />
