@@ -18,6 +18,7 @@ class CreateAppRequest extends FormRequest
             'name' => ['required'],
             'description' => ['required'],
             'target_audience' => ['required'],
+            'main_language' => ['required'],
         ];
     }
 

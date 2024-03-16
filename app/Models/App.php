@@ -25,6 +25,7 @@ class App extends Model
         'slug',
         'description',
         'target_audience',
+        'main_language',
     ];
 
     /**

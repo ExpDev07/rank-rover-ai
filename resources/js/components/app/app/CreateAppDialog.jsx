@@ -4,6 +4,7 @@ import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
+import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -26,23 +27,33 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+import LanguagePicker from "@/components/app/language/LanguagePicker"
+
 export default function CreateAppDialog({
   children,
 }) {
   const [loading, setLoading] = React.useState(false)
+  const [refresh, setRefresh] = React.useState(0)
 
   const form = useForm({
     defaultValues: {
       name: '',
       description: '',
       target_audience: '',
+      main_language: 'english',
     },
     resolver: zodResolver(z.object({
       name: z.string(),
       description: z.string().min(5),
       target_audience: z.string().min(3),
+      main_language: z.string(),
     }))
   })
+
+  const handleSelectLanguage = (language) => {
+    form.setValue('main_language', language);
+    setRefresh(refresh + 1)
+  }
 
   const handleSubmit = (data) => {
     router.post('/apps', data, {
@@ -114,6 +125,18 @@ export default function CreateAppDialog({
                 </FormItem>
               )}
             />
+            <div className="flex flex-col gap-2">
+              <Label>
+                Main Language
+              </Label>
+              <LanguagePicker
+                value={form.getValues('main_language')}
+                onChange={handleSelectLanguage}
+              />
+              <p className="text-xs text-muted-foreground">
+                We'll select this language as default whenever creating your content.
+              </p>
+            </div>
           </form>
         </Form>
         <DialogFooter>

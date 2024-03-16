@@ -125,51 +125,51 @@ export default function CreateContentDialog({
             </p>
           </div>
           <ScrollArea className="max-w-full whitespace-nowrap">
-          <div className={cn('flex gap-4 w-max', !language && 'opacity-50 pointer-events-none')}>
-            <SelectableCard
-              className="shrink-0 max-w-48 h-28"
-              isSelected={selectedFormat === 'blog_post'}
-              onSelect={() => setSelectedFormat('blog_post')}
-              emoji="📝"
-              text="Blog Post"
-            />
-            <SelectableCard
-              className="shrink-0 max-w-48 h-28"
-              isSelected={selectedFormat === 'article'}
-              onSelect={() => setSelectedFormat('article')}
-              emoji="🗞️"
-              text="Article"
-            />
-            <SelectableCard
-              className="shrink-0 max-w-48 h-28"
-              isSelected={selectedFormat === 'essay'}
-              onSelect={() => setSelectedFormat('essay')}
-              emoji="🖋️"
-              text="Essay"
-            />
-            <SelectableCard
-              className="shrink-0 max-w-48 h-28"
-              isSelected={selectedFormat === 'how_to_guide_and_tutorial'}
-              onSelect={() => setSelectedFormat('how_to_guide_and_tutorial')}
-              emoji="🛠️"
-              text="Guide & tutorial"
-            />
-            <SelectableCard
-              className="shrink-0 max-w-48 h-28"
-              isSelected={selectedFormat === 'frequently_asked_questions'}
-              onSelect={() => setSelectedFormat('frequently_asked_questions')}
-              emoji="❓"
-              text="FAQ"
-            />
-            <SelectableCard
-              className="shrink-0 max-w-48 h-28"
-              isSelected={selectedFormat === 'listicle'}
-              onSelect={() => setSelectedFormat('listicle')}
-              emoji="🔢"
-              text="Listicle"
-            />
-          </div>
-          <ScrollBar orientation="horizontal" />
+            <div className={cn('flex gap-4 w-max', !language && 'opacity-50 pointer-events-none')}>
+              <SelectableCard
+                className="shrink-0 max-w-48 h-28"
+                isSelected={selectedFormat === 'blog_post'}
+                onSelect={() => setSelectedFormat('blog_post')}
+                emoji="📝"
+                text="Blog Post"
+              />
+              <SelectableCard
+                className="shrink-0 max-w-48 h-28"
+                isSelected={selectedFormat === 'article'}
+                onSelect={() => setSelectedFormat('article')}
+                emoji="🗞️"
+                text="Article"
+              />
+              <SelectableCard
+                className="shrink-0 max-w-48 h-28"
+                isSelected={selectedFormat === 'essay'}
+                onSelect={() => setSelectedFormat('essay')}
+                emoji="🖋️"
+                text="Essay"
+              />
+              <SelectableCard
+                className="shrink-0 max-w-48 h-28"
+                isSelected={selectedFormat === 'how_to_guide_and_tutorial'}
+                onSelect={() => setSelectedFormat('how_to_guide_and_tutorial')}
+                emoji="🛠️"
+                text="Guide & tutorial"
+              />
+              <SelectableCard
+                className="shrink-0 max-w-48 h-28"
+                isSelected={selectedFormat === 'frequently_asked_questions'}
+                onSelect={() => setSelectedFormat('frequently_asked_questions')}
+                emoji="❓"
+                text="FAQ"
+              />
+              <SelectableCard
+                className="shrink-0 max-w-48 h-28"
+                isSelected={selectedFormat === 'listicle'}
+                onSelect={() => setSelectedFormat('listicle')}
+                emoji="🔢"
+                text="Listicle"
+              />
+            </div>
+            <ScrollBar orientation="horizontal" />
           </ScrollArea>
           <div className={cn('flex gap-4', !selectedFormat && 'opacity-50 pointer-events-none')}>
             <SelectableCard

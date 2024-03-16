@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('description');
             $table->string('target_audience');
+            $table->string('main_language');
             $table->timestamps();
         });
     }
