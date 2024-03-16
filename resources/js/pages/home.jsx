@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
 import PricingGrid from "@/components/common/pricing/PricingGrid"
+import ShowcaseSection from "@/components/web/section/ShowcaseSection"
 
 export default function HomePage({
   current_user,
@@ -28,13 +29,13 @@ export default function HomePage({
       icon: BellAlertIcon,
     },
     {
-      name: 'Stylistic Flexibility',
-      description: 'Choose from various writing styles to match your brand\'s voice and audience\'s preferences.',
+      name: 'Choose Content Format',
+      description: 'Choose from various formats to match your brand\'s voice and audience\'s preferences.',
       icon: BellAlertIcon,
     },
     {
-      name: 'Format Versatility',
-      description: 'Input your target keywords and let our AI craft content that climbs the search engine ranks.',
+      name: 'Content Clusters',
+      description: 'Leverage our AI to create clusters of content. We\'ll recommend keywords and titles!',
       icon: BellAlertIcon,
     },
     {
@@ -142,6 +143,70 @@ export default function HomePage({
           </ul>
         </div>
       </section>
+      <ShowcaseSection
+        title="Create your apps 📱"
+        description="We'll use your app as context whenever curating SEO optimized content for you. Personalized and professional."
+        features={[
+          'Create your app.',
+          'Personalize your app.',
+          'Choose your app\'s main language.',
+          'Set your target audience.',
+          'See our AI curate content for your app.',
+        ]}
+        image={(
+          <img
+            className="object-cover w-full"
+            src="http://localhost:8000/images/create_app.png"
+            alt=""
+          />
+        )}
+        ctas={(
+          <Button size="lg" asChild>
+            {current_user ? (
+              <Link href="/apps">
+                Go to app 🌟
+              </Link>
+            ) : (
+              <Link href="/register">
+                Get started 🌟
+              </Link>
+            )}
+          </Button>
+        )}
+      />
+      <ShowcaseSection
+        className="text-black bg-rose-50"
+        reverse={true}
+        title="Let our AI curate your content 🤖"
+        description="Our AI will create your content like you want it, for your target audience."
+        features={[
+          'Choose from a hundred languages.',
+          'Decide your type of content, whether it be a blog post or listicle.',
+          'Let our AI recommend titles and keywords, or choose yourself.',
+          'Set the length you want for your content.',
+          'You can revise your content later.'
+        ]}
+        image={(
+          <img
+            className="object-cover w-full"
+            src="http://localhost:8000/images/create_content.png"
+            alt=""
+          />
+        )}
+        ctas={(
+          <Button size="lg" asChild>
+            {current_user ? (
+              <Link href="/apps">
+                Go to app 🌟
+              </Link>
+            ) : (
+              <Link href="/register">
+                Get started 🌟
+              </Link>
+            )}
+          </Button>
+        )}
+      />
       <section className="py-12 text-black bg-white lg:py-24">
         <div className="container mx-auto">
           <header>
@@ -154,7 +219,7 @@ export default function HomePage({
           />
         </div>
       </section>
-      <section className="py-12 text-black bg-rose-100 lg:py-24">
+      <section className="py-12 text-black bg-rose-50 lg:py-24">
         <div className="container mx-auto">
           <header>
             <h2 className="mb-8 text-3xl font-bold">
