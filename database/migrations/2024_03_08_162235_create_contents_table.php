@@ -19,8 +19,11 @@ return new class extends Migration
             $table->foreignId('current_revision_id')->nullable();
             $table->string('slug');
             $table->string('language');
+            $table->string('format');
+            $table->string('size');
             $table->string('title');
             $table->json('keywords');
+            $table->boolean('only_target_audience')->default(false);
             $table->boolean('content_queued')->default(false);
             $table->timestamps();
         });

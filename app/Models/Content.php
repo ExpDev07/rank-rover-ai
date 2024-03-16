@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Content\ContentFormat;
+use App\Content\ContentSize;
 use App\Content\ContentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +37,9 @@ class Content extends Model
         'current_revision_id',
         'slug',
         'language',
+        'format',
+        'size',
+        'only_target_audience',
         'title',
         'keywords',
         'content_queued',
@@ -47,7 +52,10 @@ class Content extends Model
      */
     protected $casts = [
         'keywords' => 'array',
+        'only_target_audience' => 'boolean',
         'content_queued' => 'boolean',
+        'format' => ContentFormat::class,
+        'size' => ContentSize::class,
     ];
 
     /**

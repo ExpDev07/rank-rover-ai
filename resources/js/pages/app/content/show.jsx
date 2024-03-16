@@ -124,7 +124,10 @@ export default function ContentShowPage({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex flex-wrap items-center gap-2">
+              <Badge className="mb-3" variant="secondary">
+                {content.slug}
+              </Badge>
+              <div className="flex flex-wrap items-center gap-2 mb-4">
                 {content.keywords.map((keyword, i) => (
                   <Badge
                     key={i}

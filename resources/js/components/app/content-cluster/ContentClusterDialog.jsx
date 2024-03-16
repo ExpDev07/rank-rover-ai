@@ -1,5 +1,5 @@
 import * as React from "react"
-import { router, usePage } from "@inertiajs/react"
+import { router, usePage, Link } from "@inertiajs/react"
 import { ArrowPathIcon } from '@heroicons/react/24/solid'
 import { cn } from "@/lib/utils"
 
@@ -68,7 +68,7 @@ export default function ContentClusterDialog({
             <TableBody>
               {contentCluster.contents.map((content) => (
                 <TableRow key={content.id}>
-                  <TableCell className="py-4 pr-4">
+                  <TableCell className="py-3 pr-4">
                     <Avatar className="w-8 h-8">
                       <AvatarImage
                         src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${content.title}`}
@@ -79,8 +79,12 @@ export default function ContentClusterDialog({
                       </AvatarFallback>
                     </Avatar>
                   </TableCell>
-                  <TableCell className="py-4 pr-4 font-medium">
-                    {content.title}
+                  <TableCell className="py-3 pr-4 font-medium">
+                    {!content.current_revision ? content.title : (
+                      <Link className="text-primary" href={`/app/${app.slug}/content/${content.slug}`}>
+                        {content.title}
+                      </Link>
+                    )}
                   </TableCell>
                   <TableCell className="flex flex-wrap gap-2 py-4 pr-4">
                     {content.keywords.map((keyword, i) => (
@@ -90,7 +94,7 @@ export default function ContentClusterDialog({
                     ))}
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center justify-center py-4">
+                    <div className="flex items-center justify-center py-3">
                       {(!content.content_queued && !content.current_revision) && (
                         <Button size="sm" onClick={() => handleWriteContent(content)}>Write now</Button>
                       )}

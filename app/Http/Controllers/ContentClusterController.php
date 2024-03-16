@@ -31,6 +31,9 @@ class ContentClusterController extends Controller
             ...$r,
             'app_id' => $app->id,
             'language' => $data['language'],
+            'size' => $data['size'],
+            'format' => $data['format'],
+            'only_target_audience' => $data['only_target_audience'] ?? false,
             'content_queued' => false,
         ]));
 
@@ -40,7 +43,7 @@ class ContentClusterController extends Controller
     /**
      * Generates the content.
      */
-    private function generateRecommendations(string $appName, string $appDesc, string $targetAudience, string $language, int $amount = 5)
+    private function generateRecommendations(string $appName, string $appDesc, string $targetAudience, string $language, int $amount = 8)
     {
         // the messages
         $messages = [];

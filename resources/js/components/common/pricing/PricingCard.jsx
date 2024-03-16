@@ -21,7 +21,11 @@ export default function PricingCard({
   const { current_user } = page.props;
 
   return (
-    <Card className={cn('relative flex flex-col justify-between', price.popular ? 'border-rose-400 py-4 border-4 scale-110' : 'py-4 border-2', className)}>
+    <Card className={
+      cn('relative flex flex-col justify-between',
+      price.popular ? 'border-rose-400 py-4 border-4 scale-110' : 'py-4 border-2',
+      className
+    )}>
       <CardHeader>
         {price.popular && (
           <span className="absolute text-4xl top-5 right-5">
