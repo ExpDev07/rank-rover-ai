@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('subscription_plans', function (Blueprint $table) {
             $table->id();
             $table->string('stripe_id')->unique();
+            $table->string('stripe_id_prod')->unique();
             $table->string('key')->unique();
             $table->string('name');
             $table->string('price');

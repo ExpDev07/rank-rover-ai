@@ -26,9 +26,10 @@ class DatabaseSeeder extends Seeder
         // subscription plans
         SubscriptionPlan::query()->create([
             'stripe_id' => 'price_1OtF96IOt83de95k38Nfiy7w',
+            'stripe_id_prod' => 'price_1Ov4btIOt83de95kVn7F1Z6k',
             'key' => 'basic_monthly',
             'name' => 'Basic',
-            'price' => '2999',
+            'price' => '3999',
             'popular' => false,
             'description' => 'Essential features you need to get started.',
             'features' => [
@@ -41,9 +42,10 @@ class DatabaseSeeder extends Seeder
         ]);
         SubscriptionPlan::query()->create([
             'stripe_id' => 'price_1OtF6TIOt83de95kSBPQkEim',
+            'stripe_id_prod' => 'price_1Ov4e3IOt83de95kkonHYFhF',
             'key' => 'pro_monthly',
             'name' => 'Pro',
-            'price' => '4999',
+            'price' => '5999',
             'popular' => true,
             'description' => 'Perfect for owners of small & medium businesses.',
             'features' => [
@@ -56,6 +58,7 @@ class DatabaseSeeder extends Seeder
         ]);
         SubscriptionPlan::query()->create([
             'stripe_id' => 'price_1OtF9hIOt83de95k276O2dRx',
+            'stripe_id_prod' => 'price_1Ov4eaIOt83de95k6j24m1dA',
             'key' => 'enterprise_monthly',
             'name' => 'Enterprise',
             'price' => '9999',

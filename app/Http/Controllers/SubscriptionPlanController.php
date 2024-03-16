@@ -24,7 +24,8 @@ class SubscriptionPlanController extends Controller
      */
     public function handleCheckout(Request $request, SubscriptionPlan $plan)
     {
-        $subscription = $request->user()->newSubscription($plan->key, $plan->stripe_id);
+        $subscription = $request->user()->newSubscription($plan->key, app()->isProduction() ? $plan->stripe_id_prod : $plan->stripe_id);
+
         $checkout = $subscription->checkout([
             'success_url' => url('/thank-you'),
             'cancel_url' => url('/select-plan'),
