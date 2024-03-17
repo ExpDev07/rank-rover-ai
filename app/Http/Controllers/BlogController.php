@@ -23,12 +23,12 @@ class BlogController extends Controller
      */
     public function renderShow(string $slug)
     {
-        if (! Storage::exists("/blog/$slug.md"))
+        if (! file_exists(base_path() . "/blog/$slug.md"))
         {
             return redirect()->to('/blog');
         }
 
-        $article = YamlFrontMatter::parse(Storage::read("/blog/$slug.md"));
+        $article = YamlFrontMatter::parse(file_get_contents(base_path() . "/blog/$slug.md"));
 
         return Inertia::render('blog/show', [
             'title' => $article->matter('title'),
