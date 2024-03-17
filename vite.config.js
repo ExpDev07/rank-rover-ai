@@ -11,8 +11,4 @@ export default defineConfig({
     }),
     react(),
   ],
-  esbuild: {
-    target: 'esnext',
-    platform: 'linux',
-  },
 });
