@@ -1,5 +1,5 @@
 import { Head, Link } from "@inertiajs/react"
-import { ChatBubbleLeftIcon, BanknotesIcon, BellAlertIcon } from '@heroicons/react/24/outline'
+import { AcademicCapIcon, LanguageIcon, KeyIcon, ArchiveBoxIcon, ArrowsPointingInIcon, FireIcon } from '@heroicons/react/24/outline'
 
 import Layout from "@/layouts/web"
 import { Button } from "@/components/ui/button"
@@ -16,32 +16,32 @@ export default function HomePage({
     {
       name: 'Dynamic Content Generation',
       description: 'Create captivating, SEO-driven articles tailored to your business needs.',
-      icon: ChatBubbleLeftIcon,
+      icon: FireIcon,
     },
     {
       name: 'Multilingual Support',
       description: 'Break language barriers. Generate content in multiple languages to reach a global audience.',
-      icon: BanknotesIcon,
+      icon: LanguageIcon,
     },
     {
       name: 'Keyword Optimization',
       description: 'Input your target keywords and let our AI craft content that climbs the search engine ranks.',
-      icon: BellAlertIcon,
+      icon: KeyIcon,
     },
     {
       name: 'Choose Content Format',
       description: 'Choose from various formats to match your brand\'s voice and audience\'s preferences.',
-      icon: BellAlertIcon,
+      icon: AcademicCapIcon,
     },
     {
       name: 'Content Clusters',
       description: 'Leverage our AI to create clusters of content. We\'ll recommend keywords and titles!',
-      icon: BellAlertIcon,
+      icon: ArrowsPointingInIcon,
     },
     {
       name: 'It\'s your content',
       description: 'Export your content in multiple formats including markdown, semantic HTML, and JSON for seamless integration.',
-      icon: BellAlertIcon,
+      icon: ArchiveBoxIcon,
     },
   ]
 
@@ -130,7 +130,7 @@ export default function HomePage({
             {features.map((feature) => (
               <li className="p-8 text-black bg-white border border-gray-200 rounded-md shadow-sm" key={feature.name}>
                 <feature.icon
-                  className="mb-6 w-14 h-14 text-rose-400"
+                  className="mb-6 w-14 h-14 text-rose-500"
                 />
                 <h3 className="mb-2 text-lg font-medium">
                   {feature.name}

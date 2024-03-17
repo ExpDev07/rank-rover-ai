@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Head, Link } from "@inertiajs/react";
-import { ChatBubbleLeftIcon, BanknotesIcon, BellAlertIcon } from "@heroicons/react/24/outline";
+import { FireIcon, LanguageIcon, KeyIcon, AcademicCapIcon, ArrowsPointingInIcon, ArchiveBoxIcon } from "@heroicons/react/24/outline";
 import { L as Layout } from "./web-CSUPOjR4.js";
 import { c as cn, B as Button } from "./button-hFl330a_.js";
 import { B as Badge } from "./badge-DvbvYTRT.js";
@@ -46,32 +46,32 @@ function HomePage({
     {
       name: "Dynamic Content Generation",
       description: "Create captivating, SEO-driven articles tailored to your business needs.",
-      icon: ChatBubbleLeftIcon
+      icon: FireIcon
     },
     {
       name: "Multilingual Support",
       description: "Break language barriers. Generate content in multiple languages to reach a global audience.",
-      icon: BanknotesIcon
+      icon: LanguageIcon
     },
     {
       name: "Keyword Optimization",
       description: "Input your target keywords and let our AI craft content that climbs the search engine ranks.",
-      icon: BellAlertIcon
+      icon: KeyIcon
     },
     {
       name: "Choose Content Format",
       description: "Choose from various formats to match your brand's voice and audience's preferences.",
-      icon: BellAlertIcon
+      icon: AcademicCapIcon
     },
     {
       name: "Content Clusters",
       description: "Leverage our AI to create clusters of content. We'll recommend keywords and titles!",
-      icon: BellAlertIcon
+      icon: ArrowsPointingInIcon
     },
     {
       name: "It's your content",
       description: "Export your content in multiple formats including markdown, semantic HTML, and JSON for seamless integration.",
-      icon: BellAlertIcon
+      icon: ArchiveBoxIcon
     }
   ];
   const articles = [
@@ -168,7 +168,7 @@ function HomePage({
         /* @__PURE__ */ jsx(
           feature.icon,
           {
-            className: "mb-6 w-14 h-14 text-rose-400"
+            className: "mb-6 w-14 h-14 text-rose-500"
           }
         ),
         /* @__PURE__ */ jsx("h3", { className: "mb-2 text-lg font-medium", children: feature.name }),
