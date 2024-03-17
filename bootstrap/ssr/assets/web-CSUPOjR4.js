@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { c as cn } from "./button-hFl330a_.js";
-import { N as Navbar, F as Footer } from "./footer-0Q4KCSOe.js";
+import { N as Navbar, F as Footer } from "./footer-Cb3smiQQ.js";
 function Layout({
   className,
   children,

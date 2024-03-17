@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Head } from "@inertiajs/react";
-import { L as Layout } from "./web-Bnj_esma.js";
+import { L as Layout } from "./web-CSUPOjR4.js";
 import { P as PricingGrid } from "./PricingGrid-De7aQqu4.js";
 import "./button-hFl330a_.js";
 import "react";
@@ -8,7 +8,7 @@ import "@radix-ui/react-slot";
 import "class-variance-authority";
 import "clsx";
 import "tailwind-merge";
-import "./footer-0Q4KCSOe.js";
+import "./footer-Cb3smiQQ.js";
 import "lucide-react";
 import "./card-BTxPqJJ5.js";
 function PricingPage({

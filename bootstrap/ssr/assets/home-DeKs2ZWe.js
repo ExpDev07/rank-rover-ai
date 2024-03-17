@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Head, Link } from "@inertiajs/react";
 import { ChatBubbleLeftIcon, BanknotesIcon, BellAlertIcon } from "@heroicons/react/24/outline";
-import { L as Layout } from "./web-Bnj_esma.js";
+import { L as Layout } from "./web-CSUPOjR4.js";
 import { c as cn, B as Button } from "./button-hFl330a_.js";
 import { B as Badge } from "./badge-DvbvYTRT.js";
 import { P as PricingGrid } from "./PricingGrid-De7aQqu4.js";
-import "./footer-0Q4KCSOe.js";
+import "./footer-Cb3smiQQ.js";
 import "react";
 import "@radix-ui/react-slot";
 import "class-variance-authority";
@@ -31,7 +31,7 @@ function ShowcaseSection({
       ] }),
       /* @__PURE__ */ jsx("ul", { className: "flex flex-col gap-4", children: features.map((feature, i) => /* @__PURE__ */ jsxs("li", { className: "flex items-center gap-x-3", children: [
         /* @__PURE__ */ jsx("span", { className: "w-3 h-3 rounded-full bg-rose-400" }),
-        /* @__PURE__ */ jsx("span", { className: "text-lg leading-tight", children: feature })
+        /* @__PURE__ */ jsx("span", { className: "text-lg leading-tight lg:text-lg", children: feature })
       ] }, i)) }),
       ctas && /* @__PURE__ */ jsx("div", { className: "flex items-center gap-2 mt-12", children: ctas })
     ] }),
@@ -212,7 +212,8 @@ function HomePage({
           "Let our AI recommend titles and keywords, or choose yourself.",
           "Set the length you want for your content.",
           "Toggle whether you want to only use your target audience as context (create more generic content).",
-          "You can revise your content later."
+          "You can revise your content later.",
+          "Save your content to anywhere you want"
         ],
         image: /* @__PURE__ */ jsx(
           "img",

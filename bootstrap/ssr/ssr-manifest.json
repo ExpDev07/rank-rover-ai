@@ -130,22 +130,22 @@
     "/build/assets/textarea-DJWfG70m.js"
   ],
   "resources/js/components/web/footer.jsx": [
-    "/build/assets/footer-0Q4KCSOe.js"
+    "/build/assets/footer-Cb3smiQQ.js"
   ],
   "resources/js/components/web/navbar.jsx": [
-    "/build/assets/footer-0Q4KCSOe.js"
+    "/build/assets/footer-Cb3smiQQ.js"
   ],
   "resources/js/components/web/section/ShowcaseSection.jsx": [
-    "/build/assets/home-DcSpo_XU.js"
+    "/build/assets/home-DeKs2ZWe.js"
   ],
   "resources/js/layouts/app.jsx": [
     "/build/assets/Section-CEFJvy7d.js"
   ],
   "resources/js/layouts/article.jsx": [
-    "/build/assets/show-B9kvD2Ll.js"
+    "/build/assets/show-FM2Mbb8T.js"
   ],
   "resources/js/layouts/web.jsx": [
-    "/build/assets/web-Bnj_esma.js"
+    "/build/assets/web-CSUPOjR4.js"
   ],
   "resources/js/lib/utils.ts": [
     "/build/assets/button-hFl330a_.js"
@@ -178,13 +178,13 @@
     "/build/assets/thank-you-BJAdrC8X.js"
   ],
   "resources/js/pages/blog/show.jsx": [
-    "/build/assets/show-B9kvD2Ll.js"
+    "/build/assets/show-FM2Mbb8T.js"
   ],
   "resources/js/pages/home.jsx": [
-    "/build/assets/home-DcSpo_XU.js"
+    "/build/assets/home-DeKs2ZWe.js"
   ],
   "resources/js/pages/pricing.jsx": [
-    "/build/assets/pricing-D9kMRlt1.js"
+    "/build/assets/pricing-D2dTOkhV.js"
   ],
   "resources/js/ssr.jsx": []
 }

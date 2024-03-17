@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { Link, Head } from "@inertiajs/react";
 import { marked } from "marked";
 import { B as Button } from "./button-hFl330a_.js";
-import { N as Navbar, F as Footer } from "./footer-0Q4KCSOe.js";
+import { N as Navbar, F as Footer } from "./footer-Cb3smiQQ.js";
 import "react";
 import "@radix-ui/react-slot";
 import "class-variance-authority";

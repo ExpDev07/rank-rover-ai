@@ -186,7 +186,8 @@ export default function HomePage({
           'Let our AI recommend titles and keywords, or choose yourself.',
           'Set the length you want for your content.',
           'Toggle whether you want to only use your target audience as context (create more generic content).',
-          'You can revise your content later.'
+          'You can revise your content later.',
+          'Save your content to anywhere you want',
         ]}
         image={(
           <img

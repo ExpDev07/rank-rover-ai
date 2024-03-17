@@ -29,7 +29,7 @@ function Navbar() {
   ] }) });
 }
 function Footer() {
-  return /* @__PURE__ */ jsx("footer", { className: "py-8 text-sm text-center bg-black text-gray-50", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto", children: "Tjenesten er utviklet av MeldSmitte, alle rettigheter forebehold." }) });
+  return /* @__PURE__ */ jsx("footer", { className: "py-8 text-sm text-center bg-black text-gray-50", children: /* @__PURE__ */ jsx("div", { className: "container mx-auto", children: "RankRover.ai © 2024. All rights reserved." }) });
 }
 export {
   Footer as F,

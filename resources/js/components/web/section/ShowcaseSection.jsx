@@ -27,7 +27,7 @@ export default function ShowcaseSection({
               {features.map((feature, i) => (
                 <li className="flex items-center gap-x-3" key={i}>
                   <span className="w-3 h-3 rounded-full bg-rose-400"></span>
-                  <span className="text-lg leading-tight">{feature}</span>
+                  <span className="text-lg leading-tight lg:text-lg">{feature}</span>
                 </li>
               ))}
             </ul>
