@@ -58,20 +58,24 @@ Route::middleware('auth')->group(function () {
     // billing
     Route::get('/billing', [BillingController::class, 'handleRedirect']);
 
-    // app
-    Route::post('/apps', [AppController::class, 'handleCreate']);
-    Route::get('/apps', [AppController::class, 'renderIndex']);
-    Route::put('/app/{app:slug}', [AppController::class, 'handleUpdate']);
-    Route::get('/app/{app:slug}', [AppController::class, 'renderShow']);
+    // requires subscription
+    Route::middleware('subscribed')->group(function () {
+        // app
+        Route::post('/apps', [AppController::class, 'handleCreate']);
+        Route::get('/apps', [AppController::class, 'renderIndex']);
+        Route::put('/app/{app:slug}', [AppController::class, 'handleUpdate']);
+        Route::get('/app/{app:slug}', [AppController::class, 'renderShow']);
 
-    // content
-    Route::post('/app/{app:slug}/content', [ContentController::class, 'handleCreate']);
-    Route::get('/app/{app:slug}/content', [ContentController::class, 'renderIndex']);
-    Route::get('/app/{app:slug}/content/{content:slug}', [ContentController::class, 'renderShow']);
-    Route::post('/app/{app:slug}/content/{content:slug}/write', [ContentController::class, 'handleWrite']);
-    Route::post('/app/{app:slug}/content/{content:slug}/retry', [ContentController::class, 'handleRetry']);
-    Route::post('/app/{app:slug}/content/{content:slug}/tweak', [ContentController::class, 'handleTweak']);
+        // content
+        Route::post('/app/{app:slug}/content', [ContentController::class, 'handleCreate']);
+        Route::get('/app/{app:slug}/content', [ContentController::class, 'renderIndex']);
+        Route::get('/app/{app:slug}/content/{content:slug}', [ContentController::class, 'renderShow']);
+        Route::post('/app/{app:slug}/content/{content:slug}/write', [ContentController::class, 'handleWrite']);
+        Route::post('/app/{app:slug}/content/{content:slug}/retry', [ContentController::class, 'handleRetry']);
+        Route::post('/app/{app:slug}/content/{content:slug}/tweak', [ContentController::class, 'handleTweak']);
 
-    // content clusters
-    Route::post('/app/{app:slug}/content-cluster', [ContentClusterController::class, 'handleCreate']);});
+        // content clusters
+        Route::post('/app/{app:slug}/content-cluster', [ContentClusterController::class, 'handleCreate']);
+    });
+});
 
