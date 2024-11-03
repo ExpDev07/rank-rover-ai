@@ -76,7 +76,7 @@ function LoginPage() {
           "img",
           {
             className: "w-32 pb-0 pr-4 mb-4 border-b",
-            src: "https://rankrover.ai/images/logo.png",
+            src: "http://localhost:8000/images/logo.png",
             alt: "RankRover.ai"
           }
         ),

@@ -27,7 +27,7 @@ export default function ThankYouPage({
       <header className="flex flex-col items-center justify-center text-center">
         <img
           className="mb-0 w-44 animate-bounce"
-          src="https://rankrover.ai/images/logo.png"
+          src="http://localhost:8000/images/logo.png"
           alt="Logo"
         />
         <h1 className="mb-6 text-6xl font-bold">

@@ -25,7 +25,7 @@ function ThankYouPage({
         "img",
         {
           className: "mb-0 w-44 animate-bounce",
-          src: "https://rankrover.ai/images/logo.png",
+          src: "http://localhost:8000/images/logo.png",
           alt: "Logo"
         }
       ),

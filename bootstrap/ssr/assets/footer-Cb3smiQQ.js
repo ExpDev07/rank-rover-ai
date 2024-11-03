@@ -10,7 +10,7 @@ function Navbar() {
         "img",
         {
           className: "block w-5 lg:w-20",
-          src: "https://rankrover.ai/images/logo.png",
+          src: "http://localhost:8000/images/logo.png",
           alt: "logo"
         }
       ),

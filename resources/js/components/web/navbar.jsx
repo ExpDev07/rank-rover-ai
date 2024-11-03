@@ -12,7 +12,7 @@ export default function Navbar() {
         <Link className="flex items-center gap-x-0" href="/">
           <img
             className="block w-5 lg:w-20"
-            src="https://rankrover.ai/images/logo.png"
+            src="http://localhost:8000/images/logo.png"
             alt="logo"
           />
           <span className="font-mono font-bold text-md lg:text-lg">

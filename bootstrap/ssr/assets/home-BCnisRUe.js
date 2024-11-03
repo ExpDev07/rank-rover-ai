@@ -192,7 +192,7 @@ function HomePage({
           "img",
           {
             className: "object-cover w-full",
-            src: "https://rankrover.ai/images/create_app.png",
+            src: "http://localhost:8000/images/create_app.png",
             alt: ""
           }
         ),
@@ -219,7 +219,7 @@ function HomePage({
           "img",
           {
             className: "object-cover w-full",
-            src: "https://rankrover.ai/images/create_content.png",
+            src: "http://localhost:8000/images/create_content.png",
             alt: ""
           }
         ),
@@ -243,7 +243,7 @@ function HomePage({
           "img",
           {
             className: "object-cover w-full",
-            src: "https://rankrover.ai/images/content_cluster.png",
+            src: "http://localhost:8000/images/content_cluster.png",
             alt: ""
           }
         ),
@@ -267,7 +267,7 @@ function HomePage({
           "img",
           {
             className: "object-cover w-full",
-            src: "https://rankrover.ai/images/tweak_content.png",
+            src: "http://localhost:8000/images/tweak_content.png",
             alt: ""
           }
         ),
