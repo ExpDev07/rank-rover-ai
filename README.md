@@ -1,66 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌐 RankRover.ai
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> **Effortlessly Boost Your Content with SEO-Optimized Titles & Articles, Powered by AI**
 
-## About Laravel
+RankRover.ai is your one-stop solution for generating SEO-focused content for your app. With RankRover.ai, you can create multiple applications, define each app’s target audience, and generate SEO-friendly articles with the help of AI. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Whether you're targeting specific niches, working with different languages, or simply want fresh, engaging content for your users, RankRover.ai makes it easy.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![Home](https://github.com/ExpDev07/rank-rover-ai/blob/main/screenshots/home.png)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ Tech Used
 
-## Learning Laravel
+RankRover.ai is built with the following technologies:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Laravel** - Backend framework for building robust APIs
+- **React** - Frontend library for building user interfaces
+- **ShadcnUI** - UI components library for a sleek, modern look
+- **InertiaJS** - Middleware for seamless server-driven SPA experience
+- **Reverb** - Websockets for real-time capabilities
+- **SQL** - Database management
+- **OpenAI API** - AI-powered content generation
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🚀 Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Create & Manage Apps**: Set up one or multiple "apps" within RankRover.ai to keep your content organized and focused on unique audiences.
+- **Provide Context**: Define critical details for each app, including:
+  - Target audience
+  - App description
+  - Content language
+  - Key topics or themes
+- **Smart SEO Title Suggestions**: RankRover.ai suggests article titles that are optimized for SEO, tailored to your app's context.
+- **Generate Articles**: Quickly transform suggested titles into full articles or blog posts to jumpstart your content strategy.
+- **Refine with AI**: Collaborate with RankRover’s AI to fine-tune your articles until they're perfect.
 
-## Laravel Sponsors
+![Home](https://github.com/ExpDev07/rank-rover-ai/blob/main/screenshots/content_cluster.png)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📖 How It Works
 
-### Premium Partners
+1. **Set Up Your App**  
+   Start by creating an app in RankRover.ai. Add key information, such as your target audience, language, and a brief description of the app’s purpose.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2. **Get SEO Title Suggestions**  
+   Based on your app’s context, RankRover.ai will provide a list of recommended article titles, designed to improve SEO and engage readers.
 
-## Contributing
+3. **Generate Content**  
+   Select a title and let RankRover.ai create a full article for you! Choose between article formats like blog posts, general articles, and more.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Refine Your Content**  
+   Work with the AI to polish the article, adjusting tone, length, and style. The interactive refinement process ensures the final output matches your unique voice and needs.
 
-## Code of Conduct
+## 🎨 Example
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Here’s a quick look at what RankRover.ai can create:
 
-## Security Vulnerabilities
+1. **App**: `Health Tips`
+   - **Target Audience**: Health-conscious individuals
+   - **Language**: English
+   - **Sample Titles**:
+     - "Top 10 Foods for Boosting Immunity Naturally"
+     - "5 Simple Daily Habits to Improve Mental Health"
+     - "How to Stay Fit During a Busy Work Week"
+   - **Generated Article**: Choose a title, and RankRover.ai will generate a fully-fledged article. Refine it further by interacting with the AI.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 💡 Why RankRover.ai?
 
-## License
+- **Content Organization**: Easily manage content across multiple apps and audiences.
+- **SEO Focused**: Save time on keyword research with SEO-friendly titles created for you.
+- **Time Efficiency**: Quickly go from idea to published article, thanks to AI-driven suggestions and content generation.
+- **Interactive Refinement**: No more editing alone! Work with the AI to get your articles just right.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📥 Installation & Setup
+
+To use RankRover.ai, simply sign up for an account on our [official website](https://rankrover.ai) (currently down) and get started with our free plan.
+
+1. **Sign up or log in**
+2. **Create an app** by adding details about your target audience, language, and description.
+3. **Start generating titles and articles!**
+
+## 💼 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Screenshots
+
+![Home](https://github.com/ExpDev07/rank-rover-ai/blob/main/screenshots/pricing.png)
+
+![Home](https://github.com/ExpDev07/rank-rover-ai/blob/main/screenshots/signup.png)
+
+![Home](https://github.com/ExpDev07/rank-rover-ai/blob/main/screenshots/section.png)
