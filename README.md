@@ -20,6 +20,14 @@ RankRover.ai is built with the following technologies:
 - **SQL** - Database management
 - **OpenAI API** - AI-powered content generation
 
+## 💬 Message from author
+
+This is the first AI SaaS that I built. It is fully functional and with features. I decided to open source it as the market intended for the 
+product is tought and I did not manage to get much traction. It's now here for everyone to copy from, whether you want to continue building it 
+or need inspiration / starter kit.
+
+If you found it helpful, [please consider sponsoring a coffee :P](https://ko-fi.com/expdev/).
+
 ## 🚀 Features
 
 - **Create & Manage Apps**: Set up one or multiple "apps" within RankRover.ai to keep your content organized and focused on unique audiences.
