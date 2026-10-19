@@ -5,8 +5,8 @@
 
 ## 2. Application Compatibility
 
-- [ ] 2.1 Migrate the application bootstrap, middleware registration, exception handling, route registration, and console configuration where required by the selected Laravel release while preserving the existing web and API route definitions; verify `php artisan route:list` includes the existing public, authenticated, subscribed, and API routes in CI.
-- [ ] 2.2 Update framework-dependent application and package configuration, including authentication, Sanctum, Cashier, Inertia, Reverb, queues, and scheduled commands, to their compatible supported forms; verify `php artisan config:cache` and `php artisan optimize:clear` succeed in CI.
+- [x] 2.1 Migrate the application bootstrap, middleware registration, exception handling, route registration, and console configuration where required by the selected Laravel release while preserving the existing web and API route definitions; verify `php artisan route:list` includes the existing public, authenticated, subscribed, and API routes in CI.
+- [x] 2.2 Update framework-dependent application and package configuration, including authentication, Sanctum, Cashier, Inertia, Reverb, queues, and scheduled commands, to their compatible supported forms; verify `php artisan config:cache` and `php artisan optimize:clear` succeed in CI.
 
 ## 3. Regression Coverage
 
