@@ -1,7 +1,7 @@
 ## 1. Dependency Upgrade
 
-- [ ] 1.1 Update `composer.json` to require the latest stable Laravel major release and its required PHP version, and update each direct Laravel integration and development dependency to a release compatible with it; verify `composer validate` succeeds in CI.
-- [ ] 1.2 Regenerate `composer.lock` from the updated constraints without retaining incompatible packages; verify CI can install the locked dependency set and `php artisan --version` reports the selected Laravel release.
+- [x] 1.1 Update `composer.json` to require the latest stable Laravel major release and its required PHP version, and update each direct Laravel integration and development dependency to a release compatible with it; verify `composer validate` succeeds in CI.
+- [x] 1.2 Regenerate `composer.lock` from the updated constraints without retaining incompatible packages; verify CI can install the locked dependency set and `php artisan --version` reports the selected Laravel release.
 
 ## 2. Application Compatibility
 
