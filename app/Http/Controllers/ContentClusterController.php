@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Ahc\Json\Fixer;
 use App\Http\Requests\CreateContentClusterRequest;
 use App\Models\App;
-use Illuminate\Support\Facades\Log;
-use OpenAI\Laravel\Facades\OpenAI;
+use App\Services\AiContentService;
+use App\Services\AiResponseValidationException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class ContentClusterController extends Controller
 {
@@ -17,26 +18,38 @@ class ContentClusterController extends Controller
     public function handleCreate(App $app, CreateContentClusterRequest $request)
     {
         $data = $request->validated();
+        $data['only_target_audience'] = $data['only_target_audience'] ?? false;
 
-        $cluster = $app->contentClusters()->create($data);
+        try {
+            $generatedRecommendations = $this->generateRecommendations(
+                targetAudience: $app->target_audience,
+                appName: $data['only_target_audience'] ? '' : $app->name,
+                appDesc: $data['only_target_audience'] ? '' : $app->description,
+                language: $data['language'],
+                format: $data['format'],
+            );
+        } catch (AiResponseValidationException) {
+            throw ValidationException::withMessages([
+                'generation' => 'Content generation failed. Please try again.',
+            ]);
+        }
 
-        $generatedRecommendations = $this->generateRecommendations(
-            targetAudience: $app->target_audience,
-            appName: $data['only_target_audience'] ? '' : $app->name,
-            appDesc: $data['only_target_audience'] ? '' : $app->description,
-            language: $data['language'],
-            format: $data['format'],
-        )['recommendations']['titles'];
+        $cluster = DB::transaction(function () use ($app, $data, $generatedRecommendations) {
+            $cluster = $app->contentClusters()->create(['language' => $data['language']]);
 
-        $cluster->contents()->createMany(collect($generatedRecommendations)->map(fn ($r) => [
-            ...$r,
-            'app_id' => $app->id,
-            'language' => $data['language'],
-            'size' => $data['size'],
-            'format' => $data['format'],
-            'only_target_audience' => $data['only_target_audience'] ?? false,
-            'content_queued' => false,
-        ]));
+            $cluster->contents()->createMany(collect($generatedRecommendations)->map(fn ($r) => [
+                'title' => $r['title'],
+                'keywords' => $r['keywords'],
+                'app_id' => $app->id,
+                'language' => $data['language'],
+                'size' => $data['size'],
+                'format' => $data['format'],
+                'only_target_audience' => $data['only_target_audience'],
+                'content_queued' => false,
+            ]));
+
+            return $cluster;
+        });
 
         return redirect()->to("/app/{$app->slug}/content?show_cluster={$cluster->id}");
     }
@@ -52,22 +65,7 @@ class ContentClusterController extends Controller
         $messages[] = ['role' => 'user', 'content' => "Please recommend $amount amount of SEO content titles, each with its own set of recommended keywords, and using the provided context. If the app name and app description are empty, omit them from the context when recommending. Ensure there is no excessive spacing in the response. Here is the context:\n\n- **App name:** $appName\n- **App description:** $appDesc\n- **Target Audience:** $targetAudience\n- **Language:** $language\n- **Type of content (essay, article, listicle, etc):** $format\n\nPlease return your recommendations in a \"titles\" object as a JSON array of objects in the format of [{\"title\":\"titleString\", \"keywords\":[\"keyword1\", \"keyword2\"]}, { ... }] (this is only the format I want you to return in). Ensure the JSON structure is compact without unnecessary whitespace or padding in keys and values. MAKE SURE TO GENERATE $amount AMOUNT OF TITLES Thank you!"];
 
 
-        // send to openai
-        $response = OpenAI::chat()->create([
-            'model' => 'gpt-4-turbo-preview',
-            'response_format' => ['type' => 'json_object'],
-            'messages' => $messages,
-        ]);
-
-        // keep track of new message
-        $messages[] = $response['choices'][0]['message'];
-
-        Log::info($response->toArray());
-
-        return [
-            'messages' => $messages,
-            'recommendations' => json_decode((new Fixer)->fix($response['choices'][0]['message']['content']), true),
-        ];
+        return app(AiContentService::class)->recommendations($messages, true);
     }
 
 }

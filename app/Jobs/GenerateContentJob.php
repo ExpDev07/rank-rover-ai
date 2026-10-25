@@ -2,20 +2,16 @@
 
 namespace App\Jobs;
 
-use Ahc\Json\Fixer;
 use App\Content\ContentGenerationStatus;
-use App\Content\ContentStatus;
 use App\Events\ContentRevisionStatusChangedEvent;
 use App\Models\Content;
-use App\Models\ContentRevision;
-use Exception;
+use App\Services\AiContentService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
-use OpenAI\Laravel\Facades\OpenAI;
+use Throwable;
 
 class GenerateContentJob implements ShouldQueue
 {
@@ -63,13 +59,13 @@ class GenerateContentJob implements ShouldQueue
                 appName: $this->content->only_target_audience ? '' : $this->content->app->name,
                 appDesc: $this->content->only_target_audience ? '' : $this->content->app->description,
             );
-            $revision->content_md = $generatedContent['message_content_md']['content'];
+            $revision->content_md = $generatedContent['content'];
             $revision->messages = $generatedContent['messages'];
             $revision->status = ContentGenerationStatus::Generated;
-        } catch (Exception $error) {
+        } catch (Throwable) {
             $revision->content_md = null;
             $revision->status = ContentGenerationStatus::Errored;
-            $revision->status_text = $error->getMessage();
+            $revision->status_text = 'Content generation failed. Please try again.';
         } finally {
             $revision->save();
             $this->content->content_queued = false;
@@ -81,7 +77,7 @@ class GenerateContentJob implements ShouldQueue
     /**
      * Generates the content.
      */
-    private function generateContent(string $appName, string $appDesc, string $language, string $format, string $size, string $targetAudience, string $title, array $keywords)
+    private function generateContent(string $appName, string $appDesc, string $language, string $format, string $size, string $targetAudience, string $title, array $keywords): array
     {
         // build app context
         $appContextInstruction = "";
@@ -108,23 +104,7 @@ class GenerateContentJob implements ShouldQueue
         $messages[] = ['role' => 'system', 'content' => 'You are a highly skilled AI trained to assist with SEO content creation.'];
         $messages[] = ['role' => 'user', 'content' => $fullPrompt];
 
-
-        // send to openai
-        $response = OpenAI::chat()->create([
-            'model' => 'gpt-4-turbo-preview',
-            'response_format' => ['type' => 'json_object'],
-            'messages' => $messages,
-        ]);
-
-        // keep track of new message
-        $messages[] = $response['choices'][0]['message'];
-
-        Log::info($response->toArray());
-
-        return [
-            'messages' => $messages,
-            'message_content_md' => json_decode((new Fixer)->fix($response['choices'][0]['message']['content']), true),
-        ];
+        return app(AiContentService::class)->article($messages, true);
     }
 
 }

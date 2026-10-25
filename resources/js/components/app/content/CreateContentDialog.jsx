@@ -53,6 +53,7 @@ export default function CreateContentDialog({
 
   const [manualWorking, setManualWorking] = React.useState(false)
   const [autopilotWorking, setAutopilotWorking] = React.useState(false)
+  const [autopilotError, setAutopilotError] = React.useState('')
 
   const manualForm = useForm({
     defaultValues: {
@@ -90,10 +91,12 @@ export default function CreateContentDialog({
       format: selectedFormat,
       only_target_audience: onlyTargetAudience,
     }, {
-      preserveState: false,
+      preserveState: 'errors',
       preserveScroll: false,
+      onBefore: () => setAutopilotError(''),
       onStart: () => setAutopilotWorking(true),
       onFinish: () => setAutopilotWorking(false),
+      onError: (errors) => setAutopilotError(errors.generation || ''),
     })
   }
 
@@ -245,6 +248,11 @@ export default function CreateContentDialog({
         </div>
         <DialogFooter>
           <div className="w-full">
+            {selectedMethod === 'autopilot' && autopilotError && (
+              <p role="alert" className="mb-4 text-sm text-destructive">
+                {autopilotError}
+              </p>
+            )}
             {autopilotWorking && (
               <ul className="flex flex-col items-center justify-center w-full mb-6 gap-y-4">
                 <li className="flex items-center gap-x-2">
