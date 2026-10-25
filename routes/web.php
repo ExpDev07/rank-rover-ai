@@ -63,19 +63,21 @@ Route::middleware('auth')->group(function () {
         // app
         Route::post('/apps', [AppController::class, 'handleCreate']);
         Route::get('/apps', [AppController::class, 'renderIndex']);
-        Route::put('/app/{app:slug}', [AppController::class, 'handleUpdate']);
-        Route::get('/app/{app:slug}', [AppController::class, 'renderShow']);
 
-        // content
-        Route::post('/app/{app:slug}/content', [ContentController::class, 'handleCreate']);
-        Route::get('/app/{app:slug}/content', [ContentController::class, 'renderIndex']);
-        Route::get('/app/{app:slug}/content/{content:slug}', [ContentController::class, 'renderShow']);
-        Route::post('/app/{app:slug}/content/{content:slug}/write', [ContentController::class, 'handleWrite']);
-        Route::post('/app/{app:slug}/content/{content:slug}/retry', [ContentController::class, 'handleRetry']);
-        Route::post('/app/{app:slug}/content/{content:slug}/tweak', [ContentController::class, 'handleTweak']);
+        Route::prefix('/app/{app:slug}')->middleware('can:manage,app')->scopeBindings()->group(function () {
+            Route::put('/', [AppController::class, 'handleUpdate']);
+            Route::get('/', [AppController::class, 'renderShow']);
 
-        // content clusters
-        Route::post('/app/{app:slug}/content-cluster', [ContentClusterController::class, 'handleCreate']);
+            // content
+            Route::post('/content', [ContentController::class, 'handleCreate']);
+            Route::get('/content', [ContentController::class, 'renderIndex']);
+            Route::get('/content/{content:slug}', [ContentController::class, 'renderShow']);
+            Route::post('/content/{content:slug}/write', [ContentController::class, 'handleWrite']);
+            Route::post('/content/{content:slug}/retry', [ContentController::class, 'handleRetry']);
+            Route::post('/content/{content:slug}/tweak', [ContentController::class, 'handleTweak']);
+
+            // content clusters
+            Route::post('/content-cluster', [ContentClusterController::class, 'handleCreate']);
+        });
     });
 });
-

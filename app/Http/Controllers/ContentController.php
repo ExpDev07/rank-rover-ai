@@ -8,7 +8,6 @@ use App\Jobs\GenerateContentJob;
 use App\Jobs\TweakContentJob;
 use App\Models\App;
 use App\Models\Content;
-use App\Models\ContentCluster;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -22,8 +21,10 @@ class ContentController extends Controller
     {
         return Inertia::render('app/content/index', [
             'app' => $app,
-            'content' => $app->contents()->latest()->where('content_queued', true)->orWhereHas('currentRevision')->get(),
-            'content_cluster' => $request->has('show_cluster') ? ContentCluster::query()->with('contents.currentRevision')->findOrFail($request->integer(('show_cluster'))) : null,
+            'content' => $app->contents()->latest()->where(function ($query) {
+                $query->where('content_queued', true)->orWhereHas('currentRevision');
+            })->get(),
+            'content_cluster' => $request->has('show_cluster') ? $app->contentClusters()->with('contents.currentRevision')->findOrFail($request->integer('show_cluster')) : null,
         ]);
     }
 

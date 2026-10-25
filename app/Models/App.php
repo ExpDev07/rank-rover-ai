@@ -60,4 +60,14 @@ class App extends Model
         return $this->hasMany(Content::class);
     }
 
+    /**
+     * Resolve nested content routes through the app's contents relationship.
+     */
+    protected function childRouteBindingRelationshipName($childType)
+    {
+        return $childType === 'content'
+            ? 'contents'
+            : parent::childRouteBindingRelationshipName($childType);
+    }
+
 }
