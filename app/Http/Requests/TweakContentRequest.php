@@ -15,7 +15,7 @@ class TweakContentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tweak' => ['required'],
+            'tweak' => ['required', 'string'],
         ];
     }
 

@@ -22,7 +22,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -75,7 +74,7 @@ export default function CreateContentDialog({
       only_target_audience: onlyTargetAudience,
       keywords: data.keywords.split(', '),
     }, {
-      preserveState: false,
+      preserveState: 'errors',
       preserveScroll: false,
       onBefore: () => manualForm.clearErrors(),
       onStart: () => setManualWorking(true),
@@ -248,6 +247,11 @@ export default function CreateContentDialog({
         </div>
         <DialogFooter>
           <div className="w-full">
+            {selectedMethod === 'manual' && manualForm.formState.errors.generation && (
+              <p role="alert" className="mb-4 text-sm text-destructive">
+                {manualForm.formState.errors.generation.message}
+              </p>
+            )}
             {selectedMethod === 'autopilot' && autopilotError && (
               <p role="alert" className="mb-4 text-sm text-destructive">
                 {autopilotError}

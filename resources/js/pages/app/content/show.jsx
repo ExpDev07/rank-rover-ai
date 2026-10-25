@@ -2,19 +2,10 @@ import * as React from "react"
 import { router, Head } from "@inertiajs/react"
 import { marked } from "marked"
 import { ArrowPathIcon } from '@heroicons/react/24/solid'
-import { cn } from "@/lib/utils"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import {
   Card,
   CardContent,
@@ -32,33 +23,54 @@ export default function ContentShowPage({
   app,
   content,
 }) {
-  // poll for changes
-  if (! content.current_revision || content.current_revision.status === 'idle' || content.current_revision.status === 'generating') {
-    setTimeout(() => {
-      router.reload({ only: ['content'], preserveState: true })
-    }, 10000)
-  }
-
   const [loadingRetry, setLoadingRetry] = React.useState(false)
 
   const [loadingTweak, setLoadingTweak] = React.useState(false)
   const [tweak, setTweak] = React.useState('')
+  const [generationError, setGenerationError] = React.useState('')
+  const [tweakError, setTweakError] = React.useState('')
+
+  const isGenerating = content.content_queued || content.current_revision?.status === 'idle' || content.current_revision?.status === 'generating'
+
+  React.useEffect(() => {
+    if (!isGenerating || loadingRetry || loadingTweak) return
+
+    const timer = setTimeout(() => {
+      router.reload({ only: ['content'], preserveState: true })
+    }, 10000)
+
+    return () => clearTimeout(timer)
+  }, [content, isGenerating, loadingRetry, loadingTweak])
+
+  const clearErrors = () => {
+    setGenerationError('')
+    setTweakError('')
+  }
 
   const handleRetry = () => {
     router.post(`/app/${app.slug}/content/${content.slug}/retry`, {}, {
-      only: ['content'] ,
+      only: ['content', 'errors'],
+      preserveState: true,
+      onBefore: clearErrors,
       onStart: () => setLoadingRetry(true),
       onFinish: () => setLoadingRetry(false),
+      onError: (errors) => setGenerationError(errors.generation || ''),
     })
   }
 
   const handleTweak = () => {
     router.post(`/app/${app.slug}/content/${content.slug}/tweak`, { tweak }, {
-      only: ['content'] ,
+      only: ['content', 'errors'],
+      preserveState: true,
+      onBefore: clearErrors,
       onStart: () => setLoadingTweak(true),
       onFinish: () => setLoadingTweak(false),
+      onError: (errors) => {
+        setGenerationError(errors.generation || '')
+        setTweakError(errors.tweak || '')
+      },
+      onSuccess: () => setTweak(''),
     })
-    setTweak('')
   }
 
   const handleCopyToMarkdown = () => {
@@ -84,17 +96,17 @@ export default function ContentShowPage({
             )}
           />
           <Section className="mt-10">
-            {!content.current_revision && (
+            {generationError && (
+              <p role="alert" className="mb-4 text-sm text-destructive">
+                {generationError}
+              </p>
+            )}
+            {isGenerating && (
               <div className="flex flex-col items-center justify-center w-full border-2 rounded-md h-52">
                 <ArrowPathIcon className="w-12 h-12 animate-spin text-muted-foreground" />
               </div>
             )}
-            {content.current_revision?.status === 'generating' && (
-              <div className="flex flex-col items-center justify-center w-full border-2 rounded-md h-52">
-                <ArrowPathIcon className="w-12 h-12 animate-spin text-muted-foreground" />
-              </div>
-            )}
-            {content.current_revision?.status === 'errored' && (
+            {!isGenerating && (!content.current_revision || content.current_revision.status === 'errored') && (
               <div className="flex flex-col items-center justify-center w-full border-2 rounded-md h-52">
                 <h4 className="mb-2 text-2xl text-destructive">
                   Could not create content
@@ -155,8 +167,16 @@ export default function ContentShowPage({
               <Textarea
                 placeholder="Write more about the impact backlinking has on SEO"
                 rows="6"
+                value={tweak}
+                aria-invalid={!!tweakError}
+                aria-describedby={tweakError ? 'tweak-error' : undefined}
                 onChange={(e) => setTweak(e.target.value)}
               />
+              {tweakError && (
+                <p id="tweak-error" role="alert" className="mt-2 text-sm text-destructive">
+                  {tweakError}
+                </p>
+              )}
             </CardContent>
             <CardFooter>
               <Button
